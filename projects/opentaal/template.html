@@ -3,55 +3,78 @@
     <div class="col-md-6 col-md-offset-2" style="height:50px">
         <div id="success" class="alert alert-success" style="display:none;">
             <a class="close">×</a>
-            <strong id="i18n_welldone">Well done!</strong> <span id="i18n_welldone_text">Your answer has been saved</span>
+            <strong>Bedankt!</strong> Je antwoord is opgeslagen.
+        </div>
+        <div id="success-details" class="alert alert-success" style="display:none;">
+            <a class="close">×</a>
+            <strong>Bedankt!</strong> Je gegevens zijn opgeslagen.
         </div>
         <div id="loading" class="alert alert-info" style="display:none;">
             <a class="close">×</a>
-            <span id="i18n_loading_next_task">Loading next task...</span>
+            Volgende taak aan het laden...
         </div>
         <div id="taskcompleted" class="alert alert-info" style="display:none;">
-            <strong id="i18n_task_completed">The task has been completed!</strong> <span id="i18n_thanks">Thanks a lot!</span>
+            <strong>De taak is afgerond!</strong> Bedankt!
         </div>
         <div id="finish" class="alert alert-success" style="display:none;">
-            <strong id="i18n_congratulations">Congratulations!</strong> <span id="i18n_congratulations_text">You have participated in all available tasks!</span>
+            <strong>Gefeliciteerd!</strong> Je hebt deelgenomen aan alle beschikbare taken.
             <br/>
             <div class="alert-actions">
-                <a class="btn small" href="/">Go back</a>
-                <a class="btn small" href="/app">or, Check other projects</a>
+                <a class="btn small" href="/">Ga terug</a>
+                <a class="btn small" href="/app">of bekijk alle projecten</a>
             </div>
         </div>
         <div id="error" class="alert alert-danger" style="display:none;">
             <a class="close">×</a>
-            <strong>Error!</strong> Something went wrong, please contact the site administrators
+            <strong>Fout!</strong> Er ging iets mis, neem contact op met beheerders van deze website.
         </div>
     </div> <!-- End Success and Error Messages for the user -->
 </div> <!-- End of Row -->
 
+<div class="row skeleton-userdetails"> <!-- Start Skeleton Row-->
+    <div class="col-md-6 "><!-- Start of Question and Submission DIV (column) -->
+        <h3 id="headerAge">Leeftijd:</h3> <!-- The word will be loaded here -->
+        <form class="form-inline">
+                <textarea id="age" rows="1" style="width:100%;"></textarea>
+            </form>
+        <br><br>
+        <h3 id="headerGender">Geslacht:</h3> <!-- The word will be loaded here -->
+        <form class="form-inline">
+                <textarea id="gender" rows="1" style="width:100%;"></textarea>
+            </form>
+        <br><br>
+        <h3 id="headerLocation">Woonplaats:</h3> <!-- The word will be loaded here -->
+        <form class="form-inline">
+                <textarea id="location" rows="1" style="width:100%;"></textarea>
+            </form>
+        <br><br>
+        <div id="answer"> <!-- Start DIV for the submission buttons -->
+            <button class="btn btn-submit btn-primary btn-sm btn-submit-userdetails"><i class="fa fa-thumbs-o-up"></i>Verzend!</button>
+        </div><!-- End of DIV for the submission buttons -->
+    </div><!-- End of Question and Submission DIV (column) -->
+</div><!-- End of Skeleton Row -->
+
 <!--
-    Task DOM for loading the Flickr Images
+    Task DOM for showing the data to the user
     It uses the class="skeleton" to identify the elements that belong to the
     task.
 -->
-<div class="row skeleton"> <!-- Start Skeleton Row-->
+<div class="row skeleton-task"> <!-- Start Skeleton Row-->
     <div class="col-md-6 "><!-- Start of Question and Submission DIV (column) -->
-        <h3 id="question">Geef een synoniem voor dit woord:</h1> <!-- The question will be loaded here -->
+        <h3 id="question">Geef een synoniem voor het volgende woord:</h1> <!-- The question will be loaded here -->
         <h1 id="word">(voorbeeldwoord)</h3> <!-- The word will be loaded here -->
         <form class="form-inline">
                 <textarea id="text" rows="10" style="width:100%;"></textarea>
             </form>
         <br><br>
         <div id="answer"> <!-- Start DIV for the submission buttons -->
-            <button class="btn btn-submit btn-primary btn-sm"><i class="fa fa-thumbs-o-up"></i>Verstuur synoniem!</button>
-            <!-- If the user clicks this button, the saved answer will be value="yes"
-            <button class="btn btn-success btn-answer" value='Yes'><i class="fa fa-thumbs-o-up"></i> <span id="i18n_yes">Yes</span></button>
-            If the user clicks this button, the saved answer will be value="no"
-            <button class="btn btn-danger btn-answer" value='No'><i class="fa fa-thumbs-o-down"></i> No</button>-->
+            <button class="btn btn-submit btn-primary btn-sm btn-submit-task"><i class="fa fa-thumbs-o-up"></i>Verstuur synoniem!</button>
             <!-- If the user clicks this button, the saved answer will be value="NotKnown"-->
-            <button class="btn btn-answer" value='NotKnown'><i class="fa fa-question-circle"></i>Woord ken ik niet</button>
+            <button class="btn btn-dontknow" value='NotKnown'><i class="fa fa-question-circle"></i>Weet ik niet</button>
         </div><!-- End of DIV for the submission buttons -->
         <!-- Feedback items for the user -->
-        <p><span id="i18n_working_task">You are working now on task:</span> <span id="task-id" class="label label-warning">#</span></p>
-        <p><span id="i18n_tasks_completed">You have completed:</span> <span id="done" class="label label-info"></span> <span id="i18n_tasks_from">tasks from</span>
+        <p>Je werkt nu aan taak: <span id="task-id" class="label label-warning">#</span></p>
+        <p>Afgeronde taken: <span id="done" class="label label-info"></span> van
         <!-- Progress bar for the user -->
         <span id="total" class="label label-info"></span></p>
         <div class="progress progress-striped">
@@ -69,14 +92,10 @@
         <!-- Disqus thread for the given task -->
         <div id="disqus_thread" style="margin-top:5px;display:none"></div>
     </div><!-- End of Question and Submission DIV (column) -->
-    <!-- <div class="col-md-6">Start of Photo DIV (column)
-        <a id="photo-link" href="#">
-            <img id="photo" src="http://i.imgur.com/GeHxzb7.png" style="max-width=100%">
-        </a>
-    </div> End of Photo DIV (columnt) -->
 </div><!-- End of Skeleton Row -->
 
 <script type="text/javascript">
+	var user_details = {};
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
 
     /* * * DON'T EDIT BELOW THIS LINE * * */
@@ -98,40 +117,14 @@
 <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments (powered by Disqus).</a></noscript>
 
 <script>
-// Default language
-var userLocale = "en";
-// Translations
-var messages = {"en": {
-                        "i18n_welldone": "Well done!",
-                        "i18n_welldone_text": "Your answer has been saved",
-                        "i18n_loading_next_task": "Loading next task...",
-                        "i18n_task_completed": "The task has been completed!",
-                        "i18n_thanks": "Thanks a lot!",
-                        "i18n_congratulations": "Congratulations",
-                        "i18n_congratulations_text": "You have participated in all available tasks!",
-                        "i18n_yes": "Yes",
-                        "i18n_i_dont_know": "I don't know",
-                        "i18n_working_task": "You are working now on task:",
-                        "i18n_tasks_completed": "You have completed:",
-                        "i18n_tasks_from": "tasks from",
-                        "i18n_show_comments": "Show comments:",
-                        "i18n_hide_comments": "Hide comments:"
-                      },
-               };
+
+
 // Update userLocale with server side information
  $(document).ready(function(){
      userLocale = document.getElementById('PYBOSSA_USER_LOCALE').textContent.trim();
 
 });
 
-function i18n_translate() {
-    var ids = Object.keys(messages[userLocale])
-    for (i=0; i<ids.length; i++) {
-        console.log("Translating: " + ids[i]);
-        document.getElementById(ids[i]).innerHTML = messages[userLocale][ids[i]];
-        console.log("Done translating: " + ids[i]);
-    }
-}
 
 
 function loadUserProgress() {
@@ -145,74 +138,71 @@ function loadUserProgress() {
     });
 }
 
-//pybossa.taskLoaded(function(task, deferred) {
-    //if ( !$.isEmptyObject(task) ) {
-        //// load image from flickr
-        ////var img = $('<img />');
-        ////img.load(function() {
-        ////    // continue as soon as the image is loaded
-        ////    deferred.resolve(task);
-        ////});
-        ////img.attr('src', task.info.word).css('height', 460);
-        ////img.addClass('img-thumbnail img-responsive');
-        ////task.info.image = img;
-        //console.log("Task loaded");
-    //}
-    //else {
-        //deferred.resolve(task);
-    //}
-//});
+function showDetailsForm(task, deferred) {
+	$(".skeleton-task").hide();
+	$(".skeleton-userdetails").show();
+	details_shown = true;
+	// Submit button
+    $(".btn-submit-userdetails").off('click').on('click', function(){
+        user_details = {"age": $("textarea#age").val(), "gender": $("textarea#gender").val(), "location": $("textarea#location").val()};
+        pybossa.saveTask(task.id, user_details).done(function(data){
+            deferred.resolve();
+            $("#success-details").fadeIn();
+            setTimeout(function() { $("#success-details").fadeOut() }, 2000);
+        })
+    });
+}
+
+function showTask(task, deferred) {
+	console.log(user_details);
+	$(".skeleton-task").show();
+	$(".skeleton-userdetails").hide();
+    loadUserProgress();
+    $("textarea#text").val('');
+    $("#question").html(task.info.question);
+    $("#word").html(task.info.word);
+    $("#task-id").html(task.id);
+    // Submit button
+    $(".btn-submit-task").off('click').on('click', function(){
+        var answer = $("textarea#text").val();
+        pybossa.saveTask(task.id, answer).done(function(data){
+            deferred.resolve();
+            $("#success").fadeIn();
+            setTimeout(function() { $("#success").fadeOut() }, 2000);
+        })
+    });
+    
+    // Do not know button
+    $(".btn-dontknow").off('click').on('click', function(){
+        var answer = "";
+        pybossa.saveTask(task.id, answer).done(function(data){
+            deferred.resolve();
+            $("#success").fadeIn();
+            setTimeout(function() { $("#success").fadeOut() }, 2000);
+        })
+    });
+    $("#loading").hide();
+}
+
+function finish() {
+	$(".skeleton").hide();
+    $("#loading").hide();
+    $("#finish").fadeIn(500);
+}
 
 pybossa.presentTask(function(task, deferred) {
     if ( !$.isEmptyObject(task) ) {
-        loadUserProgress();
-        //i18n_translate();
-        $("textarea#text").val('');
-        $("#question").html(task.info.question);
-        $("#word").html(task.info.word);
-        $("#task-id").html(task.id);
-        //$('.btn-answer').off('click').on('click', function(evt) {
-            //var answer = $(this).attr("value");
-            //if (typeof answer != 'undefined') {
-                ////console.log(answer);
-                //pybossa.saveTask(task.id, answer).done(function() {
-                    //deferred.resolve();
-                //});
-                //$("#loading").fadeIn(500);
-                //if ($("#disqus_thread").is(":visible")) {
-                    //$('#disqus_thread').toggle();
-                    //$('.btn-disqus').toggle();
-                //}
-            //}
-            //else {
-                //$("#error").show();
-            //}
-        //});
-        // Submit button
-        $(".btn-submit").off('click').on('click', function(){
-            var answer = $("textarea#text").val();
-            pybossa.saveTask(task.id, answer).done(function(data){
-                deferred.resolve();
-                $("#success").fadeIn();
-                setTimeout(function() { $("#success").fadeOut() }, 2000);
-            })
-        });
-        
-        // Do not know button
-        $(".btn-answer").off('click').on('click', function(){
-            var answer = "";
-            pybossa.saveTask(task.id, answer).done(function(data){
-                deferred.resolve();
-                $("#success").fadeIn();
-                setTimeout(function() { $("#success").fadeOut() }, 2000);
-            })
-        });
-        $("#loading").hide();
+    	if (task.info.type == "userdetails") {
+    		// Show page to give personal details
+    		showDetailsForm(task, deferred);
+    	}
+    	else {
+    		// Show task
+    		showTask(task, deferred);
+    	}
     }
     else {
-        $(".skeleton").hide();
-        $("#loading").hide();
-        $("#finish").fadeIn(500);
+    	finish();
     }
 });
 

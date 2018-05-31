@@ -1,4 +1,4 @@
-N_WORDS = 20
+N_WORDS = 10
 
 import argparse
 import pandas as pd
@@ -16,7 +16,11 @@ df.columns = ["word"]
 # Sample n rows
 df = df.sample(n=N_WORDS)
 
-df["question"] = "Geef een synoniem voor dit woord:"
+df["question"] = "Geef een synoniem voor het volgende woord:"
+df["type"] = "task"
+
+details_row = pd.DataFrame([{"type":"userdetails"}])
+df = pd.concat([details_row,df], ignore_index=True)
 
 # Write to file
 df.to_csv(args.output_file, index=False)
