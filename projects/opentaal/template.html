@@ -54,6 +54,20 @@
     </div><!-- End of Question and Submission DIV (column) -->
 </div><!-- End of Skeleton Row -->
 
+<div class="row skeleton-finish"> <!-- Start Skeleton Row-->
+    <div class="col-md-6 "><!-- Start of Question and Submission DIV (column) -->
+    	<h1>Dankjewel, je hebt alle taken uitgevoerd!</h1>
+        <h3>Jouw ingevulde gegevens:</h3>
+        Leeftijd: <span id="labelAge"></span><br>
+        Geslacht: <span id="labelGender"></span><br>
+        Woonplaats: <span id="labelLocation"></span><br>
+        <h3>Volgens ons ben je:</h3>
+        Leeftijd: <span id="labelAgePrediction"></span><br>
+        Geslacht: <span id="labelGenderPrediction"></span><br>
+        Woonplaats: <span id="labelLocationPrediction"></span><br>
+    </div><!-- End of Question and Submission DIV (column) -->
+</div><!-- End of Skeleton Row -->
+
 <!--
     Task DOM for showing the data to the user
     It uses the class="skeleton" to identify the elements that belong to the
@@ -95,7 +109,7 @@
 </div><!-- End of Skeleton Row -->
 
 <script type="text/javascript">
-	var user_details = {};
+	// TODO: When finishing contribution, let Python script retrieve user details from database, instead of local storage.
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
 
     /* * * DON'T EDIT BELOW THIS LINE * * */
@@ -140,11 +154,13 @@ function loadUserProgress() {
 
 function showDetailsForm(task, deferred) {
 	$(".skeleton-task").hide();
+	$(".skeleton-task").finish();
 	$(".skeleton-userdetails").show();
 	details_shown = true;
 	// Submit button
     $(".btn-submit-userdetails").off('click').on('click', function(){
-        user_details = {"age": $("textarea#age").val(), "gender": $("textarea#gender").val(), "location": $("textarea#location").val()};
+        var user_details = {"age": $("textarea#age").val(), "gender": $("textarea#gender").val(), "location": $("textarea#location").val()};
+        localStorage.user_details = JSON.stringify(user_details);
         pybossa.saveTask(task.id, user_details).done(function(data){
             deferred.resolve();
             $("#success-details").fadeIn();
@@ -154,9 +170,9 @@ function showDetailsForm(task, deferred) {
 }
 
 function showTask(task, deferred) {
-	console.log(user_details);
-	$(".skeleton-task").show();
 	$(".skeleton-userdetails").hide();
+	$(".skeleton-finish").hide();
+	$(".skeleton-task").show();
     loadUserProgress();
     $("textarea#text").val('');
     $("#question").html(task.info.question);
@@ -185,9 +201,37 @@ function showTask(task, deferred) {
 }
 
 function finish() {
-	$(".skeleton").hide();
-    $("#loading").hide();
-    $("#finish").fadeIn(500);
+	$(".skeleton-task").hide();
+	$(".skeleton-userdetails").hide();
+	$("#loading").hide();
+	$(".skeleton-finish").show();
+    //$("#finish").fadeIn(500);
+    
+    // Load fields with user details from local storage
+    var user_details = {};
+    if ("user_details" in localStorage) {
+    	JSON.parse(localStorage.user_details);
+    }
+    $("#labelAge").html(user_details.age);
+    $("#labelGender").html(user_details.gender);
+    $("#labelLocation").html(user_details.location);
+    
+    $.ajax({
+         type:'get',
+         url:'/computation/getcomputation',
+         cache:false,
+         async:'asynchronous',
+         dataType:'json',
+         success: function(data) {
+           console.log(data)
+           $("#labelAgePrediction").html(data.age);
+           $("#labelGenderPrediction").html(data.gender);
+           $("#labelLocationPrediction").html(data.location);
+         },
+         error: function(request, status, error) {
+           console.log("Error: " + error + " "+JSON.stringify(request))
+         }
+      });
 }
 
 pybossa.presentTask(function(task, deferred) {

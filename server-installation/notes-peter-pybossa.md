@@ -193,3 +193,17 @@ Locatie van lokale settings kan worden ingesteld met environment variable: expor
 BRAND en TITLE instellen in pybossa/settings_local.py
 LOGO instellen op logo-bestand. Bestand met deze naam plaatsen in pybossa/pybossa/themes/default/static/img
 Thema instellen? Vertaling naar Nederlands aanmaken?
+
+## Computation script
+From the task presenter Javascript/html page, it may be convenient to call a server-side Python script, which performs certain computations.
+The Python script (which runs a server), can be called in the Javascript code via a JQuery AJAX get request.
+
+A Python script can be run as server using the SimpleHTTPServer class, running on a different port, eg. 8080. However, the PyBossa Javascript can only do a get request to a site on the same port, due to the same origin policy. Therefore, nginx should reverse proxy the script on the other port to a subdirectory of the main PyBossa port.
+
+Add in `/etc/nginx/sites-available/pybossa`:
+
+```
+location /computation/ {
+        proxy_pass http://localhost:8080/;
+}
+```
