@@ -154,7 +154,7 @@ function loadUserProgress() {
 
 function showDetailsForm(task, deferred) {
 	$(".skeleton-task").hide();
-	$(".skeleton-task").finish();
+	$(".skeleton-finish").hide();
 	$(".skeleton-userdetails").show();
 	details_shown = true;
 	// Submit button
@@ -170,6 +170,7 @@ function showDetailsForm(task, deferred) {
 }
 
 function showTask(task, deferred) {
+	console.log(task);
 	$(".skeleton-userdetails").hide();
 	$(".skeleton-finish").hide();
 	$(".skeleton-task").show();
@@ -207,26 +208,33 @@ function finish() {
 	$(".skeleton-finish").show();
     //$("#finish").fadeIn(500);
     
-    // Load fields with user details from local storage
+    // Load user details from local storage
     var user_details = {};
     if ("user_details" in localStorage) {
-    	JSON.parse(localStorage.user_details);
+    	user_details = JSON.parse(localStorage.user_details);
     }
+    var age = user_details.age;
+    var gender = user_details.gender;
+    var location = user_details.location;
+
+    // Fill labels with given user details
     $("#labelAge").html(user_details.age);
     $("#labelGender").html(user_details.gender);
     $("#labelLocation").html(user_details.location);
+
+    var urlWithArguments = '/computation/getcomputation' + "?age=" + age + "&gender=" + gender + "&location=" + location;
     
     $.ajax({
          type:'get',
-         url:'/computation/getcomputation',
+         url:urlWithArguments,
          cache:false,
          async:'asynchronous',
          dataType:'json',
-         success: function(data) {
-           console.log(data)
-           $("#labelAgePrediction").html(data.age);
-           $("#labelGenderPrediction").html(data.gender);
-           $("#labelLocationPrediction").html(data.location);
+         success: function(recv_data) {
+           console.log(recv_data)
+           $("#labelAgePrediction").html(recv_data.age);
+           $("#labelGenderPrediction").html(recv_data.gender);
+           $("#labelLocationPrediction").html(recv_data.location);
          },
          error: function(request, status, error) {
            console.log("Error: " + error + " "+JSON.stringify(request))
