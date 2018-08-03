@@ -1,0 +1,6 @@
+{
+    "name": "Analyseren van blends",
+    "short_name": "analyse",
+    "description": "De taak is om te bepalen uit welke twee woorden een blend bestaat.",
+    "question": "Uit welke twee woorden bestaan de genoemde blends?"
+}

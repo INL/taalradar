@@ -207,3 +207,10 @@ location /computation/ {
         proxy_pass http://localhost:8080/;
 }
 ```
+
+
+# Projects
+## Opentaal
+Computation server should be able to look up id of current user in runs database. But task presenter does not provide id of current run.
+Now, we use the personal details of the user to look up the correct runs in the database. This is however not precise: multiple users can have the same personal details.
+Also, the personal details are stored on the sid eof the client in the local storage. This breaks if a user starts a set of tasks in one browser and resumes in the other, or refreshes the browser cache.

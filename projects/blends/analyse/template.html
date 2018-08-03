@@ -1,0 +1,267 @@
+<div class="row">
+    <!-- Success and Error Messages for the user --> 
+    <div class="col-md-6 col-md-offset-2" style="height:50px">
+        <div id="success" class="alert alert-success" style="display:none;">
+            <a class="close">×</a>
+            <strong>Bedankt!</strong> Je antwoord is opgeslagen.
+        </div>
+        <div id="success-details" class="alert alert-success" style="display:none;">
+            <a class="close">×</a>
+            <strong>Bedankt!</strong> Je gegevens zijn opgeslagen.
+        </div>
+        <div id="loading" class="alert alert-info" style="display:none;">
+            <a class="close">×</a>
+            Volgende taak aan het laden...
+        </div>
+        <div id="taskcompleted" class="alert alert-info" style="display:none;">
+            <strong>De taak is afgerond!</strong> Bedankt!
+        </div>
+        <div id="finish" class="alert alert-success" style="display:none;">
+            <strong>Gefeliciteerd!</strong> Je hebt deelgenomen aan alle beschikbare taken.
+            <br/>
+            <div class="alert-actions">
+                <a class="btn small" href="/">Ga terug</a>
+                <a class="btn small" href="/app">of bekijk alle projecten</a>
+            </div>
+        </div>
+        <div id="error" class="alert alert-danger" style="display:none;">
+            <a class="close">×</a>
+            <strong>Fout!</strong> Er ging iets mis, neem contact op met beheerders van deze website.
+        </div>
+    </div> <!-- End Success and Error Messages for the user -->
+</div> <!-- End of Row -->
+
+<div class="row skeleton-userdetails"> <!-- Start Skeleton Row-->
+    <div class="col-md-6 "><!-- Start of Question and Submission DIV (column) -->
+        <h3 id="headerAge">Leeftijd:</h3> <!-- The word will be loaded here -->
+        <form class="form-inline">
+                <textarea id="age" rows="1" style="width:100%;"></textarea>
+            </form>
+        <br><br>
+        <h3 id="headerGender">Geslacht:</h3> <!-- The word will be loaded here -->
+        <form class="form-inline">
+                <textarea id="gender" rows="1" style="width:100%;"></textarea>
+            </form>
+        <br><br>
+        <h3 id="headerLocation">Woonplaats:</h3> <!-- The word will be loaded here -->
+        <form class="form-inline">
+                <textarea id="location" rows="1" style="width:100%;"></textarea>
+            </form>
+        <br><br>
+        <div id="answer"> <!-- Start DIV for the submission buttons -->
+            <button class="btn btn-submit btn-primary btn-sm btn-submit-userdetails"><i class="fa fa-thumbs-o-up"></i>Verzend!</button>
+        </div><!-- End of DIV for the submission buttons -->
+    </div><!-- End of Question and Submission DIV (column) -->
+</div><!-- End of Skeleton Row -->
+
+<div class="row skeleton-finish"> <!-- Start Skeleton Row-->
+    <div class="col-md-6 "><!-- Start of Question and Submission DIV (column) -->
+    	<h1>Dankjewel, je hebt alle taken uitgevoerd!</h1>
+        <h3>Jouw ingevulde gegevens:</h3>
+        Leeftijd: <span id="labelAge"></span><br>
+        Geslacht: <span id="labelGender"></span><br>
+        Woonplaats: <span id="labelLocation"></span><br>
+    </div><!-- End of Question and Submission DIV (column) -->
+</div><!-- End of Skeleton Row -->
+
+<!--
+    Task DOM for showing the data to the user
+    It uses the class="skeleton" to identify the elements that belong to the
+    task.
+-->
+<div class="row skeleton-task"> <!-- Start Skeleton Row-->
+    <div class="col-md-6 "><!-- Start of Question and Submission DIV (column) -->
+        <h3 id="question">Geef een synoniem voor het volgende woord:</h1> <!-- The question will be loaded here -->
+        <h1 id="word">(voorbeeldwoord)</h3> <!-- The word will be loaded here -->
+        <form class="form-inline">
+                <input id="component1" style="width:100%;"></input>
+                <input id="component2" style="width:100%;"></input>
+            </form>
+        <br><br>
+        <div id="answer"> <!-- Start DIV for the submission buttons -->
+            <button class="btn btn-submit btn-primary btn-sm btn-submit-task"><i class="fa fa-thumbs-o-up"></i>Verstuur synoniem!</button>
+            <!-- If the user clicks this button, the saved answer will be value="NotKnown"-->
+            <button class="btn btn-dontknow" value='NotKnown'><i class="fa fa-question-circle"></i>Weet ik niet</button>
+        </div><!-- End of DIV for the submission buttons -->
+        <!-- Feedback items for the user -->
+        <p>Je werkt nu aan taak: <span id="task-id" class="label label-warning">#</span></p>
+        <p>Afgeronde taken: <span id="done" class="label label-info"></span> van
+        <!-- Progress bar for the user -->
+        <span id="total" class="label label-info"></span></p>
+        <div class="progress progress-striped">
+            <div id="progress" rel="tooltip" title="#" class="progress-bar" style="width: 0%;"  role="progressbar"></div>
+        </div>
+        <!-- 
+            This application uses Disqus to allow users to provide some feedback.
+            The next section includes a button that when a user clicks on it will
+            load the comments, if any, for the given task
+        -->
+        <div id="disqus_show_btn" style="margin-top:5px;">
+            <button class="btn btn-primary btn-large btn-disqus" onclick="loadDisqus()"><i class="fa fa-comments"></i> <span id="i18n_show_comments">Show comments</span></button>
+            <button class="btn btn-large btn-disqus" onclick="loadDisqus()" style="display:none"><i class="fa fa-comments"></i> <span id="i18n_hide_comments">Hide comments</span></button>
+        </div><!-- End of Disqus Button section -->
+        <!-- Disqus thread for the given task -->
+        <div id="disqus_thread" style="margin-top:5px;display:none"></div>
+    </div><!-- End of Question and Submission DIV (column) -->
+</div><!-- End of Skeleton Row -->
+
+<script type="text/javascript">
+	// TODO: When finishing contribution, let Python script retrieve user details from database, instead of local storage.
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    function loadDisqus() {
+    $("#disqus_thread").toggle();
+    $(".btn-disqus").toggle();
+    var disqus_shortname = 'pybossa'; // required: replace example with your forum shortname
+    //var disqus_identifier = taskId;
+    var disqus_developer = 1;
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    }
+
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments (powered by Disqus).</a></noscript>
+
+<script>
+
+
+// Update userLocale with server side information
+ $(document).ready(function(){
+     userLocale = document.getElementById('PYBOSSA_USER_LOCALE').textContent.trim();
+
+});
+
+
+
+function loadUserProgress() {
+    pybossa.userProgress('analyse').done(function(data){
+        var pct = Math.round((data.done*100)/data.total);
+        $("#progress").css("width", pct.toString() +"%");
+        $("#progress").attr("title", pct.toString() + "% completed!");
+        $("#progress").tooltip({'placement': 'left'}); 
+        $("#total").text(data.total);
+        $("#done").text(data.done);
+    });
+}
+
+function showDetailsForm(task, deferred) {
+	$(".skeleton-task").hide();
+	$(".skeleton-finish").hide();
+	$(".skeleton-userdetails").show();
+	details_shown = true;
+	// Submit button
+    $(".btn-submit-userdetails").off('click').on('click', function(){
+        var user_details = {"age": $("textarea#age").val(), "gender": $("textarea#gender").val(), "location": $("textarea#location").val()};
+        localStorage.user_details = JSON.stringify(user_details);
+        pybossa.saveTask(task.id, user_details).done(function(data){
+            deferred.resolve();
+            $("#success-details").fadeIn();
+            setTimeout(function() { $("#success-details").fadeOut() }, 2000);
+        })
+    });
+}
+
+function showTask(task, deferred) {
+	console.log(task);
+	$(".skeleton-userdetails").hide();
+	$(".skeleton-finish").hide();
+	$(".skeleton-task").show();
+    loadUserProgress();
+    $("input#component1").val('');
+    $("input#component2").val('');
+    $("#question").html(task.info.question);
+    $("#word").html(task.info.lemma);
+    $("#task-id").html(task.id);
+    $("input#component1").focus();
+
+    // Submit button
+    $(".btn-submit-task").off('click').on('click', function(){
+        // Save dictionary with the two components of the blend
+        var answer = {"component1": $("input#component1").val(), "component2": $("input#component2").val()};
+        pybossa.saveTask(task.id, answer).done(function(data){
+            deferred.resolve();
+            $("#success").fadeIn();
+            setTimeout(function() { $("#success").fadeOut() }, 2000);
+        })
+    });
+    
+    // Do not know button
+    $(".btn-dontknow").off('click').on('click', function(){
+        var answer = "";
+        pybossa.saveTask(task.id, answer).done(function(data){
+            deferred.resolve();
+            $("#success").fadeIn();
+            setTimeout(function() { $("#success").fadeOut() }, 2000);
+        })
+    });
+
+    // Pressing ENTER in first fields goes to second field
+    $("input#component1").off("keyup").on("keyup", function(event) {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            // Trigger the button element with a click
+            $("input#component2").focus();
+        }
+    });
+
+    // Pressing ENTER in second field submits
+    $("input#component2").off("keyup").on("keyup", function(event) {
+        // Cancel the default action, if needed
+        event.preventDefault();
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            // Trigger the button element with a click
+            $(".btn-submit-task").click();
+        }
+    });
+
+    $("#loading").hide();
+}
+
+function finish() {
+	$(".skeleton-task").hide();
+	$(".skeleton-userdetails").hide();
+	$("#loading").hide();
+	$(".skeleton-finish").show();
+    //$("#finish").fadeIn(500);
+    
+    // Load user details from local storage
+    var user_details = {};
+    if ("user_details" in localStorage) {
+    	user_details = JSON.parse(localStorage.user_details);
+    }
+    var age = user_details.age;
+    var gender = user_details.gender;
+    var location = user_details.location;
+
+    // Fill labels with given user details
+    $("#labelAge").html(user_details.age);
+    $("#labelGender").html(user_details.gender);
+    $("#labelLocation").html(user_details.location);
+}
+
+pybossa.presentTask(function(task, deferred) {
+    if ( !$.isEmptyObject(task) ) {
+    	if (task.info.type == "userdetails") {
+    		// Show page to give personal details
+    		showDetailsForm(task, deferred);
+    	}
+    	else {
+    		// Show task
+    		showTask(task, deferred);
+    	}
+    }
+    else {
+    	finish();
+    }
+});
+
+pybossa.run('analyse');
+</script>
