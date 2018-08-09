@@ -1,0 +1,9 @@
+projects/opentaal/key.txt
+.pydevproject
+.settings/.jsdtscope
+.project
+.settings/org.eclipse.core.resources.prefs
+.settings/org.eclipse.wst.jsdt.ui.superType.container
+.settings/org.eclipse.wst.jsdt.ui.superType.name
+.vscode/.ropeproject/config.py
+*.bak

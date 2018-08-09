@@ -33,19 +33,16 @@
 
 <div class="row skeleton-userdetails"> <!-- Start Skeleton Row-->
     <div class="col-md-6 "><!-- Start of Question and Submission DIV (column) -->
-        <h3 id="headerAge">Leeftijd:</h3> <!-- The word will be loaded here -->
-        <form class="form-inline">
-                <textarea id="age" rows="1" style="width:100%;"></textarea>
-            </form>
-        <br><br>
-        <h3 id="headerGender">Geslacht:</h3> <!-- The word will be loaded here -->
-        <form class="form-inline">
-                <textarea id="gender" rows="1" style="width:100%;"></textarea>
-            </form>
-        <br><br>
-        <h3 id="headerLocation">Woonplaats:</h3> <!-- The word will be loaded here -->
-        <form class="form-inline">
-                <textarea id="location" rows="1" style="width:100%;"></textarea>
+        <form class="form-inline" id="detailsform">
+                <h3 id="headerAge">Leeftijd:</h3>
+                <input name="age" id="details1" style="width:100%;"></input>
+                <br><br>
+                <h3 id="headerGender">Geslacht:</h3>
+                <input name="gender" id="details2" style="width:100%;"></input>
+                <br><br>
+                <h3 id="headerLocation">Woonplaats:</h3>
+                <input name="location" id="details3" style="width:100%;"></input>
+                <br><br>
             </form>
         <br><br>
         <div id="answer"> <!-- Start DIV for the submission buttons -->
@@ -71,7 +68,7 @@
 -->
 <div class="row skeleton-task"> <!-- Start Skeleton Row-->
     <div class="col-md-6 "><!-- Start of Question and Submission DIV (column) -->
-        <h3 id="question">Geef een synoniem voor het volgende woord:</h1> <!-- The question will be loaded here -->
+        <h3 id="question">Uit welke twee woorden is het volgende woord opgebouwd?</h1> <!-- The question will be loaded here -->
         <h1 id="word">(voorbeeldwoord)</h3> <!-- The word will be loaded here -->
         <form class="form-inline">
                 <input id="component1" style="width:100%;"></input>
@@ -79,7 +76,7 @@
             </form>
         <br><br>
         <div id="answer"> <!-- Start DIV for the submission buttons -->
-            <button class="btn btn-submit btn-primary btn-sm btn-submit-task"><i class="fa fa-thumbs-o-up"></i>Verstuur synoniem!</button>
+            <button class="btn btn-submit btn-primary btn-sm btn-submit-task"><i class="fa fa-thumbs-o-up"></i>Verstuur</button>
             <!-- If the user clicks this button, the saved answer will be value="NotKnown"-->
             <button class="btn btn-dontknow" value='NotKnown'><i class="fa fa-question-circle"></i>Weet ik niet</button>
         </div><!-- End of DIV for the submission buttons -->
@@ -164,6 +161,25 @@ function showDetailsForm(task, deferred) {
             setTimeout(function() { $("#success-details").fadeOut() }, 2000);
         })
     });
+
+    console.log("Set ENTER reactions for all details inputs in form.");
+    $("#detailsform").off("keyup").on("keyup", function(event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            console.log("ENTER pressed in field " + event.target.id);
+            let fieldId = event.target.id;
+            // If last field, trigger Submit button
+            if (fieldId.endsWith(nDetailsFields.toString())) {
+                $(".btn-submit-userdetails").click();
+            }
+            else {
+                // For all other fields, focus next field
+                var currentNum = parseInt(fieldId[fieldId.length-1]);
+                $("#detailsform #details"+(currentNum+1).toString()).focus();
+            }
+        }
+    });
+
 }
 
 function showTask(task, deferred) {

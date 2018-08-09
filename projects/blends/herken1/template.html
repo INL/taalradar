@@ -1,6 +1,6 @@
 <div class="row">
     <!-- Success and Error Messages for the user --> 
-    <div class="col-md-6 col-md-offset-2" style="height:50px">
+    <div class="col-md-8 col-md-offset-2" style="height:50px">
         <div id="success" class="alert alert-success" style="display:none;">
             <a class="close">×</a>
             <strong>Bedankt!</strong> Je antwoord is opgeslagen.
@@ -32,22 +32,18 @@
 </div> <!-- End of Row -->
 
 <div class="row skeleton-userdetails"> <!-- Start Skeleton Row-->
-    <div class="col-md-6 "><!-- Start of Question and Submission DIV (column) -->
-        <h3 id="headerAge">Leeftijd:</h3> <!-- The word will be loaded here -->
-        <form class="form-inline">
-                <textarea id="age" rows="1" style="width:100%;"></textarea>
-            </form>
-        <br><br>
-        <h3 id="headerGender">Geslacht:</h3> <!-- The word will be loaded here -->
-        <form class="form-inline">
-                <textarea id="gender" rows="1" style="width:100%;"></textarea>
-            </form>
-        <br><br>
-        <h3 id="headerLocation">Woonplaats:</h3> <!-- The word will be loaded here -->
-        <form class="form-inline">
-                <textarea id="location" rows="1" style="width:100%;"></textarea>
-            </form>
-        <br><br>
+    <div class="col-md-8 "><!-- Start of Question and Submission DIV (column) -->
+        <form class="form-inline" id="detailsform">
+            <h3 id="headerAge">Leeftijd:</h3>
+            <input name="age" id="details1" style="width:100%;"></input>
+            <br><br>
+            <h3 id="headerGender">Geslacht:</h3>
+            <input name="gender" id="details2" style="width:100%;"></input>
+            <br><br>
+            <h3 id="headerLocation">Woonplaats:</h3>
+            <input name="location" id="details3" style="width:100%;"></input>
+            <br><br>
+        </form>
         <div id="answer"> <!-- Start DIV for the submission buttons -->
             <button class="btn btn-submit btn-primary btn-sm btn-submit-userdetails"><i class="fa fa-thumbs-o-up"></i>Verzend!</button>
         </div><!-- End of DIV for the submission buttons -->
@@ -55,7 +51,7 @@
 </div><!-- End of Skeleton Row -->
 
 <div class="row skeleton-finish"> <!-- Start Skeleton Row-->
-    <div class="col-md-6 "><!-- Start of Question and Submission DIV (column) -->
+    <div class="col-md-8 "><!-- Start of Question and Submission DIV (column) -->
     	<h1>Dankjewel, je hebt alle taken uitgevoerd!</h1>
         <h3>Jouw ingevulde gegevens:</h3>
         Leeftijd: <span id="labelAge"></span><br>
@@ -70,9 +66,9 @@
     task.
 -->
 <div class="row skeleton-task"> <!-- Start Skeleton Row-->
-    <div class="col-md-6 "><!-- Start of Question and Submission DIV (column) -->
-        <h3 id="question">Geef een synoniem voor het volgende woord:</h1> <!-- The question will be loaded here -->
-        <h1 id="word">(voorbeeldwoord)</h3> <!-- The word will be loaded here -->
+    <div class="col-md-8 "><!-- Start of Question and Submission DIV (column) -->
+        <h3 id="question">Welk woord of welke woorden in deze tekst herken je als blends?</h1> <!-- The question will be loaded here -->
+        <h4 id="word">(voorbeeldtekst)</h4> <!-- The word will be loaded here -->
         <form class="form-inline" id="inputform">
                 <input id="blend1" style="width:100%;"></input>
                 <br><br>
@@ -86,7 +82,7 @@
             </form>
         <br><br>
         <div id="answer"> <!-- Start DIV for the submission buttons -->
-            <button class="btn btn-submit btn-primary btn-sm btn-submit-task"><i class="fa fa-thumbs-o-up"></i>Verstuur synoniem!</button>
+            <button class="btn btn-submit btn-primary btn-sm btn-submit-task"><i class="fa fa-thumbs-o-up"></i>Verstuur</button>
             <!-- If the user clicks this button, the saved answer will be value="NotKnown"-->
             <button class="btn btn-dontknow" value='NotKnown'><i class="fa fa-question-circle"></i>Weet ik niet</button>
         </div><!-- End of DIV for the submission buttons -->
@@ -137,6 +133,7 @@
 <script>
 
 var nBlendFields = 5;
+var nDetailsFields = 3;
 
 // Update userLocale with server side information
  $(document).ready(function(){
@@ -173,6 +170,24 @@ function showDetailsForm(task, deferred) {
             setTimeout(function() { $("#success-details").fadeOut() }, 2000);
         })
     });
+
+    console.log("Set ENTER reactions for all details inputs in form.");
+    $("#detailsform").off("keyup").on("keyup", function(event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            console.log("ENTER pressed in field " + event.target.id);
+            let fieldId = event.target.id;
+            // If last field, trigger Submit button
+            if (fieldId.endsWith(nDetailsFields.toString())) {
+                $(".btn-submit-userdetails").click();
+            }
+            else {
+                // For all other fields, focus next field
+                var currentNum = parseInt(fieldId[fieldId.length-1]);
+                $("#detailsform #details"+(currentNum+1).toString()).focus();
+            }
+        }
+    });
 }
 
 
@@ -191,8 +206,9 @@ function showTask(task, deferred) {
         $("input#blend" + i.toString()).val('');
     }
     console.log("Loading data into form");
+    console.log(task.info);
     $("#question").html(task.info.question);
-    $("#word").html(task.info.paragraph);
+    $("#word").html(task.info.voorbeeld1);
     $("#task-id").html(task.id);
     $("input#blend1").focus();
 
@@ -236,9 +252,8 @@ function showTask(task, deferred) {
             }
             else {
                 // For all other fields, focus next field
-                var currentNum = fieldId[fieldId.length-1]
-                console.log("Focus on: " + $("#blend"+(currentNum+1).toString())[0]);
-                $("#blend"+(currentNum+1).toString()).focus();
+                var currentNum = parseInt(fieldId[fieldId.length-1]);
+                $("#inputform #blend"+(currentNum+1).toString()).focus();
             }
         }
     });

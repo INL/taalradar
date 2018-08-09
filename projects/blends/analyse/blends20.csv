@@ -1,21 +1,22 @@
-resultNumber,question,type,lemma
-,,userdetails,
-1,"Uit welke twee woorden is het volgende woord opgebouwd?",task,bromance
-3,"Uit welke twee woorden is het volgende woord opgebouwd?",task,DigiD
-5,"Uit welke twee woorden is het volgende woord opgebouwd?",task,twexit
-7,"Uit welke twee woorden is het volgende woord opgebouwd?",task,aanmodderfakker
-8,"Uit welke twee woorden is het volgende woord opgebouwd?",task,adware
-9,"Uit welke twee woorden is het volgende woord opgebouwd?",task,agflatie
-10,"Uit welke twee woorden is het volgende woord opgebouwd?",task,alcomobilist
-11,"Uit welke twee woorden is het volgende woord opgebouwd?",task,autistiform
-12,"Uit welke twee woorden is het volgende woord opgebouwd?",task,boerkini
-13,"Uit welke twee woorden is het volgende woord opgebouwd?",task,brambulance
-14,"Uit welke twee woorden is het volgende woord opgebouwd?",task,cockerpoe
-15,"Uit welke twee woorden is het volgende woord opgebouwd?",task,cronut
-16,"Uit welke twee woorden is het volgende woord opgebouwd?",task,drentenier
-17,"Uit welke twee woorden is het volgende woord opgebouwd?",task,emoticon
-18,"Uit welke twee woorden is het volgende woord opgebouwd?",task,fembot
-19,"Uit welke twee woorden is het volgende woord opgebouwd?",task,festivaluta
-20,"Uit welke twee woorden is het volgende woord opgebouwd?",task,flexitariër
-21,"Uit welke twee woorden is het volgende woord opgebouwd?",task,glamperen
-22,"Uit welke twee woorden is het volgende woord opgebouwd?",task,glamping
+question,type,lemma,basiswoord1,basiswoord2
+,userdetails,,,
+"Uit welke twee woorden is het volgende woord opgebouwd?",task,straatsen,straat,schaatsen
+"Uit welke twee woorden is het volgende woord opgebouwd?",task,alcomobilist,alcohol,automobilist
+"Uit welke twee woorden is het volgende woord opgebouwd?",task,smombie,smartphone,zombie
+"Uit welke twee woorden is het volgende woord opgebouwd?",task,vook,video,e-book
+"Uit welke twee woorden is het volgende woord opgebouwd?",task,velostrade,velo,autostrade
+"Uit welke twee woorden is het volgende woord opgebouwd?",task,taugate,taugé,gate
+"Uit welke twee woorden is het volgende woord opgebouwd?",task,poldermodderen,polderen,aanmodderen/doormodderen
+"Uit welke twee woorden is het volgende woord opgebouwd?",task,mobisode,mobiele,episode
+"Uit welke twee woorden is het volgende woord opgebouwd?",task,flexitariër,flexibel,vegetariër
+"Uit welke twee woorden is het volgende woord opgebouwd?",task,bromance,brother,romance
+"Uit welke twee woorden is het volgende woord opgebouwd?",task,infobesitas,informatie,obesitas
+"Uit welke twee woorden is het volgende woord opgebouwd?",task,shelfie,shelf,selfie
+"Uit welke twee woorden is het volgende woord opgebouwd?",task,zony,zebra,pony
+"Uit welke twee woorden is het volgende woord opgebouwd?",task,recessionista,recessie,fashionista
+"Uit welke twee woorden is het volgende woord opgebouwd?",task,festivaluta,festival,valuta
+"Uit welke twee woorden is het volgende woord opgebouwd?",task,apparterra,appartement,terra
+"Uit welke twee woorden is het volgende woord opgebouwd?",task,twexit,Twitter/tweet,exit
+"Uit welke twee woorden is het volgende woord opgebouwd?",task,agflatie,agricultuur,inflatie
+"Uit welke twee woorden is het volgende woord opgebouwd?",task,DigiD,digitale,identiteit
+"Uit welke twee woorden is het volgende woord opgebouwd?",task,twitteratuur,twitteren/Twitter,literatuur
