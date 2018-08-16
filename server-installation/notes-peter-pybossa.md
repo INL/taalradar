@@ -35,7 +35,7 @@ cp settings_local.py.tmpl settings_local.py
 cp alembic.ini.template alembic.ini
 # Install redis server
 sudo apt-get install redis-server redis-sentinel
-
+```
 
 ### Setup database
 
@@ -50,7 +50,6 @@ python cli.py db_create # populate database with tables
 
 ### Draaien als losse processen (niet aanbevolen)
 ------
-```
 
 Now run processes in separate terminals:
 
@@ -58,18 +57,20 @@ Now run processes in separate terminals:
 redis-server contrib/sentinel.conf --sentinel
 ```
 
-```
+
 # Run rqscheduler
+```
 rqscheduler --host IP-of-your-redis-master-node
 ```
 
-```
 # Run worker
+```
 python app_context_rqworker.py scheduled_jobs super high medium low email maintenance
 ```
 
-```
+
 # Run web server
+```
 python run.py # Run web server
 ```
 -----

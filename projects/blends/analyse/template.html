@@ -34,14 +34,25 @@
 <div class="row skeleton-userdetails"> <!-- Start Skeleton Row-->
     <div class="col-md-6 "><!-- Start of Question and Submission DIV (column) -->
         <form class="form-inline" id="detailsform">
-                <h3 id="headerAge">Leeftijd:</h3>
-                <input name="age" id="details1" style="width:100%;"></input>
+                <div class="form-group">
+                    <h3 id="headerAge">Leeftijd:</h3>
+                    <input type="text" class="form-control" name="age" id="details1" style="width:100%;"></input>
+                </div>
                 <br><br>
-                <h3 id="headerGender">Geslacht:</h3>
-                <input name="gender" id="details2" style="width:100%;"></input>
+                <div class="form-group">
+                    <h3 id="headerGender">Geslacht:</h3>
+                    <select class="form-control" name="gender" id="details2" style="width:100%;">
+                        <option>Zeg ik niet</option>
+                        <option>Man</option>
+                        <option>Vrouw</option>
+                        <option>Anders</option>
+                    </select>
+                </div>
                 <br><br>
-                <h3 id="headerLocation">Woonplaats:</h3>
-                <input name="location" id="details3" style="width:100%;"></input>
+                <div class="form-group">
+                    <h3 id="headerLocation">Woonplaats:</h3>
+                    <input type="text" class="form-control" name="location" id="details3" style="width:100%;"></input>
+                </div>
                 <br><br>
             </form>
         <br><br>
@@ -68,41 +79,27 @@
 -->
 <div class="row skeleton-task"> <!-- Start Skeleton Row-->
     <div class="col-md-6 "><!-- Start of Question and Submission DIV (column) -->
+        <p>Blend <span id="done" class="label label-info"></span> van <span id="total" class="label label-info"></span></p>
+        <div class="progress">
+            <div id="progress" rel="tooltip" title="#" class="progress-bar" style="width: 0%;"  role="progressbar"></div>
+        </div>
         <h3 id="question">Uit welke twee woorden is het volgende woord opgebouwd?</h1> <!-- The question will be loaded here -->
         <h1 id="word">(voorbeeldwoord)</h3> <!-- The word will be loaded here -->
         <form class="form-inline">
-                <input id="component1" style="width:100%;"></input>
-                <input id="component2" style="width:100%;"></input>
+                <input type="text" class="form-control" id="component1"></input>
+                <input type="text" class="form-control" id="component2"></input>
             </form>
         <br><br>
         <div id="answer"> <!-- Start DIV for the submission buttons -->
-            <button class="btn btn-submit btn-primary btn-sm btn-submit-task"><i class="fa fa-thumbs-o-up"></i>Verstuur</button>
+            <button class="btn btn-submit btn-primary btn-sm btn-submit-task"><i class="fa fa-thumbs-o-up"></i>Volgende</button>
             <!-- If the user clicks this button, the saved answer will be value="NotKnown"-->
             <button class="btn btn-dontknow" value='NotKnown'><i class="fa fa-question-circle"></i>Weet ik niet</button>
         </div><!-- End of DIV for the submission buttons -->
-        <!-- Feedback items for the user -->
-        <p>Je werkt nu aan taak: <span id="task-id" class="label label-warning">#</span></p>
-        <p>Afgeronde taken: <span id="done" class="label label-info"></span> van
-        <!-- Progress bar for the user -->
-        <span id="total" class="label label-info"></span></p>
-        <div class="progress progress-striped">
-            <div id="progress" rel="tooltip" title="#" class="progress-bar" style="width: 0%;"  role="progressbar"></div>
-        </div>
-        <!-- 
-            This application uses Disqus to allow users to provide some feedback.
-            The next section includes a button that when a user clicks on it will
-            load the comments, if any, for the given task
-        -->
-        <div id="disqus_show_btn" style="margin-top:5px;">
-            <button class="btn btn-primary btn-large btn-disqus" onclick="loadDisqus()"><i class="fa fa-comments"></i> <span id="i18n_show_comments">Show comments</span></button>
-            <button class="btn btn-large btn-disqus" onclick="loadDisqus()" style="display:none"><i class="fa fa-comments"></i> <span id="i18n_hide_comments">Hide comments</span></button>
-        </div><!-- End of Disqus Button section -->
-        <!-- Disqus thread for the given task -->
-        <div id="disqus_thread" style="margin-top:5px;display:none"></div>
     </div><!-- End of Question and Submission DIV (column) -->
 </div><!-- End of Skeleton Row -->
 
 <script type="text/javascript">
+    var nDetailsFields = 3;
 	// TODO: When finishing contribution, let Python script retrieve user details from database, instead of local storage.
     /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
 
@@ -136,24 +133,28 @@
 
 
 function loadUserProgress() {
-    pybossa.userProgress('analyse').done(function(data){
-        var pct = Math.round((data.done*100)/data.total);
+    pybossa.userProgress('herken2').done(function(data){
+        var currentTask = data.done;
+        var totalTasks = data.total -1; // we do not count user details
+        var pct = Math.round((currentTask*100)/totalTasks);
         $("#progress").css("width", pct.toString() +"%");
         $("#progress").attr("title", pct.toString() + "% completed!");
         $("#progress").tooltip({'placement': 'left'}); 
-        $("#total").text(data.total);
-        $("#done").text(data.done);
+        $("#total").text(totalTasks);
+        $("#done").text(currentTask);
     });
 }
+
 
 function showDetailsForm(task, deferred) {
 	$(".skeleton-task").hide();
 	$(".skeleton-finish").hide();
-	$(".skeleton-userdetails").show();
+    $(".skeleton-userdetails").show();
+    $("#details1").focus();
 	details_shown = true;
 	// Submit button
     $(".btn-submit-userdetails").off('click').on('click', function(){
-        var user_details = {"age": $("textarea#age").val(), "gender": $("textarea#gender").val(), "location": $("textarea#location").val()};
+        var user_details = {"age": $("#details1").val(), "gender": $("#details2").val(), "location": $("#details3").val()};
         localStorage.user_details = JSON.stringify(user_details);
         pybossa.saveTask(task.id, user_details).done(function(data){
             deferred.resolve();
