@@ -86,7 +86,7 @@
         <div class="progress">
             <div id="progress" rel="tooltip" title="#" class="progress-bar" style="width: 0%;"  role="progressbar"></div>
         </div>
-        <h3 id="question">Uit welke twee woorden is het volgende woord opgebouwd?</h3> <!-- The question will be loaded here -->
+        <h3>Uit welke twee volledige, bestaande woorden is het volgende woord opgebouwd?</h3> <!-- The question will be loaded here -->
         <center><h1 id="word">(voorbeeldwoord)</h1> <!-- The word will be loaded here -->
         <form class="form-inline">
                 <input type="text" class="form-control" id="component1"></input>
@@ -195,8 +195,7 @@ function showTask(task, deferred) {
 	$(".skeleton-task").show();
     loadUserProgress();
     $("input#component1").val('');
-    $("input#component2").val('');
-    //$("#question").html(task.info.question);
+    $("input#component2").val('');;
     $("#word").html(task.info.lemma);
     $("#task-id").html(task.id);
     $("input#component1").focus();
