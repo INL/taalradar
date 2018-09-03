@@ -3,11 +3,11 @@
     <div class="col-md-6 col-md-offset-2" style="height:50px">
         <div id="success" class="alert alert-success" style="display:none;">
             <a class="close">×</a>
-            <strong>Bedankt!</strong> Je antwoord is opgeslagen.
+            <strong>Bedankt!</strong> Uw antwoord is opgeslagen.
         </div>
         <div id="success-details" class="alert alert-success" style="display:none;">
             <a class="close">×</a>
-            <strong>Bedankt!</strong> Je gegevens zijn opgeslagen.
+            <strong>Bedankt!</strong> Uw gegevens zijn opgeslagen.
         </div>
         <div id="loading" class="alert alert-info" style="display:none;">
             <a class="close">×</a>
@@ -17,7 +17,7 @@
             <strong>De taak is afgerond!</strong> Bedankt!
         </div>
         <div id="finish" class="alert alert-success" style="display:none;">
-            <strong>Gefeliciteerd!</strong> Je hebt alle beschikbare blends geanalyseerd.
+            <strong>Gefeliciteerd!</strong> U heeft alle beschikbare blends geanalyseerd.
             <br/>
             <div class="alert-actions">
                 <a class="btn small" href="/">Ga terug</a>
@@ -33,6 +33,7 @@
 
 <div class="row skeleton-userdetails"> <!-- Start Skeleton Row-->
     <div class="col-md-6 "><!-- Start of Question and Submission DIV (column) -->
+        Hieronder kunt u enkele persoonlijke gegevens invullen, die ons extra inzichten geven in ons onderzoek. Deze worden anoniem opgeslagen, gekoppeld aan uw antwoorden, zichtbaar voor bezoekers van dit platform. De velden die u niet wilt invullen, kunt u leeg laten.
         <form class="form-inline" id="detailsform">
                 <div class="form-group">
                     <h3 id="headerAge">Leeftijd:</h3>
@@ -64,7 +65,13 @@
 
 <div class="row skeleton-finish"> <!-- Start Skeleton Row-->
     <div class="col-md-6 "><!-- Start of Question and Submission DIV (column) -->
-    	<h1>Dankjewel, je hebt alle beschikbare blends geanalyseerd!</h1>
+        <h1>Dankuwel, u heeft alle beschikbare blends geanalyseerd!</h1>
+        Het Instituut voor de Nederlandse taal gebruikt uw bijdrage om ervaring op te doen met crowdsourcing
+        en de kennis over de Nederlandse taal uit te breiden. <br><br>
+        Wilt u op de hoogte blijven van ons onderzoek, en
+        eventueel vaker meedoen aan dergelijke experimenten? Mail dan naar
+        <a href="mailto:servicedesk@ivdnt.org">servicedesk@ivdnt.org</a>, onder
+        vermelding van Taalradar.
     </div><!-- End of Question and Submission DIV (column) -->
 </div><!-- End of Skeleton Row -->
 
@@ -79,12 +86,13 @@
         <div class="progress">
             <div id="progress" rel="tooltip" title="#" class="progress-bar" style="width: 0%;"  role="progressbar"></div>
         </div>
-        <h3 id="question">Uit welke twee woorden is het volgende woord opgebouwd?</h3> <!-- The question will be loaded here -->
-        <h1 id="word">(voorbeeldwoord)</h1> <!-- The word will be loaded here -->
+        <h3>Uit welke twee volledige, bestaande woorden is het volgende woord opgebouwd?</h3> <!-- The question will be loaded here -->
+        <center><h1 id="word">(voorbeeldwoord)</h1> <!-- The word will be loaded here -->
         <form class="form-inline">
                 <input type="text" class="form-control" id="component1"></input>
                 <input type="text" class="form-control" id="component2"></input>
         </form>
+        </center>
         <br><br>
         <div id="answer"> <!-- Start DIV for the submission buttons -->
             <button class="btn btn-submit btn-primary btn-submit-task"><i class="fa fa-thumbs-o-up"></i>Volgende</button>
@@ -165,8 +173,7 @@ function showTask(task, deferred) {
 	$(".skeleton-task").show();
     loadUserProgress();
     $("input#component1").val('');
-    $("input#component2").val('');
-    //$("#question").html(task.info.question);
+    $("input#component2").val('');;
     $("#word").html(task.info.lemma);
     $("#task-id").html(task.id);
     $("input#component1").focus();
