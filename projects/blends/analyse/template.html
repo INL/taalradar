@@ -81,24 +81,58 @@
     task.
 -->
 <div class="row skeleton-task"> <!-- Start Skeleton Row-->
-    <div class="col-md-6 "><!-- Start of Question and Submission DIV (column) -->
+    <div class="col-md-10 "><!-- Start of Question and Submission DIV (column) -->
         <p>Blend <span id="done" class="label label-info"></span> van <span id="total" class="label label-info"></span></p>
         <div class="progress">
             <div id="progress" rel="tooltip" title="#" class="progress-bar" style="width: 0%;"  role="progressbar"></div>
         </div>
         <h3>Uit welke twee volledige, bestaande woorden is het volgende woord opgebouwd?</h3> <!-- The question will be loaded here -->
-        <center><h1 id="word">(voorbeeldwoord)</h1> <!-- The word will be loaded here -->
         <form class="form-inline">
-                <input type="text" class="form-control" id="component1"></input>
-                <input type="text" class="form-control" id="component2"></input>
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-4">
+                    <div class="text-center">
+                        <h1 id="word">(voorbeeldwoord)</h1> <!-- The word will be loaded here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="col-md-4">
+                    Woord 1:<br>
+                    <input type="text" class="form-control" id="component1"></input>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="dontknowCheck1">
+                        <label class="form-check-label" for="dontknowCheck1">
+                        Weet ik niet
+                        </label>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    Woord 2:<br>
+                    <input type="text" class="form-control" id="component2"></input>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="dontknowCheck2">
+                        <label class="form-check-label" for="dontknowCheck2">
+                        Weet ik niet
+                        </label>
+                    </div>
+                </div>
+                
+                
+                
+            </div>
         </form>
-        </center>
-        <br><br>
-        <div id="answer"> <!-- Start DIV for the submission buttons -->
-            <button class="btn btn-submit btn-primary btn-submit-task"><i class="fa fa-thumbs-o-up"></i>Volgende</button>
-            <!-- If the user clicks this button, the saved answer will be value="NotKnown"-->
-            <button class="btn btn-dontknow" value='NotKnown'><i class="fa fa-question-circle"></i>Weet ik niet</button>
+        <div id="answer" class="col-md-2"> <!-- Start DIV for the submission buttons -->
+            <br>
+            <button class="btn btn-primary btn-submit-task"><i class="fa fa-thumbs-o-up"></i>Volgende</button>
         </div><!-- End of DIV for the submission buttons -->
+        <br><br>
+        <div class="col-md-10 small">
+                Tip: door op ENTER te drukken, beweegt u van het eerste naar het tweede woord, en van het tweede woord naar de volgende opdracht.
+        </div>
+                
+        
     </div><!-- End of Question and Submission DIV (column) -->
 </div><!-- End of Skeleton Row -->
 
@@ -167,21 +201,34 @@ function showDetailsForm(task, deferred) {
 }
 
 function showTask(task, deferred) {
-	console.log(task);
+    loadUserProgress();
 	$(".skeleton-userdetails").hide();
 	$(".skeleton-finish").hide();
-	$(".skeleton-task").show();
-    loadUserProgress();
-    $("input#component1").val('');
-    $("input#component2").val('');;
+    $(".skeleton-task").show();
+    
     $("#word").html(task.info.lemma);
     $("#task-id").html(task.id);
+    
+    // Remove don't know chekboxes
+    $("input#dontknowCheck1").removeAttr("checked");
+    $("input#dontknowCheck2").removeAttr("checked");
+    // Empty, re-enable and focus input fields
+    $("input#component1").val('');
+    $("input#component2").val('');
+    $("input#component1").removeAttr("disabled");
+    $("input#component2").removeAttr("disabled");
     $("input#component1").focus();
 
     // Submit button
     $(".btn-submit-task").off('click').on('click', function(){
         // Save dictionary with the two components of the blend
-        var answer = {"component1": $("input#component1").val(), "component2": $("input#component2").val()};
+        var component1 = $("input#component1");
+        var component2 = $("input#component2");
+        var component1Str = component1.prop("disabled") ? "" : component1.val();
+
+        var component2Str = component2.prop("disabled") ? "" : component2.val();
+        var answer = {"component1": component1Str, "component2": component2Str};
+        console.log(answer);
         pybossa.saveTask(task.id, answer).done(function(data){
             deferred.resolve();
             $("#success").fadeIn();
@@ -189,17 +236,8 @@ function showTask(task, deferred) {
         })
     });
     
-    // Do not know button
-    $(".btn-dontknow").off('click').on('click', function(){
-        var answer = "";
-        pybossa.saveTask(task.id, answer).done(function(data){
-            deferred.resolve();
-            $("#success").fadeIn();
-            setTimeout(function() { $("#success").fadeOut() }, 2000);
-        })
-    });
 
-    // Pressing ENTER in first fields goes to second field
+    // Pressing ENTER or TAB in first fields goes to second field
     $("input#component1").off("keyup").on("keyup", function(event) {
         // Cancel the default action, if needed
         // Number 13 is the "Enter" key on the keyboard
@@ -216,6 +254,24 @@ function showTask(task, deferred) {
         if (event.keyCode === 13) {
             // Trigger the button element with a click
             $(".btn-submit-task").click();
+        }
+    });
+
+    $("input#dontknowCheck1").change(function() {
+        if (this.checked) {
+            $("input#component1").prop("disabled", true);
+        }
+        else {
+            $("input#component1").prop("disabled", false);
+        }
+    });
+
+    $("input#dontknowCheck2").change(function() {
+        if (this.checked) {
+            $("input#component2").prop("disabled", true);
+        }
+        else {
+            $("input#component2").prop("disabled", false);
         }
     });
 
