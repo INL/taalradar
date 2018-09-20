@@ -1,6 +1,6 @@
 {
-    "name": "Herkennen van blends 1",
-    "short_name": "herken1",
-    "description": "De taak is om uit een stuk tekst te benoemen wat de blends zijn.",
-    "question": "Welk woord of welke woorden in deze tekst herken je als blends?"
+    "name": "Neologismen",
+    "short_name": "neologismen",
+    "description": "De taak is om van een aantal woorden, in context, te bepalen of dit neologismen zijn.",
+    "question": ""
 }
