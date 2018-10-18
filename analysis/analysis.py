@@ -91,6 +91,11 @@ def categorical_df(data, dataType, y_label):
         category_items = list(category_dict.items())
     category_df = pd.DataFrame.from_records(category_items, columns = [dataType,y_label])
 
+    # For gender, we want always same order of bars
+    # For location, show descending on frequency
+    if dataType=="Gender":
+        category_df.sort_values(by=dataType, axis=0, inplace=True)
+
     return category_df
 
 # Custom comparison function: check if gold standard contains all elements from answer.
@@ -163,24 +168,18 @@ def analyze_answers(answer_records, df_tasks, gold_dict, project):
                 user_answer = info
             elif(isinstance(info, dict)):
                 user_answer = info.values()
-            user_answer = set([i.lower().strip() for i in user_answer])
-            if project['type']=='analyse':
-                print(user_answer)
-            if contains_all(gold_dict[task_question],user_answer):
+            else: # Unrecognized type, probably empty string
+                user_answer = []
+            if (len(user_answer) == 0) or (all([x=='' for x in user_answer])):
+                user_answer = ["Do not know"]
+            user_answer_set = set([i.lower().strip() for i in user_answer])
+            if contains_all(gold_dict[task_question],user_answer_set):
                 correct += 1
             total += 1
-            all_answers.append(frozenset(user_answer))
-        if project['type']=='analyse':
-            pass#counter = Counter(all_answers).most_common(10)
-            #print(pd.DataFrame.from_records(counter, columns = ["user input", "frequency"]))
-        # if project['type']=='analyse':
-        #     print(task_question)
-        #     runs_per_task["info"] = runs_per_task["info"].map(lambda x: ",".join(x.values()) if isinstance(x,dict) else x)
-        #     for i, grouped in runs_per_task.groupby("info"):
-        #         if len(grouped) > 0:
-        #             with pd.option_context('max_colwidth', 50):
-        #                 print(grouped[["info","created", "user_id", "user_ip"]])
-        #     print("")
+            all_answers.append(",".join(user_answer_set))
+        counter = Counter(all_answers).most_common(10)
+        counter_df = pd.DataFrame.from_records(counter, columns = ["user input", "frequency"])
+        counter_df.to_csv(project['type']+"-" +  task_question +".tsv", sep="\t", index=False)
         score[task_question] = correct / total
     plot_score(score, project["name"])
 
