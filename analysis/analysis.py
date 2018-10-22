@@ -5,6 +5,7 @@ import seaborn as sns
 import os
 import errno
 import numpy as np
+from unidecode import unidecode
 from collections import defaultdict, Counter
 
 projects = [{'name':'Blends analysis',
@@ -102,8 +103,8 @@ def categorical_df(data, dataType, y_label):
 # Answer may possibly have more items.
 # Compare case-insensitive
 def contains_all(gold, answer):
-    answer_lc = [a.lower().split(' ')[0] for a in answer]
-    gold_lc = [g.lower() for g in gold]
+    answer_lc = [unidecode(a.lower().split(' ')[0]) for a in answer]
+    gold_lc = [unidecode(g.lower()) for g in gold]
     for el in gold_lc:
         if el not in answer_lc:
             return False
