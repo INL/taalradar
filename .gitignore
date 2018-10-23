@@ -7,3 +7,4 @@ projects/opentaal/key.txt
 .settings/org.eclipse.wst.jsdt.ui.superType.name
 .vscode/.ropeproject/config.py
 *.bak
+node_modules
