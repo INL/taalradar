@@ -1,0 +1,22 @@
+{
+  "name": "taalradar",
+  "version": "1.0.0",
+  "description": "[Taalradar](http://taalradar.ivdnt.org) is a crowdsourcing application of the [Instituut voor de Nederlandse Taal](https://github.com/INL), enabling speakers of Dutch to contribute to the knowledge about the Dutch language. The application is based on [PyBOSSA](https://github.com/scifabric/pybossa).",
+  "main": "template.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/INL/taalradar.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/INL/taalradar/issues"
+  },
+  "homepage": "https://github.com/INL/taalradar#readme",
+  "dependencies": {
+    "eslint-plugin-html": "^4.0.6"
+  }
+}
