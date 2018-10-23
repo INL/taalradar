@@ -7,3 +7,9 @@ projects/opentaal/key.txt
 .settings/org.eclipse.wst.jsdt.ui.superType.name
 .vscode/.ropeproject/config.py
 *.bak
+*.csv
+*.tsv
+*.png
+projects/opentaal/OpenTaal-210G-basis-gekeurd.txt
+projects/blends/analyse/template.html.orig
+projects/blends/herken1/template.html.orig
