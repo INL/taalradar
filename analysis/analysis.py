@@ -96,7 +96,6 @@ def categorical_df(data, dataType, y_label):
     # For location, show descending on frequency
     if dataType=="Gender":
         category_df.sort_values(by=dataType, axis=0, inplace=True)
-
     return category_df
 
 # Custom comparison function: check if gold standard contains all elements from answer.
@@ -144,6 +143,7 @@ def analyze_details(info_fields, title):
         else:
             cat_df = categorical_df(data, prop_c, y_label)
             barplot(x=prop_c, y=y_label, data=cat_df, title=title)
+        cat_df.to_csv(title+ " " + prop_c + ".tsv", sep="\t", index=False)
 
 def plot_score(score, title):
     # Convert score dict to df
