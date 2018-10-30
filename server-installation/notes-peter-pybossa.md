@@ -73,9 +73,9 @@ python app_context_rqworker.py scheduled_jobs super high medium low email mainte
 ```
 python run.py # Run web server
 ```
------
 
 Webserver is nu beschikbaar op http://localhost:5000
+-----
 
 
 ## Installatie als background daemon

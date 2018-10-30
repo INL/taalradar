@@ -10,6 +10,9 @@ projects/opentaal/key.txt
 *.csv
 *.tsv
 *.png
+*.xls
+*.txt
 projects/opentaal/OpenTaal-210G-basis-gekeurd.txt
 projects/blends/analyse/template.html.orig
 projects/blends/herken1/template.html.orig
+node_modules

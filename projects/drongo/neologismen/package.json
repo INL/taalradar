@@ -1,0 +1,14 @@
+{
+  "name": "neologismen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "template.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "eslint-plugin-html": "^4.0.6"
+  }
+}

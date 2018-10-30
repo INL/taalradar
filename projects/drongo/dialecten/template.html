@@ -85,9 +85,8 @@
         <div class="progress">
             <div id="progress" rel="tooltip" title="#" class="progress-bar" style="width: 0%;"  role="progressbar"></div>
         </div>
-        <h3><i><b>(...)</b> <span id="citation">(voorbeeldtekst)</span> <b>(...)</b></i></h3> <!-- The word will be loaded here -->
-        <br>
-        <h3 id="question">Is het woord <b id="word"></b> volgens u een woord dat lang gebruikt zal blijven worden, door veel verschillende mensen (bijv. jong, oud) in veel verschillende situaties (bijv. gesprek, krant)?</h3> <!-- The question will be loaded here -->
+        <h3 id="question">Is het woord <b id="word"></b> een neologisme?</h1> <!-- The question will be loaded here -->
+        <h4><b>(...)</b> <span id="citation">(voorbeeldtekst)</span> <b>(...)</b></h4> <!-- The word will be loaded here -->
         <br><br>
         <div id="answer"> <!-- Start DIV for the submission buttons -->
             <button class="btn btn-success"><i class="fa fa-thumbs-o-up"></i>Ja</button>
@@ -110,7 +109,7 @@ var nDetailsFields = 3;
 
 
 function loadUserProgress() {
-    pybossa.userProgress('neologismen').done(function(data){
+    pybossa.userProgress('dialecten').done(function(data){
         var currentTask = data.done;
         var totalTasks = data.total -1; // we do not count user details
         var pct = Math.round((currentTask*100)/totalTasks);
@@ -216,5 +215,5 @@ pybossa.presentTask(function(task, deferred) {
     }
 });
 
-pybossa.run('neologismen');
+pybossa.run('dialecten');
 </script>
