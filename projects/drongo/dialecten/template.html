@@ -85,12 +85,18 @@
         <div class="progress">
             <div id="progress" rel="tooltip" title="#" class="progress-bar" style="width: 0%;"  role="progressbar"></div>
         </div>
-        <h3 id="question">Is het woord <b id="word"></b> een neologisme?</h1> <!-- The question will be loaded here -->
-        <h4><b>(...)</b> <span id="citation">(voorbeeldtekst)</span> <b>(...)</b></h4> <!-- The word will be loaded here -->
+        <b id="heading"></b>
+        <br>
+        <h4 id="questionAddition"></h4>
+        <h2 id="question"></h2>
+        <form class="form-inline" id="taskform">
+            <input type="text" class="form-control" id="inputWord" style="width:100%;"></input>
+            Eventueel commentaar:
+            <input type="text" class="form-control" id="inputComments" style="width:100%;"></input>
+        </form>
         <br><br>
         <div id="answer"> <!-- Start DIV for the submission buttons -->
-            <button class="btn btn-success"><i class="fa fa-thumbs-o-up"></i>Ja</button>
-            <button class="btn btn-danger"><i class="fa fa-thumbs-o-down"></i>Nee</button>
+            <button class="btn btn-submit btn-primary btn-submit-task"><i class="fa fa-thumbs-o-up"></i>Volgende</button>
         </div><!-- End of DIV for the submission buttons -->
         <div class="col-md-10 small">
         </div>
@@ -142,11 +148,23 @@ function showDetailsForm(task, deferred) {
         });
     });
 
-}
+    $("#detailsform").off("keyup").on("keyup", function(event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            let fieldId = event.target.id;
+            // If last field, trigger Submit button
+            if (fieldId.endsWith(nDetailsFields.toString())) {
+                $(".btn-submit-userdetails").click();
+            }
+            else {
+                // For all other fields, focus next field
+                var currentNum = parseInt(fieldId[fieldId.length-1]);
+                $("#detailsform #details"+(currentNum+1).toString()).focus();
+            }
+        }
+    });
 
-function boldString(str, find){
-    const re = new RegExp(find, 'g');
-    return str.replace(re, '<b>'+find+'</b>');
+
 }
 
 function showTask(task, deferred) {
@@ -159,34 +177,49 @@ function showTask(task, deferred) {
     loadUserProgress();
     console.log("Loading data into form");
     console.log(task.info);
-    //$("#question").html(task.info.question);
-    $('#word').html(task.info.woord);
-    $("#citation").html(boldString(task.info.concordanties, task.info.woord));
+    $("#heading").html(task.info.category);
+    if (task.info.category === 'Woorden voor snoep') {
+        $("#questionAddition").html("Hoe noemt u ...?");
+    }
+    else {
+        $("#questionAddition").html("");
+    }
+    $("#question").html(task.info.question);
     $("#task-id").html(task.id);
 
-    // Yes button
-    $(".btn-success").off('click').on('click', function(){
+    // Clear fields and focus
+    $("#inputWord").val("");
+    $("#inputComments").val("");
+    $("#inputWord").focus();
+
+    $("#taskform").off("keyup").on("keyup", function(event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            let fieldId = event.target.id;
+            // If last field, trigger Submit button
+            if (fieldId==="inputComments") {
+                $(".btn-submit-task").click();
+            }
+            else {
+                // focus next field
+                $("#inputComments").focus();
+            }
+        }
+    });
+
+    // Send button
+    $(".btn-submit").off('click').on('click', function(){
         // Save array with all non-empty blend fields
-        var answer = {"neo_user": true, "id": task.info.id, "woord": task.info.woord};
+        const dialectForm = $("#inputQuestion").val();
+        const comments = $("#inputComments").val();
+        var answer = {"dialectForm": dialectForm, "comments": comments, "id": task.info.id, "question": task.info.question};
         pybossa.saveTask(task.id, answer).done(function(data){
-            console.log("Before resolve");
             deferred.resolve();
-            console.log("After resolve");
             $("#success").fadeIn();
             setTimeout(function() { $("#success").fadeOut() }, 2000);
         });
     });
 
-    // No button
-    $(".btn-danger").off('click').on('click', function(){
-        // Save array with all non-empty blend fields
-        var answer = {"neo_user": false, "id": task.info.id, "woord": task.info.woord};
-        pybossa.saveTask(task.id, answer).done(function(data){
-            deferred.resolve();
-            $("#success").fadeIn();
-            setTimeout(function() { $("#success").fadeOut() }, 2000);
-        });
-    });
 
     $("#loading").hide();
 }

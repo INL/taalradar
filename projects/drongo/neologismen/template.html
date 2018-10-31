@@ -56,7 +56,7 @@
                 </div>
                 <br><br>
             </form>
-        <div id="answer"> <!-- Start DIV for the submission buttons -->
+        <div> <!-- Start DIV for the submission buttons -->
             <button class="btn btn-submit btn-primary btn-submit-userdetails"><i class="fa fa-thumbs-o-up"></i>Verzend!</button>
         </div><!-- End of DIV for the submission buttons -->
     </div><!-- End of Question and Submission DIV (column) -->
@@ -85,13 +85,27 @@
         <div class="progress">
             <div id="progress" rel="tooltip" title="#" class="progress-bar" style="width: 0%;"  role="progressbar"></div>
         </div>
-        <h3><i><b>(...)</b> <span id="citation">(voorbeeldtekst)</span> <b>(...)</b></i></h3> <!-- The word will be loaded here -->
+        <h3><i><b>(...)</b> <span id="citation">(voorbeeldtekst)</span> <b>(...)</b></i></h3>
         <br>
-        <h3 id="question">Is het woord <b id="word"></b> volgens u een woord dat lang gebruikt zal blijven worden, door veel verschillende mensen (bijv. jong, oud) in veel verschillende situaties (bijv. gesprek, krant)?</h3> <!-- The question will be loaded here -->
+        <h3> Welke stellingen over het woord <b id="word"></b> zijn wat u betreft van toepassing?</h3>
+        <form class="form-inline" id="taskform">
+            <div class="form-check">
+                
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" value="" id="checkHoudbaar">
+                    Dit woord zal lang gebruikt blijven worden.
+                </label>
+            </div>
+            <div class="form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" type="checkbox" value="" id="checkDivers">
+                    Dit woord zal door veel verschillende mensen (bijv. jong, oud) in veel verschillende situaties (bijv. gesprek, krant) gebruikt worden.
+                </label>
+            </div>
+        </form>
         <br><br>
         <div id="answer"> <!-- Start DIV for the submission buttons -->
-            <button class="btn btn-success"><i class="fa fa-thumbs-o-up"></i>Ja</button>
-            <button class="btn btn-danger"><i class="fa fa-thumbs-o-down"></i>Nee</button>
+            <button class="btn btn-submit-task"><i class="fa fa-thumbs-o-up"></i>Volgende</button>
         </div><!-- End of DIV for the submission buttons -->
         <div class="col-md-10 small">
         </div>
@@ -135,14 +149,29 @@ function showDetailsForm(task, deferred) {
         var user_details = {"age": $("#details1").val(), "gender": $("#details2").val(), "location": $("#details3").val()};
         localStorage.user_details = JSON.stringify(user_details);
         pybossa.saveTask(task.id, user_details).done(function(data){
-            console.log("Before resolve");
             deferred.resolve();
-            console.log("After resolve");
             $("#success-details").fadeIn();
             setTimeout(function() { $("#success-details").fadeOut() }, 2000);
         });
     });
 
+    console.log("Set ENTER reactions for all details inputs in form.");
+    $("#detailsform").off("keyup").on("keyup", function(event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            console.log("ENTER pressed in field " + event.target.id);
+            let fieldId = event.target.id;
+            // If last field, trigger Submit button
+            if (fieldId.endsWith(nDetailsFields.toString())) {
+                $(".btn-submit-userdetails").click();
+            }
+            else {
+                // For all other fields, focus next field
+                var currentNum = parseInt(fieldId[fieldId.length-1]);
+                $("#detailsform #details"+(currentNum+1).toString()).focus();
+            }
+        }
+    });
 }
 
 function boldString(str, find){
@@ -160,28 +189,37 @@ function showTask(task, deferred) {
     loadUserProgress();
     console.log("Loading data into form");
     console.log(task.info);
-    //$("#question").html(task.info.question);
     $('#word').html(task.info.woord);
     $("#citation").html(boldString(task.info.concordanties, task.info.woord));
     $("#task-id").html(task.id);
 
-    // Yes button
-    $(".btn-success").off('click').on('click', function(){
-        // Save array with all non-empty blend fields
-        var answer = {"neo_user": true, "id": task.info.id, "woord": task.info.woord};
-        pybossa.saveTask(task.id, answer).done(function(data){
-            console.log("Before resolve");
-            deferred.resolve();
-            console.log("After resolve");
-            $("#success").fadeIn();
-            setTimeout(function() { $("#success").fadeOut() }, 2000);
-        });
+    // Empty checkboxes
+    $("#checkHoudbaar").removeAttr("checked");
+    $("#checkDivers").removeAttr("checked");
+    // Focus first checkbox
+    $("#checkHoudbaar").focus();
+
+    $("#taskform").off("keyup").on("keyup", function(event) {
+        // Number 13 is the "Enter" key on the keyboard
+        if (event.keyCode === 13) {
+            let fieldId = event.target.id;
+            // If last field, trigger Submit button
+            if (fieldId==="checkDivers") {
+                $(".btn-submit-task").click();
+            }
+            else {
+                // focus next field
+                $("#checkDivers").focus();
+            }
+        }
     });
 
-    // No button
-    $(".btn-danger").off('click').on('click', function(){
+    // Submit button
+    $(".btn-submit-task").off('click').on('click', function(){
         // Save array with all non-empty blend fields
-        var answer = {"neo_user": false, "id": task.info.id, "woord": task.info.woord};
+        var houdbaar = $("#checkHoudbaar").is(":checked");
+        var divers = $("#checkDivers").is(":checked");
+        var answer = {"houdbaar": houdbaar, "divers": divers, "id": task.info.id, "woord": task.info.woord};
         pybossa.saveTask(task.id, answer).done(function(data){
             deferred.resolve();
             $("#success").fadeIn();
@@ -218,3 +256,9 @@ pybossa.presentTask(function(task, deferred) {
 
 pybossa.run('neologismen');
 </script>
+<style>
+    .form-check-label {
+        font-weight: normal;
+        font-size: 18px;
+    }
+</style>
