@@ -31,7 +31,7 @@
     </div> <!-- End Success and Error Messages for the user -->
 </div> <!-- End of Row -->
 
-<div class="row skeleton-userdetails"> <!-- Start Skeleton Row-->
+<div class="row skeleton-userdetails-taalverhalen"> <!-- Start Skeleton Row-->
     Hieronder kunt u enkele persoonlijke gegevens invullen, die ons extra inzichten geven in ons onderzoek. De velden die u niet wilt invullen, kunt u leeg laten.<br><br>Uw leeftijd, geslacht en woonplaats zijn, gekoppeld aan uw antwoorden, zichtbaar voor andere bezoekers van het platform. Andere bezoekers kunnen echter niet uw eventuele accountgegevens (naam en e-mailadres) zien die hieraan gekoppeld zijn.
     <div class="col-md-8 "><!-- Start of Question and Submission DIV (column) -->
         <form class="form-inline" id="detailsform">
@@ -63,10 +63,12 @@
 </div><!-- End of Skeleton Row -->
 
 <div class="row skeleton-finish"> <!-- Start Skeleton Row-->
-    <div class="col-md-6 "><!-- Start of Question and Submission DIV (column) -->
-        <h1>Dank u wel, u heeft alle beschikbare teksten doorlopen!</h1>
-        Het Instituut voor de Nederlandse taal gebruikt uw bijdrage om ervaring op te doen met crowdsourcing
-        en de kennis over de Nederlandse taal uit te breiden. <br><br>
+    <div class="col-md-8 "><!-- Start of Question and Submission DIV (column) -->
+        <h1>Dank u wel, u heeft alle dialectteksten doorlopen!</h1>
+        Deze vragenlijst is samengesteld door Miet Ooms, vertaler en expert in taalvariatie in het Nederlands (<a href="http://taalverhalen.be">Taalverhalen.be</a>). Het Instituut voor de Nederlandse taal gebruikt uw bijdrage om de kennis over de Nederlandse taal uit te breiden.
+        <h3>Nog een experiment?</h3>
+        Smaakt dit experiment naar meer? Doe ook mee met ons experiment over <a href="http://taalradar.ivdnt.org/project/neologismen/newtask">nieuwe woorden</a>!
+        <h3>Op de hoogte blijven?</h3>
         Wilt u op de hoogte blijven van ons onderzoek, en
         eventueel vaker meedoen aan dergelijke experimenten? Mail dan naar
         <a href="mailto:servicedesk@ivdnt.org">servicedesk@ivdnt.org</a>, onder
@@ -81,7 +83,7 @@
 -->
 <div class="row skeleton-task"> <!-- Start Skeleton Row-->
     <div class="col-md-10 "><!-- Start of Question and Submission DIV (column) -->
-        <p>Tekst <span id="done" class="label label-info"></span> van <span id="total" class="label label-info"></span></p>
+        <p>Taak <span id="done" class="label label-info"></span> van <span id="total" class="label label-info"></span></p>
         <div class="progress">
             <div id="progress" rel="tooltip" title="#" class="progress-bar" style="width: 0%;"  role="progressbar"></div>
         </div>
@@ -89,6 +91,8 @@
         <br>
         <h4 id="questionAddition"></h4>
         <h2 id="question"></h2>
+        <div id="imageSection"></div>
+        <br>
         <form class="form-inline" id="taskform">
             <input type="text" class="form-control" id="inputWord" style="width:100%;"></input>
             Eventueel commentaar:
@@ -117,7 +121,7 @@ var nDetailsFields = 3;
 function loadUserProgress() {
     pybossa.userProgress('dialecten').done(function(data){
         var currentTask = data.done;
-        var totalTasks = data.total -1; // we do not count user details
+        var totalTasks = data.total; // we do include user details at the end as task
         var pct = Math.round((currentTask*100)/totalTasks);
         $("#progress").css("width", pct.toString() +"%");
         $("#progress").attr("title", pct.toString() + "% completed!");
@@ -128,7 +132,7 @@ function loadUserProgress() {
 }
 
 
-function showDetailsForm(task, deferred) {
+function showDetailsFormTaalverhalen(task, deferred) {
     console.log("Starting to show details form...");
 	$(".skeleton-task").hide();
 	$(".skeleton-finish").hide();
@@ -170,7 +174,7 @@ function showDetailsForm(task, deferred) {
 function showTask(task, deferred) {
     console.log("Starting to show task: " + task);
     console.log("Hiding and showing right pages");
-	$(".skeleton-userdetails").hide();
+	$(".skeleton-userdetails-taalverhalen").hide();
 	$(".skeleton-finish").hide();
     $(".skeleton-task").show();
     console.log("Loading user progress");
@@ -179,13 +183,22 @@ function showTask(task, deferred) {
     console.log(task.info);
     $("#heading").html(task.info.category);
     if (task.info.category === 'Woorden voor snoep') {
-        $("#questionAddition").html("Hoe noemt u ...?");
+        $("#questionAddition").html("Hoe noemt u...");
     }
     else {
         $("#questionAddition").html("");
     }
     $("#question").html(task.info.question);
     $("#task-id").html(task.id);
+
+    // Set image
+    $("#image").remove();
+    if (task.info.image !== "") {
+        $('#imageSection').prepend(`<img id="image" src="${task.info.image}" width="300"/>`)
+        if (task.info.imageLicense !== "") {
+            $("#image").attr("title",task.info.imageLicense);
+        }
+    }
 
     // Clear fields and focus
     $("#inputWord").val("");
@@ -226,7 +239,7 @@ function showTask(task, deferred) {
 
 function finish() {
 	$(".skeleton-task").hide();
-	$(".skeleton-userdetails").hide();
+	$(".skeleton-userdetails-taalverhalen").hide();
 	$("#loading").hide();
 	$(".skeleton-finish").show();
     
@@ -234,9 +247,9 @@ function finish() {
 
 pybossa.presentTask(function(task, deferred) {
     if ( !$.isEmptyObject(task) ) {
-    	if (task.info.type == "userdetails") {
+    	if (task.info.type === "userdetails-taalverhalen") {
     		// Show page to give personal details
-    		showDetailsForm(task, deferred);
+    		showDetailsFormTaalverhalen(task, deferred);
     	}
     	else {
     		// Show task
