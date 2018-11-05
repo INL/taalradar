@@ -41,7 +41,7 @@ def write_pybossa_file(df_content):
     # Add first row with user details
     df_header = pd.DataFrame.from_dict({"type": ["userdetails"]})
     df_comb = df_header.merge(df_content, how="outer")
-    filename = "neologismen-tasks15"
+    filename = "neologismen-tasks"
     filename += ".csv"
     df_comb.to_csv(filename)
 
@@ -82,7 +82,7 @@ def process_neologisms(neo_file_tagged, concord_file_tagged, neo_file_untagged, 
         df_neo_cat = cat["df"]
         df_concord_lookup_cat = cat["concord_lookup"]
         df_neo_concord = add_concordances(df_neo_cat, df_concord_lookup_cat)
-        df_neo_concord_sample = df_neo_concord.sample(n=7, random_state=RANDOM_STATE)
+        df_neo_concord_sample = df_neo_concord.sample(n=10, random_state=RANDOM_STATE)
         print(cat["name"])
         df_neo_concord_sample[["woord","datum","concordanties"]].to_csv(cat["name"]+"-test.tsv",sep="\t",index=False)
         df_output = df_output.append(df_neo_concord_sample)

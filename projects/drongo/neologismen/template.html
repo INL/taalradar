@@ -162,7 +162,7 @@ function showDetailsForm(task, deferred) {
         // Number 13 is the "Enter" key on the keyboard
         if (event.keyCode === 13) {
             console.log("ENTER pressed in field " + event.target.id);
-            let fieldId = event.target.id;
+            var fieldId = event.target.id;
             // If last field, trigger Submit button
             if (fieldId.endsWith(nDetailsFields.toString())) {
                 $(".btn-submit-userdetails").click();
@@ -177,7 +177,7 @@ function showDetailsForm(task, deferred) {
 }
 
 function boldString(str, find){
-    const re = new RegExp(find, 'g');
+    var re = new RegExp(find, 'g');
     return str.replace(re, '<b>'+find+'</b>');
 }
 
@@ -204,7 +204,7 @@ function showTask(task, deferred) {
     $("#taskform").off("keyup").on("keyup", function(event) {
         // Number 13 is the "Enter" key on the keyboard
         if (event.keyCode === 13) {
-            let fieldId = event.target.id;
+            var fieldId = event.target.id;
             // If last field, trigger Submit button
             if (fieldId==="checkDivers") {
                 $(".btn-submit-task").click();

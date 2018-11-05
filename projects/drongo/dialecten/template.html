@@ -155,7 +155,7 @@ function showDetailsFormTaalverhalen(task, deferred) {
     $("#detailsform").off("keyup").on("keyup", function(event) {
         // Number 13 is the "Enter" key on the keyboard
         if (event.keyCode === 13) {
-            let fieldId = event.target.id;
+            var fieldId = event.target.id;
             // If last field, trigger Submit button
             if (fieldId.endsWith(nDetailsFields.toString())) {
                 $(".btn-submit-userdetails").click();
@@ -194,7 +194,7 @@ function showTask(task, deferred) {
     // Set image
     $("#image").remove();
     if (task.info.image !== "") {
-        $('#imageSection').prepend(`<img id="image" src="${task.info.image}" width="300"/>`)
+        $('#imageSection').prepend('<img id="image" src="' + task.info.image + '" width="300"/>');
         if (task.info.imageLicense !== "") {
             $("#image").attr("title",task.info.imageLicense);
         }
@@ -208,7 +208,7 @@ function showTask(task, deferred) {
     $("#taskform").off("keyup").on("keyup", function(event) {
         // Number 13 is the "Enter" key on the keyboard
         if (event.keyCode === 13) {
-            let fieldId = event.target.id;
+            var fieldId = event.target.id;
             // If last field, trigger Submit button
             if (fieldId==="inputComments") {
                 $(".btn-submit-task").click();
@@ -223,8 +223,8 @@ function showTask(task, deferred) {
     // Send button
     $(".btn-submit").off('click').on('click', function(){
         // Save array with all non-empty blend fields
-        const dialectForm = $("#inputQuestion").val();
-        const comments = $("#inputComments").val();
+        var dialectForm = $("#inputQuestion").val();
+        var comments = $("#inputComments").val();
         var answer = {"dialectForm": dialectForm, "comments": comments, "id": task.info.id, "question": task.info.question};
         pybossa.saveTask(task.id, answer).done(function(data){
             deferred.resolve();
