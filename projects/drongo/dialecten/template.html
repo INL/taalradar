@@ -34,7 +34,7 @@
 <div class="row skeleton-userdetails-taalverhalen"> <!-- Start Skeleton Row-->
     Hieronder kunt u enkele persoonlijke gegevens invullen, die ons extra inzichten geven in ons onderzoek. De velden die u niet wilt invullen, kunt u leeg laten.<br><br>Uw leeftijd, geslacht en woonplaats zijn, gekoppeld aan uw antwoorden, zichtbaar voor andere bezoekers van het platform. Andere bezoekers kunnen echter niet uw eventuele accountgegevens (naam en e-mailadres) zien die hieraan gekoppeld zijn.
     <div class="col-md-8 "><!-- Start of Question and Submission DIV (column) -->
-        <form class="form-inline" id="detailsform">
+        <form class="form-inline" id="detailsform-taalverhalen">
                 <div class="form-group">
                     <h3 id="headerAge">Leeftijd:</h3>
                     <input type="number" min="0" max="150" class="form-control" name="age" id="details1" style="width:100%;"></input>
@@ -120,7 +120,7 @@ var nDetailsFields = 3;
 
 function loadUserProgress() {
     pybossa.userProgress('dialecten').done(function(data){
-        var currentTask = data.done;
+        var currentTask = data.done+1;
         var totalTasks = data.total; // we do include user details at the end as task
         var pct = Math.round((currentTask*100)/totalTasks);
         $("#progress").css("width", pct.toString() +"%");
@@ -136,7 +136,7 @@ function showDetailsFormTaalverhalen(task, deferred) {
     console.log("Starting to show details form...");
 	$(".skeleton-task").hide();
 	$(".skeleton-finish").hide();
-    $(".skeleton-userdetails").show();
+    $(".skeleton-userdetails-taalverhalen").show();
     $("#details1").focus();
 	details_shown = true;
     // Submit button
@@ -152,7 +152,7 @@ function showDetailsFormTaalverhalen(task, deferred) {
         });
     });
 
-    $("#detailsform").off("keyup").on("keyup", function(event) {
+    $("#detailsform-taalverhalen").off("keyup").on("keyup", function(event) {
         // Number 13 is the "Enter" key on the keyboard
         if (event.keyCode === 13) {
             var fieldId = event.target.id;
@@ -163,7 +163,7 @@ function showDetailsFormTaalverhalen(task, deferred) {
             else {
                 // For all other fields, focus next field
                 var currentNum = parseInt(fieldId[fieldId.length-1]);
-                $("#detailsform #details"+(currentNum+1).toString()).focus();
+                $("#detailsform-taalverhalen #details"+(currentNum+1).toString()).focus();
             }
         }
     });
