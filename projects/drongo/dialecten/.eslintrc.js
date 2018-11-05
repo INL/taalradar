@@ -1,14 +1,17 @@
 module.exports = {
     "env": {
-        "browser": true
+        "browser": true,
+        "jquery": true
     },
+    "plugins": ["html","compat"],
     "extends": "eslint:recommended",
     "parserOptions": {
         "ecmaVersion": 5
     },
     "rules": {
+        "no-console": "off",
         "indent": [
-            "error",
+            "warn",
             "tab"
         ],
         "linebreak-style": [
@@ -22,6 +25,7 @@ module.exports = {
         "semi": [
             "error",
             "always"
-        ]
+        ],
+        "compat/compat": "error"
     }
 };

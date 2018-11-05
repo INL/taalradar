@@ -118,118 +118,118 @@
 var nDetailsFields = 3;
 
 // Update userLocale with server side information
- $(document).ready(function(){
-     userLocale = document.getElementById('PYBOSSA_USER_LOCALE').textContent.trim();
+$(document).ready(function(){
+	userLocale = document.getElementById("PYBOSSA_USER_LOCALE").textContent.trim();
 
 });
 
 
 
 function loadUserProgress() {
-    pybossa.userProgress('neologismen').done(function(data){
-        var currentTask = data.done;
-        var totalTasks = data.total -1; // we do not count user details
-        var pct = Math.round((currentTask*100)/totalTasks);
-        $("#progress").css("width", pct.toString() +"%");
-        $("#progress").attr("title", pct.toString() + "% completed!");
-        $("#progress").tooltip({'placement': 'left'}); 
-        $("#total").text(totalTasks);
-        $("#done").text(currentTask);
-    });
+	pybossa.userProgress("neologismen").done(function(data){
+		var currentTask = data.done;
+		var totalTasks = data.total -1; // we do not count user details
+		var pct = Math.round((currentTask*100)/totalTasks);
+		$("#progress").css("width", pct.toString() +"%");
+		$("#progress").attr("title", pct.toString() + "% completed!");
+		$("#progress").tooltip({"placement": "left"}); 
+		$("#total").text(totalTasks);
+		$("#done").text(currentTask);
+	});
 }
 
 
 function showDetailsForm(task, deferred) {
-    console.log("Starting to show details form...");
+	console.log("Starting to show details form...");
 	$(".skeleton-task").hide();
 	$(".skeleton-finish").hide();
-    $(".skeleton-userdetails").show();
-    $("#details1").focus();
+	$(".skeleton-userdetails").show();
+	$("#details1").focus();
 	details_shown = true;
-    // Submit button
-    $(".btn-submit-userdetails").off('click').on('click', function(){
-        var user_details = {"age": $("#details1").val(), "gender": $("#details2").val(), "location": $("#details3").val()};
-        localStorage.user_details = JSON.stringify(user_details);
-        pybossa.saveTask(task.id, user_details).done(function(data){
-            deferred.resolve();
-            $("#success-details").fadeIn();
-            setTimeout(function() { $("#success-details").fadeOut() }, 2000);
-        });
-    });
+	// Submit button
+	$(".btn-submit-userdetails").off("click").on("click", function(){
+		var user_details = {"age": $("#details1").val(), "gender": $("#details2").val(), "location": $("#details3").val()};
+		localStorage.user_details = JSON.stringify(user_details);
+		pybossa.saveTask(task.id, user_details).done(function(data){
+			deferred.resolve();
+			$("#success-details").fadeIn();
+			setTimeout(function() { $("#success-details").fadeOut(); }, 2000);
+		});
+	});
 
-    console.log("Set ENTER reactions for all details inputs in form.");
-    $("#detailsform").off("keyup").on("keyup", function(event) {
-        // Number 13 is the "Enter" key on the keyboard
-        if (event.keyCode === 13) {
-            console.log("ENTER pressed in field " + event.target.id);
-            var fieldId = event.target.id;
-            // If last field, trigger Submit button
-            if (fieldId.endsWith(nDetailsFields.toString())) {
-                $(".btn-submit-userdetails").click();
-            }
-            else {
-                // For all other fields, focus next field
-                var currentNum = parseInt(fieldId[fieldId.length-1]);
-                $("#detailsform #details"+(currentNum+1).toString()).focus();
-            }
-        }
-    });
+	console.log("Set ENTER reactions for all details inputs in form.");
+	$("#detailsform").off("keyup").on("keyup", function(event) {
+		// Number 13 is the "Enter" key on the keyboard
+		if (event.keyCode === 13) {
+			console.log("ENTER pressed in field " + event.target.id);
+			var fieldId = event.target.id;
+			// If last field, trigger Submit button
+			if (fieldId.endsWith(nDetailsFields.toString())) {
+				$(".btn-submit-userdetails").click();
+			}
+			else {
+				// For all other fields, focus next field
+				var currentNum = parseInt(fieldId[fieldId.length-1]);
+				$("#detailsform #details"+(currentNum+1).toString()).focus();
+			}
+		}
+	});
 }
 
 function boldString(str, find){
-    var re = new RegExp(find, 'g');
-    return str.replace(re, '<b>'+find+'</b>');
+	var re = new RegExp(find, "g");
+	return str.replace(re, "<b>"+find+"</b>");
 }
 
 function showTask(task, deferred) {
-    console.log("Starting to show task: " + task);
-    console.log("Hiding and showing right pages");
+	console.log("Starting to show task: " + task);
+	console.log("Hiding and showing right pages");
 	$(".skeleton-userdetails").hide();
 	$(".skeleton-finish").hide();
-    $(".skeleton-task").show();
-    console.log("Loading user progress");
-    loadUserProgress();
-    console.log("Loading data into form");
-    console.log(task.info);
-    $('#word').html(task.info.woord);
-    $("#citation").html(boldString(task.info.concordanties, task.info.woord));
-    $("#task-id").html(task.id);
+	$(".skeleton-task").show();
+	console.log("Loading user progress");
+	loadUserProgress();
+	console.log("Loading data into form");
+	console.log(task.info);
+	$("#word").html(task.info.woord);
+	$("#citation").html(boldString(task.info.concordanties, task.info.woord));
+	$("#task-id").html(task.id);
 
-    // Empty checkboxes
-    $("#checkHoudbaar").removeAttr("checked");
-    $("#checkDivers").removeAttr("checked");
-    // Focus first checkbox
-    $("#checkHoudbaar").focus();
+	// Empty checkboxes
+	$("#checkHoudbaar").removeAttr("checked");
+	$("#checkDivers").removeAttr("checked");
+	// Focus first checkbox
+	$("#checkHoudbaar").focus();
 
-    $("#taskform").off("keyup").on("keyup", function(event) {
-        // Number 13 is the "Enter" key on the keyboard
-        if (event.keyCode === 13) {
-            var fieldId = event.target.id;
-            // If last field, trigger Submit button
-            if (fieldId==="checkDivers") {
-                $(".btn-submit-task").click();
-            }
-            else {
-                // focus next field
-                $("#checkDivers").focus();
-            }
-        }
-    });
+	$("#taskform").off("keyup").on("keyup", function(event) {
+		// Number 13 is the "Enter" key on the keyboard
+		if (event.keyCode === 13) {
+			var fieldId = event.target.id;
+			// If last field, trigger Submit button
+			if (fieldId==="checkDivers") {
+				$(".btn-submit-task").click();
+			}
+			else {
+				// focus next field
+				$("#checkDivers").focus();
+			}
+		}
+	});
 
-    // Submit button
-    $(".btn-submit-task").off('click').on('click', function(){
-        // Save array with all non-empty blend fields
-        var houdbaar = $("#checkHoudbaar").is(":checked");
-        var divers = $("#checkDivers").is(":checked");
-        var answer = {"houdbaar": houdbaar, "divers": divers, "id": task.info.id, "woord": task.info.woord};
-        pybossa.saveTask(task.id, answer).done(function(data){
-            deferred.resolve();
-            $("#success").fadeIn();
-            setTimeout(function() { $("#success").fadeOut() }, 2000);
-        });
-    });
+	// Submit button
+	$(".btn-submit-task").off("click").on("click", function(){
+		// Save array with all non-empty blend fields
+		var houdbaar = $("#checkHoudbaar").is(":checked");
+		var divers = $("#checkDivers").is(":checked");
+		var answer = {"houdbaar": houdbaar, "divers": divers, "id": task.info.id, "woord": task.info.woord};
+		pybossa.saveTask(task.id, answer).done(function(data){
+			deferred.resolve();
+			$("#success").fadeIn();
+			setTimeout(function() { $("#success").fadeOut(); }, 2000);
+		});
+	});
 
-    $("#loading").hide();
+	$("#loading").hide();
 }
 
 function finish() {
@@ -240,8 +240,18 @@ function finish() {
     
 }
 
+// Polyfills
+if (!String.prototype.endsWith) {
+	String.prototype.endsWith = function(search, this_len) {
+		if (this_len === undefined || this_len > this.length) {
+			this_len = this.length;
+		}
+		return this.substring(this_len - search.length, this_len) === search;
+	};
+}
+
 pybossa.presentTask(function(task, deferred) {
-    if ( !$.isEmptyObject(task) ) {
+	if ( !$.isEmptyObject(task) ) {
     	if (task.info.type == "userdetails") {
     		// Show page to give personal details
     		showDetailsForm(task, deferred);
@@ -250,13 +260,13 @@ pybossa.presentTask(function(task, deferred) {
     		// Show task
     		showTask(task, deferred);
     	}
-    }
-    else {
+	}
+	else {
     	finish();
-    }
+	}
 });
 
-pybossa.run('neologismen');
+pybossa.run("neologismen");
 </script>
 <style>
     .form-check-label {

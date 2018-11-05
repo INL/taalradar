@@ -108,133 +108,134 @@
 </div><!-- End of Skeleton Row -->
 
 <script type="text/javascript">
+/* global console */
+/* global pybossa */
 var nDetailsFields = 3;
 
 // Update userLocale with server side information
- $(document).ready(function(){
-     userLocale = document.getElementById('PYBOSSA_USER_LOCALE').textContent.trim();
+/*$(document).ready(function(){
+	userLocale = document.getElementById("PYBOSSA_USER_LOCALE").textContent.trim();
 
-});
+});*/
 
 
 
 function loadUserProgress() {
-    pybossa.userProgress('dialecten').done(function(data){
-        var currentTask = data.done+1;
-        var totalTasks = data.total; // we do include user details at the end as task
-        var pct = Math.round((currentTask*100)/totalTasks);
-        $("#progress").css("width", pct.toString() +"%");
-        $("#progress").attr("title", pct.toString() + "% completed!");
-        $("#progress").tooltip({'placement': 'left'}); 
-        $("#total").text(totalTasks);
-        $("#done").text(currentTask);
-    });
+	pybossa.userProgress("dialecten").done(function(data){
+		var currentTask = data.done+1;
+		var totalTasks = data.total; // we do include user details at the end as task
+		var pct = Math.round((currentTask*100)/totalTasks);
+		$("#progress").css("width", pct.toString() +"%");
+		$("#progress").attr("title", pct.toString() + "% completed!");
+		$("#progress").tooltip({"placement": "left"}); 
+		$("#total").text(totalTasks);
+		$("#done").text(currentTask);
+	});
 }
 
 
 function showDetailsFormTaalverhalen(task, deferred) {
-    console.log("Starting to show details form...");
+	console.log("Starting to show details form...");
 	$(".skeleton-task").hide();
 	$(".skeleton-finish").hide();
-    $(".skeleton-userdetails-taalverhalen").show();
-    $("#details1").focus();
-	details_shown = true;
-    // Submit button
-    $(".btn-submit-userdetails").off('click').on('click', function(){
-        var user_details = {"age": $("#details1").val(), "gender": $("#details2").val(), "location": $("#details3").val()};
-        localStorage.user_details = JSON.stringify(user_details);
-        pybossa.saveTask(task.id, user_details).done(function(data){
-            console.log("Before resolve");
-            deferred.resolve();
-            console.log("After resolve");
-            $("#success-details").fadeIn();
-            setTimeout(function() { $("#success-details").fadeOut() }, 2000);
-        });
-    });
+	$(".skeleton-userdetails-taalverhalen").show();
+	$("#details1").focus();
+	// Submit button
+	$(".btn-submit-userdetails").off("click").on("click", function(){
+		var user_details = {"age": $("#details1").val(), "gender": $("#details2").val(), "location": $("#details3").val()};
+		localStorage.user_details = JSON.stringify(user_details);
+		pybossa.saveTask(task.id, user_details).done(function(data){
+			console.log("Before resolve");
+			deferred.resolve();
+			console.log("After resolve");
+			$("#success-details").fadeIn();
+			setTimeout(function() { $("#success-details").fadeOut(); }, 2000);
+		});
+	});
 
-    $("#detailsform-taalverhalen").off("keyup").on("keyup", function(event) {
-        // Number 13 is the "Enter" key on the keyboard
-        if (event.keyCode === 13) {
-            var fieldId = event.target.id;
-            // If last field, trigger Submit button
-            if (fieldId.endsWith(nDetailsFields.toString())) {
-                $(".btn-submit-userdetails").click();
-            }
-            else {
-                // For all other fields, focus next field
-                var currentNum = parseInt(fieldId[fieldId.length-1]);
-                $("#detailsform-taalverhalen #details"+(currentNum+1).toString()).focus();
-            }
-        }
-    });
+	$("#detailsform-taalverhalen").off("keyup").on("keyup", function(event) {
+		// Number 13 is the "Enter" key on the keyboard
+		if (event.keyCode === 13) {
+			var fieldId = event.target.id;
+			// If last field, trigger Submit button
+			if (fieldId.endsWith(nDetailsFields.toString())) {
+				$(".btn-submit-userdetails").click();
+			}
+			else {
+				// For all other fields, focus next field
+				var currentNum = parseInt(fieldId[fieldId.length-1]);
+				$("#detailsform-taalverhalen #details"+(currentNum+1).toString()).focus();
+			}
+		}
+	});
 
 
 }
 
 function showTask(task, deferred) {
-    console.log("Starting to show task: " + task);
-    console.log("Hiding and showing right pages");
+	console.log("Starting to show task: " + task);
+	console.log("Hiding and showing right pages");
 	$(".skeleton-userdetails-taalverhalen").hide();
 	$(".skeleton-finish").hide();
-    $(".skeleton-task").show();
-    console.log("Loading user progress");
-    loadUserProgress();
-    console.log("Loading data into form");
-    console.log(task.info);
-    $("#heading").html(task.info.category);
-    if (task.info.category === 'Woorden voor snoep') {
-        $("#questionAddition").html("Hoe noemt u...");
-    }
-    else {
-        $("#questionAddition").html("");
-    }
-    $("#question").html(task.info.question);
-    $("#task-id").html(task.id);
+	$(".skeleton-task").show();
+	console.log("Loading user progress");
+	loadUserProgress();
+	console.log("Loading data into form");
+	console.log(task.info);
+	$("#heading").html(task.info.category);
+	if (task.info.category === "Woorden voor snoep") {
+		$("#questionAddition").html("Hoe noemt u...");
+	}
+	else {
+		$("#questionAddition").html("");
+	}
+	$("#question").html(task.info.question);
+	$("#task-id").html(task.id);
 
-    // Set image
-    $("#image").remove();
-    if (task.info.image !== "") {
-        $('#imageSection').prepend('<img id="image" src="' + task.info.image + '" width="300"/>');
-        if (task.info.imageLicense !== "") {
-            $("#image").attr("title",task.info.imageLicense);
-        }
-    }
+	// Set image
+	$("#image").remove();
+	if (task.info.image !== "") {
+		$("#imageSection").prepend("<img id=\"image\" src=\"" + task.info.image + "\" width=\"300\"/>");
+		if (task.info.imageLicense !== "") {
+			$("#image").attr("title",task.info.imageLicense);
+		}
+	}
 
-    // Clear fields and focus
-    $("#inputWord").val("");
-    $("#inputComments").val("");
-    $("#inputWord").focus();
+	// Clear fields and focus
+	$("#inputWord").val("");
+	$("#inputComments").val("");
+	$("#inputWord").focus();
 
-    $("#taskform").off("keyup").on("keyup", function(event) {
-        // Number 13 is the "Enter" key on the keyboard
-        if (event.keyCode === 13) {
-            var fieldId = event.target.id;
-            // If last field, trigger Submit button
-            if (fieldId==="inputComments") {
-                $(".btn-submit-task").click();
-            }
-            else {
-                // focus next field
-                $("#inputComments").focus();
-            }
-        }
-    });
+	$("#taskform").off("keyup").on("keyup", function(event) {
+		// Number 13 is the "Enter" key on the keyboard
+		if (event.keyCode === 13) {
+			var fieldId = event.target.id;
+			// If last field, trigger Submit button
+			if (fieldId==="inputComments") {
+				$(".btn-submit-task").click();
+			}
+			else {
+				// focus next field
+				$("#inputComments").focus();
+			}
+		}
+	});
 
-    // Send button
-    $(".btn-submit").off('click').on('click', function(){
-        // Save array with all non-empty blend fields
-        var dialectForm = $("#inputQuestion").val();
-        var comments = $("#inputComments").val();
-        var answer = {"dialectForm": dialectForm, "comments": comments, "id": task.info.id, "question": task.info.question};
-        pybossa.saveTask(task.id, answer).done(function(data){
-            deferred.resolve();
-            $("#success").fadeIn();
-            setTimeout(function() { $("#success").fadeOut() }, 2000);
-        });
-    });
+	// Send button
+	$(".btn-submit").off("click").on("click", function(){
+		// Save array with all non-empty blend fields
+		var dialectForm = $("#inputQuestion").val();
+		var comments = $("#inputComments").val();
+		var answer = {"dialectForm": dialectForm, "comments": comments, "id": task.info.id, "question": task.info.question};
+		pybossa.saveTask(task.id, answer).done(function(data){
+			deferred.resolve();
+			$("#success").fadeIn();
+			setTimeout(function() { $("#success").fadeOut(); }, 2000);
+		});
+	});
 
 
-    $("#loading").hide();
+	$("#loading").hide();
 }
 
 function finish() {
@@ -245,8 +246,18 @@ function finish() {
     
 }
 
+// Define polyfills
+if (!String.prototype.endsWith) {
+	String.prototype.endsWith = function(search, this_len) {
+		if (this_len === undefined || this_len > this.length) {
+			this_len = this.length;
+		}
+		return this.substring(this_len - search.length, this_len) === search;
+	};
+}
+
 pybossa.presentTask(function(task, deferred) {
-    if ( !$.isEmptyObject(task) ) {
+	if ( !$.isEmptyObject(task) ) {
     	if (task.info.type === "userdetails-taalverhalen") {
     		// Show page to give personal details
     		showDetailsFormTaalverhalen(task, deferred);
@@ -255,11 +266,11 @@ pybossa.presentTask(function(task, deferred) {
     		// Show task
     		showTask(task, deferred);
     	}
-    }
-    else {
+	}
+	else {
     	finish();
-    }
+	}
 });
 
-pybossa.run('dialecten');
+pybossa.run("dialecten");
 </script>
