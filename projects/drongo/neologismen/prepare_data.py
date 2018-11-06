@@ -53,8 +53,8 @@ def read_filter_neologisms(neo_file):
     df_neo = pd.read_csv(neo_file, engine="c")
     # Filter out erroneous entries, which have an "error comment"
     df_neo = df_neo[df_neo["comment"].isna()]
-    # Filter out words with numerals
-    df_neo = df_neo[df_neo["woord"].str.match(r"^[A-Za-z]+[A-Za-z\-]+$")]
+    # Filter out words with numerals and dashes
+    df_neo = df_neo[df_neo["woord"].str.match(r"^[A-Za-z]+$")]
     # Filter out declined forms
     df_neo = df_neo[df_neo["lemma"] == df_neo["woord"]]
     return df_neo
@@ -82,7 +82,7 @@ def process_neologisms(neo_file_tagged, concord_file_tagged, neo_file_untagged, 
         df_neo_cat = cat["df"]
         df_concord_lookup_cat = cat["concord_lookup"]
         df_neo_concord = add_concordances(df_neo_cat, df_concord_lookup_cat)
-        df_neo_concord_sample = df_neo_concord.sample(n=10, random_state=RANDOM_STATE)
+        df_neo_concord_sample = df_neo_concord.sample(n=5, random_state=RANDOM_STATE)
         print(cat["name"])
         df_neo_concord_sample[["woord","datum","concordanties"]].to_csv(cat["name"]+"-test.tsv",sep="\t",index=False)
         df_output = df_output.append(df_neo_concord_sample)
