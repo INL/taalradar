@@ -20,7 +20,7 @@ projects = [{'name':'Blends analysis',
               'gold_filename': 'results-sept2018/blends-herken1-10.csv',
               'type': 'herken1',
               'question_field': 'lemma'}]
-details = ["gender","age","location"]
+details = [("gender","geslacht"),("age","leeftijd"),("location","woonplaats")]
 
 def get_df(json_filename):
     if not os.path.isfile(json_filename):
@@ -46,7 +46,8 @@ def get_gold_dict(csv_filename, project):
 
 def is_details(field):
     # Info field should contain all of: gender,age,location
-    return all(key in field for key in details)
+    # Use English details key as ID
+    return all(key_en in field for key_en,_ in details)
 
 def is_answer(field):
     return not is_details(field)
@@ -76,7 +77,7 @@ def convert_to_int(data):
 #     return fixed_word
     
 
-def categorical_df(data, dataType, y_label):
+def categorical_df(data, dataType, x_label, y_label):
     if dataType == "Location":
         data_clean = [value.title() for value in data]
         # Replace '' by not_given
@@ -90,12 +91,14 @@ def categorical_df(data, dataType, y_label):
         data_clean = [mapping[value] for value in data]
         category_dict = Counter(data_clean)
         category_items = list(category_dict.items())
-    category_df = pd.DataFrame.from_records(category_items, columns = [dataType,y_label])
+    elif dataType == "Age":
+        category_items = np.histogram(data,bins=np.linspace(0,100,10))
+    category_df = pd.DataFrame.from_records(category_items, columns = [x_label,y_label])
 
     # For gender, we want always same order of bars
     # For location, show descending on frequency
     if dataType=="Gender":
-        category_df.sort_values(by=dataType, axis=0, inplace=True)
+        category_df.sort_values(by=x_label, axis=0, inplace=True)
     return category_df
 
 # Custom comparison function: check if gold standard contains all elements from answer.
@@ -115,35 +118,46 @@ def get_task_question_from_id(id, df_tasks, proj):
     return df.iloc[0]["info"][proj["question_field"]]
 
 
-def barplot(x,y,data,title, plot_width=10):
+def barplot(x,y,data,title, lang="en", plot_width=10):
     plt.subplots(figsize=(plot_width,6))
     ax = sns.barplot(x=x, y=y, data=data)
     ax.set(xlabel=x, ylabel=y)
     plt.title(title)
-    plt.savefig(title + " " + x + ".png")
+    plt.savefig(title + " " + x + " " + lang +".png")
     plt.close()
 
-def distplot(x,y,data,title):
+def distplot(x,y,data,title, lang="en"):
     plt.subplots(figsize=(10,5))
     ax = sns.distplot(data, kde=False, bins=20)
     ax.set(xlabel=x, ylabel=y)
     plt.title(title)
-    plt.savefig(title + " " + x + ".png")
+    plt.savefig(title + " " + x + " " + lang + ".png")
     plt.close()
 
 def analyze_details(info_fields, title):
     print(title + " # participants "+ ": " + str(len(info_fields.index)))
-    y_label = '# participants'
-    for prop in details:
-        prop_c = prop.capitalize()
-        data = [d[prop] for d in info_fields]
-        if prop_c == "Age":
+    y_label_en = '# participants'
+    y_label_nl = '# deelnemers'
+    for (prop_en, prop_nl) in details:
+        # Use English prop as ID
+        prop_en_c = prop_en.capitalize()
+        prop_nl_c = prop_nl.capitalize()
+        data = [d[prop_en] for d in info_fields]
+        if prop_en_c == "Age":
             data_int = convert_to_int(data)
-            distplot(x=prop_c, y=y_label, data=data_int, title=title)
+            # English distplot
+            distplot(x=prop_en_c, y=y_label_en, data=data_int, title=title)
+            # Dutch distplot
+            distplot(x=prop_nl_c, y=y_label_nl, data=data_int, title=title, lang="nl")
         else:
-            cat_df = categorical_df(data, prop_c, y_label)
-            barplot(x=prop_c, y=y_label, data=cat_df, title=title)
-        cat_df.to_csv(title+ " " + prop_c + ".tsv", sep="\t", index=False)
+            # English barplot
+            cat_df_en = categorical_df(data, dataType=prop_en_c, x_label=prop_en_c, y_label=y_label_en)
+            barplot(x=prop_en_c, y=y_label_en, data=cat_df_en, title=title, lang="en")
+            # Dutch barplot
+            cat_df_nl = categorical_df(data, dataType=prop_en_c, x_label=prop_nl_c, y_label=y_label_nl)
+            barplot(x=prop_nl_c, y=y_label_nl, data=cat_df_nl, title=title, lang="nl")
+            # Only English table
+            cat_df_en.to_csv(title+ " " + prop_en_c + ".tsv", sep="\t", index=False)
 
 def plot_score(score, title):
     # Convert score dict to df
