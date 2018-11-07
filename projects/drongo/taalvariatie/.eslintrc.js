@@ -4,6 +4,7 @@ module.exports = {
         "jquery": true
     },
     "plugins": ["html","compat"],
+    "extends": "eslint:recommended",
     "parserOptions": {
         "ecmaVersion": 5
     },

@@ -37,7 +37,7 @@
         <form class="form-inline" id="detailsform-taalverhalen">
                 <div class="form-group">
                     <h3 id="headerAge">Leeftijd:</h3>
-                    <input type="number" min="0" max="150" class="form-control" name="age" id="details1" style="width:100%;"></input>
+                    <input type="number" min="0" max="150" class="form-control" name="age" id="details1" style="width:100%;"/>
                 </div>
                 <br><br>
                 <div class="form-group">
@@ -52,11 +52,11 @@
                 <br><br>
                 <div class="form-group">
                     <h3 id="headerLocation">Woonplaats:</h3>
-                    <input type="text" class="form-control" name="location" id="details3" style="width:100%;"></input>
+                    <input type="text" class="form-control" name="location" id="details3" style="width:100%;"/>
                 </div>
                 <br><br>
             </form>
-        <div id="answer"> <!-- Start DIV for the submission buttons -->
+        <div> <!-- Start DIV for the submission buttons -->
             <button class="btn btn-submit btn-primary btn-submit-userdetails"><i class="fa"></i>Verzend!</button>
         </div><!-- End of DIV for the submission buttons -->
     </div><!-- End of Question and Submission DIV (column) -->
@@ -64,10 +64,10 @@
 
 <div class="row skeleton-finish"> <!-- Start Skeleton Row-->
     <div class="col-md-8 "><!-- Start of Question and Submission DIV (column) -->
-        <h1>Dank u wel, u heeft alle dialectteksten doorlopen!</h1>
+        <h1>Dank u wel, u heeft alle woorden/zinnen doorlopen!</h1>
         Deze vragenlijst is samengesteld door Miet Ooms, vertaler en expert in taalvariatie in het Nederlands (<a href="http://taalverhalen.be">Taalverhalen.be</a>). Het Instituut voor de Nederlandse taal gebruikt uw bijdrage om de kennis over de Nederlandse taal uit te breiden.
         <h3>Nog een experiment?</h3>
-        Smaakt dit experiment naar meer? Doe ook mee met ons experiment over <a href="http://taalradar.ivdnt.org/project/neologismen/newtask">nieuwe woorden</a>!
+        Smaakt dit experiment naar meer? Doe ook mee met ons experiment over <a href="http://taalradar.ivdnt.org/project/nieuwewoorden/newtask">nieuwe woorden</a>!
         <h3>Op de hoogte blijven?</h3>
         Wilt u op de hoogte blijven van ons onderzoek, en
         eventueel vaker meedoen aan dergelijke experimenten? Mail dan naar
@@ -94,12 +94,12 @@
         <div id="imageSection"></div>
         <br>
         <form class="form-inline" id="taskform">
-            <input type="text" class="form-control" id="inputWord" style="width:100%;"></input>
+            <input type="text" class="form-control" id="inputWord" style="width:100%;"/>
             Eventueel commentaar:
-            <input type="text" class="form-control" id="inputComments" style="width:100%;"></input>
+            <input type="text" class="form-control" id="inputComments" style="width:100%;"/>
         </form>
         <br><br>
-        <div id="answer"> <!-- Start DIV for the submission buttons -->
+        <div> <!-- Start DIV for the submission buttons -->
             <button class="btn btn-submit btn-primary btn-submit-task"><i class="fa"></i>Volgende</button>
         </div><!-- End of DIV for the submission buttons -->
         <div class="col-md-10 small">
@@ -108,7 +108,6 @@
 </div><!-- End of Skeleton Row -->
 
 <script type="text/javascript">
-/* global console */
 /* global pybossa */
 var nDetailsFields = 3;
 
@@ -121,7 +120,7 @@ var nDetailsFields = 3;
 
 
 function loadUserProgress() {
-	pybossa.userProgress("dialecten").done(function(data){
+	pybossa.userProgress("taalvariatie").done(function(data){
 		var currentTask = data.done+1;
 		var totalTasks = data.total; // we do include user details at the end as task
 		var pct = Math.round((currentTask*100)/totalTasks);
@@ -144,10 +143,8 @@ function showDetailsFormTaalverhalen(task, deferred) {
 	$(".btn-submit-userdetails").off("click").on("click", function(){
 		var user_details = {"age": $("#details1").val(), "gender": $("#details2").val(), "location": $("#details3").val()};
 		localStorage.user_details = JSON.stringify(user_details);
-		pybossa.saveTask(task.id, user_details).done(function(data){
-			console.log("Before resolve");
+		pybossa.saveTask(task.id, user_details).done(function(_){
 			deferred.resolve();
-			console.log("After resolve");
 			$("#success-details").fadeIn();
 			setTimeout(function() { $("#success-details").fadeOut(); }, 2000);
 		});
@@ -227,7 +224,7 @@ function showTask(task, deferred) {
 		var dialectForm = $("#inputQuestion").val();
 		var comments = $("#inputComments").val();
 		var answer = {"dialectForm": dialectForm, "comments": comments, "id": task.info.id, "question": task.info.question};
-		pybossa.saveTask(task.id, answer).done(function(data){
+		pybossa.saveTask(task.id, answer).done(function(_){
 			deferred.resolve();
 			$("#success").fadeIn();
 			setTimeout(function() { $("#success").fadeOut(); }, 2000);
@@ -258,19 +255,19 @@ if (!String.prototype.endsWith) {
 
 pybossa.presentTask(function(task, deferred) {
 	if ( !$.isEmptyObject(task) ) {
-    	if (task.info.type === "userdetails-taalverhalen") {
-    		// Show page to give personal details
-    		showDetailsFormTaalverhalen(task, deferred);
-    	}
-    	else {
-    		// Show task
-    		showTask(task, deferred);
-    	}
+		if (task.info.type === "userdetails-taalverhalen") {
+			// Show page to give personal details
+			showDetailsFormTaalverhalen(task, deferred);
+		}
+		else {
+			// Show task
+			showTask(task, deferred);
+		}
 	}
 	else {
-    	finish();
+		finish();
 	}
 });
 
-pybossa.run("dialecten");
+pybossa.run("taalvariatie");
 </script>

@@ -1,3 +1,0 @@
-pybossa-pbs
-argparse
-pandas

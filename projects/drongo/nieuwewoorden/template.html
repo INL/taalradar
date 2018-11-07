@@ -37,7 +37,7 @@
         <form class="form-inline" id="detailsform">
                 <div class="form-group">
                     <h3 id="headerAge">Leeftijd:</h3>
-                    <input type="number" min="0" max="150" class="form-control" name="age" id="details1" style="width:100%;"></input>
+                    <input type="number" min="0" max="150" class="form-control" name="age" id="details1" style="width:100%;"/>
                 </div>
                 <br><br>
                 <div class="form-group">
@@ -52,7 +52,7 @@
                 <br><br>
                 <div class="form-group">
                     <h3 id="headerLocation">Woonplaats:</h3>
-                    <input type="text" class="form-control" name="location" id="details3" style="width:100%;"></input>
+                    <input type="text" class="form-control" name="location" id="details3" style="width:100%;"/>
                 </div>
                 <br><br>
             </form>
@@ -64,10 +64,10 @@
 
 <div class="row skeleton-finish"> <!-- Start Skeleton Row-->
     <div class="col-md-8 "><!-- Start of Question and Submission DIV (column) -->
-        <h1>Dank u wel, u heeft alle neologismen doorlopen!</h1>
+        <h1>Dank u wel, u heeft alle woorden doorlopen!</h1>
         Het Instituut voor de Nederlandse taal gebruikt uw bijdrage om de kennis over de Nederlandse taal uit te breiden.
         <h3>Nog een experiment?</h3>
-        Smaakt dit experiment naar meer? Doe ook mee met ons experiment over <a href="http://taalradar.ivdnt.org/project/dialecten/newtask">dialecten</a>!
+        Smaakt dit experiment naar meer? Doe ook mee met ons experiment over <a href="http://taalradar.ivdnt.org/project/taalvariatie/newtask">taalvariatie</a>!
         <h3>Op de hoogte blijven?</h3>
         Wilt u op de hoogte blijven van ons onderzoek, en
         eventueel vaker meedoen aan dergelijke experimenten? Mail dan naar
@@ -106,7 +106,7 @@
             </div>
         </form>
         <br><br>
-        <div id="answer"> <!-- Start DIV for the submission buttons -->
+        <div> <!-- Start DIV for the submission buttons -->
             <button class="btn btn-submit-task"><i class="fa"></i>Volgende</button>
         </div><!-- End of DIV for the submission buttons -->
         <div class="col-md-10 small">
@@ -115,18 +115,14 @@
 </div><!-- End of Skeleton Row -->
 
 <script type="text/javascript">
+/* global pybossa */
 var nDetailsFields = 3;
 
-// Update userLocale with server side information
-$(document).ready(function(){
-	userLocale = document.getElementById("PYBOSSA_USER_LOCALE").textContent.trim();
-
-});
 
 
 
 function loadUserProgress() {
-	pybossa.userProgress("neologismen").done(function(data){
+	pybossa.userProgress("nieuwewoorden").done(function(data){
 		var currentTask = data.done;
 		var totalTasks = data.total -1; // we do not count user details
 		var pct = Math.round((currentTask*100)/totalTasks);
@@ -145,12 +141,11 @@ function showDetailsForm(task, deferred) {
 	$(".skeleton-finish").hide();
 	$(".skeleton-userdetails").show();
 	$("#details1").focus();
-	details_shown = true;
 	// Submit button
 	$(".btn-submit-userdetails").off("click").on("click", function(){
 		var user_details = {"age": $("#details1").val(), "gender": $("#details2").val(), "location": $("#details3").val()};
 		localStorage.user_details = JSON.stringify(user_details);
-		pybossa.saveTask(task.id, user_details).done(function(data){
+		pybossa.saveTask(task.id, user_details).done(function(_){
 			deferred.resolve();
 			$("#success-details").fadeIn();
 			setTimeout(function() { $("#success-details").fadeOut(); }, 2000);
@@ -222,7 +217,7 @@ function showTask(task, deferred) {
 		var houdbaar = $("#checkHoudbaar").is(":checked");
 		var divers = $("#checkDivers").is(":checked");
 		var answer = {"houdbaar": houdbaar, "divers": divers, "id": task.info.id, "woord": task.info.woord};
-		pybossa.saveTask(task.id, answer).done(function(data){
+		pybossa.saveTask(task.id, answer).done(function(_){
 			deferred.resolve();
 			$("#success").fadeIn();
 			setTimeout(function() { $("#success").fadeOut(); }, 2000);
@@ -252,21 +247,21 @@ if (!String.prototype.endsWith) {
 
 pybossa.presentTask(function(task, deferred) {
 	if ( !$.isEmptyObject(task) ) {
-    	if (task.info.type == "userdetails") {
-    		// Show page to give personal details
-    		showDetailsForm(task, deferred);
-    	}
-    	else {
-    		// Show task
-    		showTask(task, deferred);
-    	}
+		if (task.info.type == "userdetails") {
+			// Show page to give personal details
+			showDetailsForm(task, deferred);
+		}
+		else {
+			// Show task
+			showTask(task, deferred);
+		}
 	}
 	else {
-    	finish();
+		finish();
 	}
 });
 
-pybossa.run("neologismen");
+pybossa.run("nieuwewoorden");
 </script>
 <style>
     .form-check-label {

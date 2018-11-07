@@ -1,5 +1,5 @@
 {
-  "name": "dialecten",
+  "name": "taalvariatie",
   "version": "1.0.0",
   "description": "",
   "main": "template.html",
@@ -14,5 +14,5 @@
   },
   "devDependencies": {
     "eslint-plugin-compat": "^2.6.3"
-  },
+  }
 }
