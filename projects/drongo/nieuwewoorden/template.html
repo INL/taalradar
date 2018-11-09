@@ -89,20 +89,28 @@
         </div>
         <h3><i><b>(...)</b> <span id="citation">(voorbeeldtekst)</span> <b>(...)</b></i></h3>
         <br>
-        <h3> Welke stellingen over het woord <b id="word"></b> zijn wat u betreft van toepassing?</h3>
         <form class="form-inline" id="taskform">
             <div class="form-check">
-                
+                Dit woord zal lang gebruikt blijven worden.
                 <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" value="" id="checkHoudbaar">
-                    Dit woord zal lang gebruikt blijven worden.
+                    <input class="form-check-input" type="radio" value="" name="radioHoudbaar" id="radioHoudbaarYes">
+                    Ja
+				</label>
+				<label class="form-check-label">
+                    <input class="form-check-input" type="radio" value="" name="radioHoudbaar" id="radioHoudbaarNo">
+                    Nee
                 </label>
             </div>
             <div class="form-check">
+				Dit woord zal door veel verschillende mensen (bijv. jong, oud) in veel verschillende situaties (bijv. gesprek, krant) gebruikt worden.
                 <label class="form-check-label">
-                    <input class="form-check-input" type="checkbox" value="" id="checkDivers">
-                    Dit woord zal door veel verschillende mensen (bijv. jong, oud) in veel verschillende situaties (bijv. gesprek, krant) gebruikt worden.
-                </label>
+					<input class="form-check-input" type="radio" value="" name="radioDivers" id="radioDiversYes">
+					Ja
+				</label>
+				<label class="form-check-label">
+					<input class="form-check-input" type="radio" value="" name="radioDivers" id="radioDiversNo">
+					Nee
+				</label>
             </div>
         </form>
         <br><br>
@@ -191,31 +199,37 @@ function showTask(task, deferred) {
 	$("#task-id").html(task.id);
 
 	// Empty checkboxes
-	$("#checkHoudbaar").removeAttr("checked");
-	$("#checkDivers").removeAttr("checked");
-	// Focus first checkbox
-	$("#checkHoudbaar").focus();
+	$("#radioHoudbaarYes").removeAttr("checked");
+	$("#radioHoudbaarNo").removeAttr("checked");
+	$("#radioDiversYes").removeAttr("checked");
+	$("#radioDiversNo").removeAttr("checked");
+
 
 	$("#taskform").off("keyup").on("keyup", function(event) {
 		// Number 13 is the "Enter" key on the keyboard
 		if (event.keyCode === 13) {
 			var fieldId = event.target.id;
-			// If last field, trigger Submit button
-			if (fieldId==="checkDivers") {
-				$(".btn-submit-task").click();
-			}
-			else {
-				// focus next field
-				$("#checkDivers").focus();
-			}
+			$(".btn-submit-task").click();
 		}
 	});
 
 	// Submit button
 	$(".btn-submit-task").off("click").on("click", function(){
 		// Save array with all non-empty blend fields
-		var houdbaar = $("#checkHoudbaar").is(":checked");
-		var divers = $("#checkDivers").is(":checked");
+		var houdbaarYes = $("#radioHoudbaarYes").is(":checked");
+		var houdbaarNo = $("#radioHoudbaarNo").is(":checked");
+		var diversYes = $("#radioDiversYes").is(":checked");
+		var diversNo = $("#radioDiversNo").is(":checked");
+
+		var houdbaar = houdbaarYes;
+		var divers = diversYes
+		// If none chosen, give back null
+		if (houdbaarYes === false && houdbaarNo === false) {
+			houdbaar = null;
+		}
+		if (diversYes === false && diversNo === false) {
+			divers = null;
+		}
 		var answer = {"houdbaar": houdbaar, "divers": divers, "id": task.info.id, "woord": task.info.woord};
 		pybossa.saveTask(task.id, answer).done(function(_){
 			deferred.resolve();
