@@ -1,0 +1,2588 @@
+# Dutch translations for PROJECT.
+# Copyright (C) 2016 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2016.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2016-02-05 18:06+0000\n"
+"PO-Revision-Date: 2018-11-13 13:11+0100\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: nl\n"
+"Language-Team: nl <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.4.0\n"
+
+#: themes/default/templates/_navbar.html:12
+#: themes/default/templates/account/index.html:14
+msgid "Community"
+msgstr "Gemeenschap"
+
+#: themes/default/templates/_navbar.html:13
+#: themes/default/templates/account/projects.html:13
+#: themes/default/templates/base.html:78
+#: themes/default/templates/stats/global.html:89
+msgid "Projects"
+msgstr "Projecten"
+
+#: themes/default/templates/_navbar.html:14
+#: themes/default/templates/projects/new_blogpost.html:21
+msgid "Create"
+msgstr "Aanmaken"
+
+#: themes/default/templates/_navbar.html:15
+#: themes/default/templates/home/_about.html:3
+msgid "About"
+msgstr "Over"
+
+#: themes/default/templates/_navbar.html:22
+#: themes/default/templates/account/_helpers.html:3
+msgid "My Profile"
+msgstr "Mijn profiel"
+
+#: themes/default/templates/_navbar.html:23
+#: themes/default/templates/account/_helpers.html:4
+msgid "My Projects"
+msgstr "Mijn projecten"
+
+#: themes/default/templates/_navbar.html:24
+#: themes/default/templates/account/_helpers.html:8
+msgid "My Settings"
+msgstr "Mijn instellingen"
+
+#: themes/default/templates/_navbar.html:27
+#: themes/default/templates/account/_helpers.html:6
+#: themes/default/templates/admin/categories.html:13
+#: themes/default/templates/admin/del_category.html:13
+#: themes/default/templates/admin/index.html:12
+#: themes/default/templates/admin/projects.html:13
+#: themes/default/templates/admin/update_category.html:13
+#: themes/default/templates/admin/users.html:14
+msgid "Admin Site"
+msgstr "Beheerderspagina"
+
+#: themes/default/templates/_navbar.html:30
+msgid "Sign Out"
+msgstr "Uitloggen"
+
+#: themes/default/templates/_navbar.html:38
+#: themes/default/templates/account/signin.html:45
+msgid "Sign in"
+msgstr "Inloggen"
+
+#: themes/default/templates/base.html:66
+msgid "Resources"
+msgstr "Bronnen"
+
+#: themes/default/templates/base.html:67
+msgid "Docs"
+msgstr "Documentatie"
+
+#: themes/default/templates/base.html:69
+msgid "Terms of Use"
+msgstr "Gebruiksvoorwaarden"
+
+#: themes/default/templates/base.html:70
+msgid "Cookies Policy"
+msgstr "Cookiebeleid"
+
+#: themes/default/templates/base.html:71
+msgid "Stats"
+msgstr "Statistieken"
+
+#: themes/default/templates/base.html:76
+msgid "Licenses"
+msgstr "Licenties"
+
+#: themes/default/templates/base.html:77
+msgid "Overview"
+msgstr "Overzicht"
+
+#: themes/default/templates/base.html:79
+msgid "Data"
+msgstr "Data"
+
+#: themes/default/templates/base.html:80
+msgid "Content"
+msgstr "Inhoud"
+
+#: themes/default/templates/base.html:85
+msgid "Technologies"
+msgstr "Technologieën"
+
+#: themes/default/templates/base.html:86
+msgid "CKAN"
+msgstr "CKAN"
+
+#: themes/default/templates/base.html:87
+msgid "EpiCollect"
+msgstr "EpiCollect"
+
+#: themes/default/templates/base.html:92
+msgid "Contact"
+msgstr "Contact"
+
+#: themes/default/templates/base.html:93
+msgid "Email"
+msgstr "Email"
+
+#: themes/default/templates/base.html:94
+msgid "Twitter"
+msgstr "Twitter"
+
+#: themes/default/templates/account/_helpers.html:14
+msgid "I've done"
+msgstr "Ik heb bijgedragen aan"
+
+#: themes/default/templates/account/_helpers.html:14
+msgid "tasks for the @PyBossa project:"
+msgstr "taken voor het @PyBossa project:"
+
+#: themes/default/templates/account/_helpers.html:14
+msgid "Do you want to help?"
+msgstr "Wilt u meehelpen?"
+
+#: themes/default/templates/account/_helpers.html:15
+msgid "Tweet"
+msgstr "Tweet"
+
+#: themes/default/templates/account/_helpers.html:39
+msgid "Nick"
+msgstr "Nickname"
+
+#: themes/default/templates/account/_helpers.html:41
+msgid "E-mail"
+msgstr "E-mail"
+
+#: themes/default/templates/account/_helpers.html:54
+#: themes/default/templates/account/_helpers.html:67
+#: themes/default/templates/stats/index.html:17
+msgid "Rank"
+msgstr "Plaats"
+
+#: themes/default/templates/account/_helpers.html:59
+#: themes/default/templates/projects/tasks_browse.html:33
+msgid "of"
+msgstr "van"
+
+#: themes/default/templates/account/_helpers.html:59
+msgid "with a Score of"
+msgstr "met een score van"
+
+#: themes/default/templates/account/_helpers.html:59
+msgid "contributed tasks"
+msgstr "bijgedragen taken"
+
+#: themes/default/templates/account/_helpers.html:67
+msgid "The user has not contributed to any tasks yet"
+msgstr "De gebruiker heeft nog niet bijgedragen aan taken"
+
+#: themes/default/templates/account/_helpers.html:70
+#: themes/default/templates/home/index.html:78
+msgid "Joined"
+msgstr "Toegetreden"
+
+#: themes/default/templates/account/_helpers.html:73
+msgid "API key"
+msgstr "API-sleutel"
+
+#: themes/default/templates/account/_helpers.html:76
+msgid "Edit your profile"
+msgstr "Pas uw profiel aan"
+
+#: themes/default/templates/account/_helpers.html:100
+#: themes/default/templates/projects/_helpers.html:7
+msgid "Prev"
+msgstr "Vorige"
+
+#: themes/default/templates/account/_helpers.html:120
+#: themes/default/templates/projects/_helpers.html:27
+msgid "Next"
+msgstr "Volgende"
+
+#: themes/default/templates/account/account_validation.html:7
+msgid "Just one more step, please"
+msgstr "Nog één stap"
+
+#: themes/default/templates/account/account_validation.html:8
+msgid ""
+"In order to confirm your identity, we've sent an email to the address you"
+" just provided. Please, check it out and click on the link you'll find to"
+" create your account at"
+msgstr ""
+"Om uw identiteit te bevestigen, hebben we u een email gestuurd,"
+" naar het adres dat u zojuist heeft opgegeven. Open de mail en klik op"
+" de link om uw account aan te maken op"
+
+#: themes/default/templates/account/account_validation.html:9
+msgid ""
+"If you are not receiving the email, please check the junk folder. If it's"
+" not there please drop us an email to"
+msgstr ""
+"Als u de email niet heeft ontvangen, kunt u het best uw map met ongewenste"
+" email controleren. Als u de mail alsnog niet kunt vinden, kunt u contact met"
+" ons opnemen via"
+
+#: themes/default/templates/account/account_validation.html:10
+msgid "In the meantime, you can check some of the amazing"
+msgstr "In de tussentijd kunt u alvast even kijken naar deze fantastische"
+
+#: themes/default/templates/account/account_validation.html:10
+msgid "projects"
+msgstr "projecten"
+
+#: themes/default/templates/account/account_validation.html:10
+msgid "and contribute to them as anonymous"
+msgstr "en bijdragen als anonieme"
+
+#: themes/default/templates/account/index.html:14
+msgid "registered users"
+msgstr "aangemelde gebruikers"
+
+#: themes/default/templates/account/index.html:14
+#: themes/default/templates/stats/global.html:49
+msgid "Leaderboard"
+msgstr "Ranglijst"
+
+#: themes/default/templates/account/newsletter.html:10
+msgid "Newsletter"
+msgstr "Nieuwsbrief"
+
+#: themes/default/templates/account/newsletter.html:11
+msgid ""
+"If you want to be updated with our new features, projects, and\n"
+"        scientific projects, subscribe to our newsletter."
+msgstr ""
+"Als u op de hoogte wilt blijven van nieuwe functionaliteit,\n"
+" projecten en wetenschappelijke ontwikkelingen, meld u aan"
+" voor de nieuwsbrief."
+
+#: themes/default/templates/account/newsletter.html:15
+msgid "Sign me up!"
+msgstr "Meld mij aan!"
+
+#: themes/default/templates/account/newsletter.html:18
+msgid "Not interested"
+msgstr "Geen interesse"
+
+#: themes/default/templates/account/password_forgot.html:6
+#: themes/default/templates/account/password_reset.html:6
+msgid "Reset your Password"
+msgstr "Herstel uw wachtwoord"
+
+#: themes/default/templates/account/password_forgot.html:10
+msgid "my e-mail"
+msgstr "mijn e-mail"
+
+#: themes/default/templates/account/password_forgot.html:12
+msgid "Reset my Password"
+msgstr "Herstel mijn wachtwoord"
+
+#: themes/default/templates/account/password_forgot.html:13
+#: themes/default/templates/account/password_reset.html:14
+#: themes/default/templates/account/register.html:25
+#: themes/default/templates/account/signin.html:46
+#: themes/default/templates/account/update.html:48
+#: themes/default/templates/account/update.html:65
+#: themes/default/templates/account/update.html:78
+#: themes/default/templates/admin/update_category.html:23
+#: themes/default/templates/projects/importers/csv.html:24
+#: themes/default/templates/projects/importers/dropbox.html:31
+#: themes/default/templates/projects/importers/epicollect.html:26
+#: themes/default/templates/projects/importers/flickr.html:35
+#: themes/default/templates/projects/importers/gdocs.html:24
+#: themes/default/templates/projects/importers/s3.html:37
+#: themes/default/templates/projects/importers/twitter.html:44
+#: themes/default/templates/projects/new.html:27
+#: themes/default/templates/projects/new_blogpost.html:22
+#: themes/default/templates/projects/password.html:20
+#: themes/default/templates/projects/task_n_answers.html:21
+#: themes/default/templates/projects/task_presenter_editor.html:36
+#: themes/default/templates/projects/task_priority.html:31
+#: themes/default/templates/projects/task_scheduler.html:36
+#: themes/default/templates/projects/update.html:48
+#: themes/default/templates/projects/update_blogpost.html:24
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: themes/default/templates/account/password_reset.html:10
+msgid "my new password"
+msgstr "mijn nieuwe wachtwoord"
+
+#: themes/default/templates/account/password_reset.html:11
+msgid "my new password again"
+msgstr "nogmaals mijn nieuwe wachtwoord"
+
+#: themes/default/templates/account/profile.html:15
+msgid "Your Profile"
+msgstr "Uw profiel"
+
+#: themes/default/templates/account/profile.html:18
+msgid "Your Contributions"
+msgstr "Uw bijdragen"
+
+#: themes/default/templates/account/profile.html:26
+msgid "Contribute!"
+msgstr "Doe mee!"
+
+#: themes/default/templates/account/projects.html:16
+msgid "Published"
+msgstr "Gepubliceerd"
+
+#: themes/default/templates/account/projects.html:22
+#: themes/default/templates/projects/index.html:15
+msgid "Draft"
+msgstr "Concept"
+
+#: themes/default/templates/account/projects.html:28
+msgid "You have not created a project"
+msgstr "U heeft nog geen project aangemaakt"
+
+#: themes/default/templates/account/projects.html:29
+#: themes/default/templates/home/index.html:37
+msgid "Create a Project"
+msgstr "Maak een project aan"
+
+#: themes/default/templates/account/register.html:6
+#: themes/default/templates/account/signin.html:6
+msgid "Note"
+msgstr "N.B."
+
+#: themes/default/templates/account/register.html:7
+#: themes/default/templates/account/signin.html:7
+msgid "By click the"
+msgstr "Door te klikken op de"
+
+#: themes/default/templates/account/register.html:8
+msgid "Create account button"
+msgstr "knop Account aanmaken"
+
+#: themes/default/templates/account/register.html:9
+msgid "below you are agreeing to the"
+msgstr "hieronder verklaart u akkoord te gaan met de"
+
+#: themes/default/templates/account/register.html:10
+#: themes/default/templates/account/signin.html:8
+msgid "terms of use"
+msgstr "gebruiksvoorwaarden"
+
+#: themes/default/templates/account/register.html:10
+#: themes/default/templates/account/signin.html:8
+msgid "and"
+msgstr "en"
+
+#: themes/default/templates/account/register.html:11
+#: themes/default/templates/account/signin.html:9
+msgid "data"
+msgstr "data"
+
+#: themes/default/templates/account/register.html:14
+#: themes/default/templates/account/register.html:24
+msgid "Create an account"
+msgstr "Account aanmaken"
+
+#: themes/default/templates/account/register.html:18
+#: themes/default/templates/account/update.html:40
+msgid "my full name"
+msgstr "mijn volledige naam"
+
+#: themes/default/templates/account/register.html:19
+#: themes/default/templates/account/update.html:41
+msgid "myusername"
+msgstr "mijngebruikersnaam"
+
+#: themes/default/templates/account/register.html:20
+#: themes/default/templates/account/update.html:42
+msgid "hello@mywebsite.org"
+msgstr "hallo@mijnwebsite.org"
+
+#: themes/default/templates/account/register.html:21
+#: themes/default/templates/account/register.html:22
+msgid "my secret password"
+msgstr "mijn geheime wachtwoord"
+
+#: themes/default/templates/account/signin.html:7
+msgid "Sign in button"
+msgstr "knop Aanmelden"
+
+#: themes/default/templates/account/signin.html:7
+msgid ""
+"below you are agreeing to\n"
+"    the"
+msgstr ""
+"hieronder verklaart u dat u akkoor gaat\n"
+" met de"
+
+#: themes/default/templates/account/signin.html:13
+#: themes/default/templates/account/signin.html:23
+msgid "Sign in with Twitter"
+msgstr "Aanmelden met Twitter"
+
+#: themes/default/templates/account/signin.html:16
+#: themes/default/templates/account/signin.html:26
+msgid "Sign in with Facebook"
+msgstr "Aanmelden met Facebook"
+
+#: themes/default/templates/account/signin.html:19
+#: themes/default/templates/account/signin.html:29
+msgid "Sign in with Google"
+msgstr "Aanmelden met Google"
+
+#: themes/default/templates/account/signin.html:38
+msgid "Or Sign in with your PyBossa account"
+msgstr "Of meld u aan met uw PyBossa account"
+
+#: themes/default/templates/account/signin.html:40
+msgid "Sign in with your PyBossa account"
+msgstr "Aanmelden met uw PyBossa account"
+
+#: themes/default/templates/account/signin.html:52
+msgid " Create a new account!"
+msgstr " Maak een nieuw account aan!"
+
+#: themes/default/templates/account/signin.html:53
+msgid "Forgot Password"
+msgstr "Wachtwoord vergeten"
+
+#: themes/default/templates/account/update.html:17
+msgid "Update your profile"
+msgstr "Profiel bijwerken"
+
+#: themes/default/templates/account/update.html:31
+#: themes/default/templates/projects/update.html:28
+msgid "Upload"
+msgstr "Uploaden"
+
+#: themes/default/templates/account/update.html:47
+#: themes/default/templates/account/update.html:77
+#: themes/default/templates/projects/update.html:47
+msgid "Save the changes"
+msgstr "Wijzigingen opslaan"
+
+#: themes/default/templates/account/update.html:54
+msgid "Change your Password"
+msgstr "Wachtwoord wijzigen"
+
+#: themes/default/templates/account/update.html:64
+msgid "Save the Changes"
+msgstr "Wijzigingen opslaan"
+
+#: themes/default/templates/account/update.html:85
+msgid "Do you want to reset your personal API Key?"
+msgstr "Wilt u uw persoonlijke API-sleutel herstellen"
+
+#: themes/default/templates/account/update.html:89
+msgid "No, do not reset the API key!"
+msgstr "Nee, API-sleutel niet herstellen!"
+
+#: themes/default/templates/account/email/forgot_password.html:4
+msgid "Recover your lost password"
+msgstr "Uw vergeten wachtwoord herstellen"
+
+#: themes/default/templates/account/email/forgot_password.html:8
+#: themes/default/templates/account/email/forgot_password_openid.html:8
+#: themes/default/templates/account/email/validate_account.html:8
+msgid "Hello"
+msgstr "Hallo"
+
+#: themes/default/templates/account/email/forgot_password.html:14
+#: themes/default/templates/account/email/forgot_password_openid.html:13
+msgid "We received a request to recover your password for"
+msgstr "We hebben een verzoek ontvangen om uw wachtwoord te herstellen voor"
+
+#: themes/default/templates/account/email/forgot_password.html:17
+#: themes/default/templates/account/email/forgot_password_openid.html:16
+#: themes/default/templates/account/email/validate_account.html:22
+msgid "If you did not request this, please ignore this email"
+msgstr "Als u dit verzoek niet heeft gedaan, kunt u deze email negeren"
+
+#: themes/default/templates/account/email/forgot_password.html:20
+msgid "To recover your password, please visit the URL below"
+msgstr "Bezoek de URL hieronder om uw wachtwoord te herstellen"
+
+#: themes/default/templates/account/email/forgot_password.html:23
+msgid "Click here to recover your account"
+msgstr "Klik hier om uw account te herstellen"
+
+#: themes/default/templates/account/email/forgot_password.html:26
+#: themes/default/templates/account/email/forgot_password_openid.html:22
+#: themes/default/templates/account/email/validate_account.html:31
+msgid "Regards"
+msgstr "Met vriendelijke groet"
+
+#: themes/default/templates/account/email/forgot_password_openid.html:4
+msgid "Recover your password"
+msgstr "Herstel uw wachtwoord"
+
+#: themes/default/templates/account/email/forgot_password_openid.html:19
+msgid "Our records show that you use your"
+msgstr "Volgens ons systeem gebruikt u uw"
+
+#: themes/default/templates/account/email/forgot_password_openid.html:19
+msgid ""
+"account to sign in. Please use the same account to sign-in again. If you "
+"forgot the password to your"
+msgstr ""
+"account om in te loggen. Gebruik alstublieft hetzelfde account om opnieuw"
+" in te loggen. Als u het wachtwoord vergeten bent van"
+
+#: themes/default/templates/account/email/forgot_password_openid.html:19
+msgid "account, please contact"
+msgstr "account, neem contact op met"
+
+#: themes/default/templates/account/email/forgot_password_openid.html:25
+#: themes/default/templates/account/email/validate_account.html:34
+msgid "Team"
+msgstr "Team"
+
+#: themes/default/templates/account/email/validate_account.html:4
+msgid "Validate your account"
+msgstr "Account bevestigen"
+
+#: themes/default/templates/account/email/validate_account.html:13
+msgid "Thank you for creating an account in"
+msgstr "Hartelijk dank voor het aanmaken van uw account in"
+
+#: themes/default/templates/account/email/validate_account.html:16
+msgid "Just one more step!"
+msgstr "Nog één stap!"
+
+#: themes/default/templates/account/email/validate_account.html:19
+msgid ""
+"To verify that you are the owner of this e-mail address, please visit the"
+" URL below"
+msgstr ""
+"Klik op de onderstaande URL om te bevestigen dat u de eigenaar bent"
+"van dit emailadres"
+
+#: themes/default/templates/account/email/validate_account.html:25
+msgid "Click here to confirm your e-mail address and create your account"
+msgstr "Klik hier om uw e-mailadres te bestigen en uw account aan te maken"
+
+#: themes/default/templates/admin/_helpers.html:9
+msgid "nick"
+msgstr "nickname"
+
+#: themes/default/templates/admin/_helpers.html:10
+msgid "Member since"
+msgstr "Gebruiker sinds"
+
+#: themes/default/templates/admin/_helpers.html:14
+msgid "Remove from admin group"
+msgstr "Verwijderen uit beheerdersgroep"
+
+#: themes/default/templates/admin/_helpers.html:18
+msgid "Add to admin group"
+msgstr "Toevoegen aan beheerdersgroep"
+
+#: themes/default/templates/admin/categories.html:13
+msgid "Manage Categories"
+msgstr "Categorieën beheren"
+
+#: themes/default/templates/admin/categories.html:20
+#: themes/default/templates/admin/update_category.html:19
+msgid "Category name"
+msgstr "Categorienaam"
+
+#: themes/default/templates/admin/categories.html:21
+#: themes/default/templates/admin/update_category.html:20
+msgid "Category description"
+msgstr "Categoriebeschrijving"
+
+#: themes/default/templates/admin/categories.html:23
+msgid "Add Category"
+msgstr "Categorie toevoegen"
+
+#: themes/default/templates/admin/categories.html:30
+msgid "List of Available Categories"
+msgstr "Lijst van beschikbare categorieën"
+
+#: themes/default/templates/admin/categories.html:39
+msgid "Edit Category Name"
+msgstr "Categorienaam bewerken"
+
+#: themes/default/templates/admin/categories.html:41
+#: themes/default/templates/admin/categories.html:43
+#: themes/default/templates/admin/del_category.html:17
+msgid "Delete Category"
+msgstr "Categorie verwijderen"
+
+#: themes/default/templates/admin/dashboard.html:19
+msgid "Dashboard last 7 days"
+msgstr "Dashboard van laatste 7 dagen"
+
+#: themes/default/templates/admin/dashboard.html:22
+msgid "Refresh"
+msgstr "Verversen"
+
+#: themes/default/templates/admin/dashboard.html:28
+msgid "Active users"
+msgstr "Actieve gebruikers"
+
+#: themes/default/templates/admin/dashboard.html:37
+msgid "Active anonymous users"
+msgstr "Actieve anonieme gebruikers"
+
+#: themes/default/templates/admin/dashboard.html:46
+msgid "Draft projects"
+msgstr "Conceptprojecten"
+
+#: themes/default/templates/admin/dashboard.html:54
+msgid "Published projects"
+msgstr "Gepubliceerde projecten"
+
+#: themes/default/templates/admin/dashboard.html:62
+msgid "Updated projects"
+msgstr "Bijgewerkte projecten"
+
+#: themes/default/templates/admin/dashboard.html:70
+msgid "New tasks"
+msgstr "Nieuwe taken"
+
+#: themes/default/templates/admin/dashboard.html:79
+msgid "New Answers"
+msgstr "Nieuwe antwoorden"
+
+#: themes/default/templates/admin/dashboard.html:88
+msgid "New Users"
+msgstr "Nieuwe gebruikers"
+
+#: themes/default/templates/admin/dashboard.html:97
+msgid "Returning Users"
+msgstr "Terugkerende gebruikers"
+
+#: themes/default/templates/admin/dashboard.html:108
+msgid "Recent activity"
+msgstr "Recente activiteit"
+
+#: themes/default/templates/admin/dashboard.html:115
+msgid "new project created"
+msgstr "nieuw project aangemaakt"
+
+#: themes/default/templates/admin/dashboard.html:119
+msgid "has published a blog post"
+msgstr "heeft een blogpost gepubliceerd"
+
+#: themes/default/templates/admin/dashboard.html:123
+msgid "has added new tasks"
+msgstr "heeft nieuwe taken toegevoegd"
+
+#: themes/default/templates/admin/dashboard.html:127
+msgid "has completed a task"
+msgstr "heeft een taak afgerond"
+
+#: themes/default/templates/admin/dashboard.html:131
+msgid "has contributed to"
+msgstr "heeft aan een taak bijgedragen"
+
+#: themes/default/templates/admin/dashboard.html:139
+#: themes/default/templates/admin/dashboard.html:149
+msgid "has joined"
+msgstr "is toegetreden"
+
+#: themes/default/templates/admin/dashboard.html:159
+msgid "No data available yet. You'll need to wait 24 hours."
+msgstr "Nog geen data beschikbaar. U moet 24 uur wachten."
+
+#: themes/default/templates/admin/del_category.html:15
+#: themes/default/templates/projects/delete.html:14
+#: themes/default/templates/projects/tasks/delete.html:14
+msgid "Danger Zone!"
+msgstr "Gevarenzone!"
+
+#: themes/default/templates/admin/del_category.html:15
+msgid ""
+"Deleting the category will remove it from all the projects! This "
+"operation cannot be undone!"
+msgstr ""
+"Het verwijderen van deze categorie verwijdert deze van al uw"
+"projecten. Deze bewerking kan niet ongedaan worden gemaakt!"
+
+#: themes/default/templates/admin/del_category.html:21
+msgid "No, do not delete it"
+msgstr "Nee, niet verwijderen"
+
+#: themes/default/templates/admin/index.html:15
+msgid "Dashboard"
+msgstr "Dashboard"
+
+#: themes/default/templates/admin/index.html:16
+msgid "Internal Statistics"
+msgstr "Interne statistieken"
+
+#: themes/default/templates/admin/index.html:18
+msgid "Go"
+msgstr "Ga"
+
+#: themes/default/templates/admin/index.html:22
+msgid "Background Jobs"
+msgstr "Achtergrondtaken"
+
+#: themes/default/templates/admin/index.html:23
+msgid "Monitor the background jobs"
+msgstr "Achtergrondtaken controleren"
+
+#: themes/default/templates/admin/index.html:25
+#: themes/default/templates/admin/index.html:34
+#: themes/default/templates/admin/index.html:41
+#: themes/default/templates/admin/index.html:50
+msgid "Manage"
+msgstr "Beheren"
+
+#: themes/default/templates/admin/index.html:31
+#: themes/default/templates/projects/index.html:33
+msgid "Featured Projects"
+msgstr "Aanbevolen projecten"
+
+#: themes/default/templates/admin/index.html:32
+msgid "Show projects on the front page"
+msgstr "Toon projecten op de hoofdpagina"
+
+#: themes/default/templates/admin/index.html:38
+msgid "Categories"
+msgstr "Categorieën"
+
+#: themes/default/templates/admin/index.html:39
+msgid "Manage project categories"
+msgstr "Projectcategorieën beheren"
+
+#: themes/default/templates/admin/index.html:47
+msgid "Administrators"
+msgstr "Beheerders"
+
+#: themes/default/templates/admin/index.html:48
+msgid "Manage administrators"
+msgstr "Beheer beheerders"
+
+#: themes/default/templates/admin/index.html:54
+#: themes/default/templates/projects/stats.html:235
+msgid "Users"
+msgstr "Gebruikers"
+
+#: themes/default/templates/admin/index.html:55
+msgid "Export a list of users"
+msgstr "Exporteer een lijst van gebruikers"
+
+#: themes/default/templates/admin/index.html:57
+msgid "JSON"
+msgstr "JSON"
+
+#: themes/default/templates/admin/index.html:60
+msgid "CSV"
+msgstr "CSV"
+
+#: themes/default/templates/admin/index.html:66
+msgid "Latest news from PyBossa"
+msgstr "Laatste nieuws van PyBossa"
+
+#: themes/default/templates/admin/index.html:69
+msgid "New PyBossa version"
+msgstr "Nieuwe versie van PyBossa"
+
+#: themes/default/templates/admin/index.html:69
+msgid "New SciFabric Blog Post"
+msgstr "Nieuwe blogpost van SciFabric"
+
+#: themes/default/templates/admin/projects.html:13
+msgid "Manage featured projects"
+msgstr "Beheer aanbevolen projecten"
+
+#: themes/default/templates/admin/update_category.html:22
+msgid "Update Category"
+msgstr "Categorie bijwerken"
+
+#: themes/default/templates/admin/users.html:14
+msgid "Manage Admin Users"
+msgstr "Beheer beheerdersgebuikers"
+
+#: themes/default/templates/admin/users.html:19
+msgid "Try with the full name or nick"
+msgstr "Probeer met volledige naam of nickname"
+
+#: themes/default/templates/admin/users.html:20
+msgid "Search"
+msgstr "Zoeken"
+
+#: themes/default/templates/admin/users.html:24
+msgid "Found Users"
+msgstr "Gevonden gebruikers"
+
+#: themes/default/templates/admin/users.html:31
+msgid "Current Users with Admin privileges"
+msgstr "Huidige gebruikers met beheerdersrechten"
+
+#: themes/default/templates/home/_about.html:5
+msgid ""
+"PyBossa is a free, open-source crowd-sourcing and micro-tasking platform."
+" It enables people to create and run projects that utilise online "
+"assistance in performing tasks that require human cognition such as image"
+" classification, transcription, geocoding and more. PyBossa is there to "
+"help researchers, civic hackers and developers to create projects where "
+"anyone around the world with some time, interest and an internet "
+"connection can contribute."
+msgstr ""
+"PyBossa is een vrij, gratis, open-source platform voor crowdsourcing"
+" en microtasking. Het biedt de mogelijkheid om projecten te draaien"
+" die online hulp gebruiken bij het uitvoeren van taken die menselijk"
+" denkvermogen vereisen, zoals classificatie van afbeeldingen, transcriptie,"
+" geocodering en meer. PyBossa helpt onderzoekers, digitale activisten en"
+" ontwikkelaars om projecten te creëeren waar iedereen in de wereld met tijd,"
+" interesse en een internetverbinding aan kan bijdragen."
+
+#: themes/default/templates/home/_about.html:8
+msgid "PyBossa is different to existing efforts:"
+msgstr "PYBOSSA is anders dan bestaande systemen"
+
+#: themes/default/templates/home/_about.html:10
+#, python-format
+msgid "It's a 100%% open-source"
+msgstr "Het is 100%% open-source"
+
+#: themes/default/templates/home/_about.html:11
+msgid ""
+"Unlike, say, “mechanical turk” style projects, PyBossa is not designed to"
+" handle payment or money — it is designed to support volunteer-driven "
+"projects."
+msgstr ""
+"In tegenstelling tot “mechanical turk”-achtige projecten, is PyBossa"
+" niet ontworpen om geld of betaling te mogelijk te maken — het is gericht"
+" op projecten gedreven door vrijwilligers."
+
+#: themes/default/templates/home/_about.html:13
+msgid ""
+"It's designed as a platform and framework for developing deploying crowd-"
+"sourcing and microtasking project rather than being a crowd-sourcing "
+"project itself. Individual crowd-sourcing projects are written as simple "
+"snippets of Javascript and HTML which are then deployed on a PyBossa "
+"instance (such as"
+msgstr ""
+"Het is ontworpen als een platform raamwerk voor het ontwikkelen"
+" en publiceren van crowdsourcing- en microtasking-projecten — zonder zelf"
+" een crowdsourcingproject te zijn. Individuele crowdsourcingprojecten"
+" worden ontwikkeld als stukjes Javscript- en HTML-code, die dan worden "
+" gepubliceerd op een installatie van PyBossa (zoals"
+
+#: themes/default/templates/home/_about.html:13
+msgid ""
+"This way one can easily develop custom projects while using the PyBossa "
+"platform to store your data, manage users, and handle workflow"
+msgstr ""
+"Op deze manier wordt het makkelijk gemaakt om eigen projecten te maken,"
+" terwijl het PyBossa-platform zorgt voor het opslaan van data, beheren van"
+" gebruikers en het regelen van het proces."
+
+#: themes/default/templates/home/_about.html:18
+msgid "You can read more about the architecture in the"
+msgstr "U kunt meer lezen over het softwareontwerp in de"
+
+#: themes/default/templates/home/_about.html:18
+msgid "PyBossa Documentation"
+msgstr "documentatie van PyBossa"
+
+#: themes/default/templates/home/_about.html:18
+msgid "and follow the"
+msgstr "en volg de"
+
+#: themes/default/templates/home/_about.html:18
+msgid "step-by-step tutorial to create your own projects"
+msgstr "stap-voor-stap tutorial om uw eigen project te maken"
+
+#: themes/default/templates/home/_about.html:21
+#: themes/default/templates/projects/_helpers.html:40
+#: themes/default/templates/projects/stats.html:32
+msgid "Statistics"
+msgstr "Statistieken"
+
+#: themes/default/templates/home/_about.html:23
+msgid ""
+" PyBossa provides individual statistics for every project in the system, "
+"as well as a"
+msgstr "PyBossa zorgt voor individuele statistieken voor elk project"
+
+#: themes/default/templates/home/_about.html:23
+msgid "general overview about the system like total number of users, tasks, etc"
+msgstr "en een algemeen overzicht over het systeem, met totaal aantal gebruikers, taken, etc."
+
+#: themes/default/templates/home/_about.html:25
+msgid "Check the global statistics"
+msgstr "Bekijk de globale statistieken"
+
+#: themes/default/templates/home/_about.html:27
+msgid "Contact information"
+msgstr "Contactinformatie"
+
+#: themes/default/templates/home/_about.html:29
+msgid "For more info, send us an e-mail to: "
+msgstr "Stuur voor meer informatie een e-mail naar: "
+
+#: themes/default/templates/home/_about.html:29
+msgid "Follow us on Twitter!"
+msgstr "Volg ons op Twitter!"
+
+#: themes/default/templates/home/_about.html:30
+msgid "E-mail list: "
+msgstr "E-maillijst: "
+
+#: themes/default/templates/home/_about.html:31
+msgid "Report any bug, issue or improvement:"
+msgstr "Rapporteer fouten, problemen of verbeteringen: "
+
+#: themes/default/templates/home/_about.html:33
+msgid "Github Issues"
+msgstr "Github issues"
+
+#: themes/default/templates/home/_pybossa_text.html:1
+msgid ""
+"Online assistance in performing tasks that require human cognition, "
+"knowledge or intelligence such as image classification, transcription, "
+"geocoding and more!"
+msgstr ""
+"Online hulp bij het uitvoeren van taken die menselijk denkvermogen,"
+" kennis of intelligentie vereisen, zoals het classificeren van afbeeldingen,"
+" transcriptie, geocoderen en meer!"
+
+#: themes/default/templates/home/_pybossa_text.html:3
+msgid "Help advance research"
+msgstr "Help bij het vooruitbrengen van onderzoek"
+
+#: themes/default/templates/home/_pybossa_text.html:4
+msgid "Everything is open and freely usable"
+msgstr "Alles is open en vrij te gebruiken"
+
+#: themes/default/templates/home/_pybossa_text.html:5
+msgid "Things computers can't do"
+msgstr "Dingen die computers niet kunnen"
+
+#: themes/default/templates/home/index.html:18
+#: themes/default/templates/projects/_helpers.html:36
+#: themes/default/templates/projects/_helpers.html:240
+msgid "Info"
+msgstr "Info"
+
+#: themes/default/templates/home/index.html:33
+msgid "Get Started"
+msgstr "Beginnen"
+
+#: themes/default/templates/home/index.html:34
+msgid "It's really simple to start contributing."
+msgstr "Het is makkelijk om bij te dragen"
+
+#: themes/default/templates/home/index.html:37
+msgid " Start Contributing"
+msgstr " Begin met bijdragen"
+
+#: themes/default/templates/home/index.html:42
+msgid "Most Active Projects"
+msgstr "Meest actieve projecten"
+
+#: themes/default/templates/home/index.html:54
+msgid "Start"
+msgstr "Start"
+
+#: themes/default/templates/home/index.html:62
+msgid "Your project"
+msgstr "Uw project"
+
+#: themes/default/templates/home/index.html:63
+msgid "could be here!"
+msgstr "kan hier staan!"
+
+#: themes/default/templates/home/index.html:64
+msgid "Create a project"
+msgstr "Maak een project aan"
+
+#: themes/default/templates/home/index.html:73
+msgid "Most Active Volunteers"
+msgstr "Meest actieve vrijwilligers"
+
+#: themes/default/templates/home/index.html:80
+msgid "Submitted Tasks"
+msgstr "Ingezonden taken"
+
+#: themes/default/templates/home/index.html:84
+#: themes/default/templates/projects/_helpers.html:39
+#: themes/default/templates/projects/_helpers.html:75
+#: themes/default/templates/projects/_helpers.html:203
+#: themes/default/templates/projects/export.html:19
+#: themes/default/templates/projects/export.html:21
+#: themes/default/templates/projects/export.html:32
+#: themes/default/templates/projects/export.html:34
+#: themes/default/templates/projects/export.html:53
+#: themes/default/templates/projects/stats.html:287
+#: themes/default/templates/projects/stats.html:377
+#: themes/default/templates/projects/tasks.html:13
+#: themes/default/templates/projects/tasks_browse.html:62
+msgid "Tasks"
+msgstr "Taken"
+
+#: themes/default/templates/home/search.html:7
+msgid "Search Results"
+msgstr "Zoekresultaten"
+
+#: themes/default/templates/projects/_helpers.html:37
+#: themes/default/templates/projects/presenter.html:15
+msgid "Contribute"
+msgstr "Bijdragen"
+
+#: themes/default/templates/projects/_helpers.html:38
+#: themes/default/templates/projects/results.html:15
+msgid "Results"
+msgstr "Resultaten"
+
+#: themes/default/templates/projects/_helpers.html:42
+#: themes/default/templates/projects/_helpers.html:89
+#: themes/default/templates/projects/_helpers.html:102
+#: themes/default/templates/projects/settings.html:14
+#: themes/default/templates/projects/tasks.html:37
+#: themes/default/templates/projects/tasks.html:41
+msgid "Settings"
+msgstr "Instellingen"
+
+#: themes/default/templates/projects/_helpers.html:49
+msgid "Audit Logs"
+msgstr "Logboeken"
+
+#: themes/default/templates/projects/_helpers.html:54
+msgid "Webhooks"
+msgstr "Webhooks"
+
+#: themes/default/templates/projects/_helpers.html:57
+msgid "Blog"
+msgstr "Blog"
+
+#: themes/default/templates/projects/_helpers.html:69
+msgid "ID"
+msgstr "ID"
+
+#: themes/default/templates/projects/_helpers.html:71
+#: themes/default/templates/projects/_helpers.html:131
+msgid "Description"
+msgstr "Beschrijving"
+
+#: themes/default/templates/projects/_helpers.html:72
+#: themes/default/templates/projects/_helpers.html:132
+msgid "Creation Date"
+msgstr "Datum aangemaakt"
+
+#: themes/default/templates/projects/_helpers.html:73
+#: themes/default/templates/projects/_helpers.html:134
+msgid "Last Activity"
+msgstr "Laatste activiteit"
+
+#: themes/default/templates/projects/_helpers.html:74
+#: themes/default/templates/projects/_helpers.html:137
+#: themes/default/templates/projects/_helpers.html:199
+msgid "Overall progress"
+msgstr "Algehele voortgang"
+
+#: themes/default/templates/projects/_helpers.html:74
+#: themes/default/templates/projects/_helpers.html:199
+#: themes/default/templates/projects/tasks_browse.html:19
+msgid "completed"
+msgstr "voltooid"
+
+#: themes/default/templates/projects/_helpers.html:105
+#: themes/default/templates/projects/_helpers.html:115
+msgid "Remove from Featured!"
+msgstr "Verwijderen uit Aanbevolen!"
+
+#: themes/default/templates/projects/_helpers.html:108
+#: themes/default/templates/projects/_helpers.html:112
+msgid "Add to Featured!"
+msgstr "Toevoegen aan Aanbevolen!"
+
+#: themes/default/templates/projects/_helpers.html:139
+#: themes/default/templates/projects/_helpers.html:141
+msgid "Created by"
+msgstr "Aangemaakt door"
+
+#: themes/default/templates/projects/_helpers.html:139
+msgid "Me"
+msgstr "Mij"
+
+#: themes/default/templates/projects/_helpers.html:144
+msgid "Try it!"
+msgstr "Probeer het!"
+
+#: themes/default/templates/projects/_helpers.html:212
+msgid "Done! View results"
+msgstr "Voltooid! Toon resultaten"
+
+#: themes/default/templates/projects/_helpers.html:215
+msgid "Start Contributing Now!"
+msgstr "Begin nu met bijdragen!"
+
+#: themes/default/templates/projects/_helpers.html:218
+msgid "Thanks for contributing"
+msgstr "Dank voor uw bijdrage"
+
+#: themes/default/templates/projects/_helpers.html:221
+msgid "Draft project, complete it!"
+msgstr "Conceptproject, voltooi het!"
+
+#: themes/default/templates/projects/_helpers.html:224
+msgid "You can now publish it!"
+msgstr "U kunt het nu publiceren!"
+
+#: themes/default/templates/projects/actions.html:9
+#: themes/default/templates/projects/settings.html:18
+msgid "Edit the project details"
+msgstr "Wijzig de projectdetails"
+
+#: themes/default/templates/projects/actions.html:10
+#: themes/default/templates/projects/tasks.html:33
+msgid "Edit the task presenter"
+msgstr "Wijzig de taakpresentator"
+
+#: themes/default/templates/projects/actions.html:11
+#: themes/default/templates/projects/importers/csv.html:14
+#: themes/default/templates/projects/importers/dropbox.html:17
+#: themes/default/templates/projects/importers/epicollect.html:14
+#: themes/default/templates/projects/importers/flickr.html:15
+#: themes/default/templates/projects/importers/gdocs.html:14
+#: themes/default/templates/projects/importers/iiif.html:5
+#: themes/default/templates/projects/importers/s3.html:20
+#: themes/default/templates/projects/importers/twitter.html:14
+msgid "Import tasks"
+msgstr "Taken importeren"
+
+#: themes/default/templates/projects/actions.html:12
+#: themes/default/templates/projects/settings.html:20
+msgid "Delete the project"
+msgstr "Project verwijderen"
+
+#: themes/default/templates/projects/auditlog.html:17
+msgid "When"
+msgstr "Wanneer"
+
+#: themes/default/templates/projects/auditlog.html:18
+msgid "Who"
+msgstr "Wie"
+
+#: themes/default/templates/projects/auditlog.html:19
+msgid "Source"
+msgstr "Bron"
+
+#: themes/default/templates/projects/auditlog.html:20
+msgid "Action"
+msgstr "Actie"
+
+#: themes/default/templates/projects/auditlog.html:21
+msgid "Attribute"
+msgstr "Eigenschap"
+
+#: themes/default/templates/projects/auditlog.html:22
+msgid "Old Value"
+msgstr "Oude waarde"
+
+#: themes/default/templates/projects/auditlog.html:23
+msgid "New Value"
+msgstr "Nieuwe waarde"
+
+#: themes/default/templates/projects/auditlog.html:28
+msgid "You"
+msgstr "U"
+
+#: themes/default/templates/projects/auditlog.html:39
+msgid "Sorry! No logs so far."
+msgstr "Helaas! Geen logboeken tot nu toe."
+
+#: themes/default/templates/projects/auditlog.html:45
+#: themes/default/templates/projects/blog.html:33
+#: themes/default/templates/projects/delete.html:29
+#: themes/default/templates/projects/project.html:31
+#: themes/default/templates/projects/publish.html:30
+#: themes/default/templates/projects/settings.html:26
+#: themes/default/templates/projects/task_n_answers.html:29
+#: themes/default/templates/projects/task_priority.html:39
+#: themes/default/templates/projects/task_scheduler.html:44
+#: themes/default/templates/projects/task_settings.html:43
+#: themes/default/templates/projects/tasks.html:78
+#: themes/default/templates/projects/tasks_browse.html:65
+msgid "Sorry! This project does not exist."
+msgstr "Helaas! Dit project bestaat niet."
+
+#: themes/default/templates/projects/blog.html:27
+msgid "Sorry! No posts so far."
+msgstr "Helaas! Nog geen berichten."
+
+#: themes/default/templates/projects/blog_post.html:15
+msgid "Author: "
+msgstr "Auteur: "
+
+#: themes/default/templates/projects/blog_post.html:17
+msgid "Written: "
+msgstr "Geschreven: "
+
+#: themes/default/templates/projects/blog_post.html:31
+#: themes/default/templates/projects/task_autoimporter.html:40
+#: themes/default/templates/projects/task_settings.html:31
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: themes/default/templates/projects/blog_post.html:32
+msgid "Edit"
+msgstr "Wijzigen"
+
+#: themes/default/templates/projects/blog_post.html:36
+#: themes/default/templates/projects/blog_post.html:41
+#: themes/default/templates/projects/task_autoimporter.html:41
+msgid "Back"
+msgstr "Terug"
+
+#: themes/default/templates/projects/blog_post.html:40
+msgid "Sorry! This blogpost does not exist."
+msgstr "Helaas! Deze blogpost bestaat niet."
+
+#: themes/default/templates/projects/delete.html:12
+msgid "Delete project"
+msgstr "Verwijder project"
+
+#: themes/default/templates/projects/delete.html:14
+msgid "If you delete the project and its tasks, it will be gone forever!"
+msgstr "Als u dit project en bijbehorende taken verwijdert, is deze definitief verdwenen!"
+
+#: themes/default/templates/projects/delete.html:20
+msgid ""
+"Are you sure you want to delete this project and all its tasks and "
+"associated task runs?"
+msgstr ""
+"Weet u zeker dat u dit project, met alle bijbehorende taken en "
+"gegeven antwoorden wilt verwijderen?"
+
+#: themes/default/templates/projects/delete.html:22
+msgid "Yes, delete it"
+msgstr "Ja, verwijder het"
+
+#: themes/default/templates/projects/delete.html:23
+msgid "No, do not delete it!"
+msgstr "Nee, verwijder het niet!"
+
+#: themes/default/templates/projects/export.html:13
+msgid "Export All Tasks and Task Runs"
+msgstr "Exporteer alle taken en antwoorden"
+
+#: themes/default/templates/projects/export.html:14
+msgid "You can export and download"
+msgstr "U kunt exporteren en downloaden"
+
+#: themes/default/templates/projects/export.html:14
+msgid "all the available"
+msgstr "alle beschikbare"
+
+#: themes/default/templates/projects/export.html:14
+msgid ""
+"Tasks and Task Runs (the submitted answers by the users) in CSV or JSON "
+"formats."
+msgstr "Taken en gegeven antwoorden in CSV- of JSON-formaat."
+
+#: themes/default/templates/projects/export.html:17
+msgid "Export in CSV format"
+msgstr ""
+
+#: themes/default/templates/projects/export.html:24
+#: themes/default/templates/projects/export.html:26
+#: themes/default/templates/projects/export.html:37
+#: themes/default/templates/projects/export.html:39
+#: themes/default/templates/projects/export.html:54
+msgid "Task Runs"
+msgstr "Antwoorden"
+
+#: themes/default/templates/projects/export.html:30
+msgid "Export in JSON format"
+msgstr "Exporteren in JSON-formaat"
+
+#: themes/default/templates/projects/export.html:47
+msgid "Export to the"
+msgstr "Exporteer naar"
+
+#: themes/default/templates/projects/export.html:49
+msgid "Export to a CKAN server"
+msgstr "Exporteer naar een CKAN-server"
+
+#: themes/default/templates/projects/export.html:51
+msgid "IMPORTANT"
+msgstr "BELANGRIJK"
+
+#: themes/default/templates/projects/export.html:51
+msgid ""
+"This export option stills in beta mode and may fail in the CKAN server. "
+"If you get an error, please send an e-mail to info@pybossa.com"
+msgstr ""
+"Deze exportoptie is nog in beta-modus en kan mislukken in de CKAN-server. "
+"Stuur, als u een foutmelding krijgt, een e-mail naar info@pybossa.com"
+
+#: themes/default/templates/projects/export.html:56
+msgid "You don't have a Datahub.io API key in your"
+msgstr "U heeft geen Datahub.io API-sleutel in uw"
+
+#: themes/default/templates/projects/export.html:56
+msgid "account. Please,"
+msgstr "account. Graag"
+
+#: themes/default/templates/projects/export.html:56
+msgid "create an account"
+msgstr "een account aanmaken"
+
+#: themes/default/templates/projects/export.html:56
+msgid "and copy/paste the API key in your profile in order to use this exporter"
+msgstr "en de API-sleutel kopiëren en plakken in uw profiel, om deze exporteerfunctie te gebruiken"
+
+#: themes/default/templates/projects/index.html:35
+msgid "A special selection of the most interesting projects"
+msgstr "Een speciale selectie van de meest interessante projecten"
+
+#: themes/default/templates/projects/index.html:38
+#: themes/default/templates/stats/global.html:93
+msgid "Draft Projects"
+msgstr "Conceptprojecten"
+
+#: themes/default/templates/projects/index.html:39
+msgid "Work in progress projects"
+msgstr "Projecten in aanbouw"
+
+#: themes/default/templates/projects/index.html:58
+msgid "Sorry, there are no published projects for this category yet"
+msgstr "Helaas, er zijn nog geen gepubliceerde projecten voor deze categorie"
+
+#: themes/default/templates/projects/new.html:13
+msgid "Project"
+msgstr "Project"
+
+#: themes/default/templates/projects/new.html:13
+msgid "Create a new project"
+msgstr "Maak een nieuw project aan"
+
+#: themes/default/templates/projects/new.html:17
+#: themes/default/templates/projects/update.html:37
+msgid "The name of the project"
+msgstr "De naam van het project"
+
+#: themes/default/templates/projects/new.html:18
+#: themes/default/templates/projects/update.html:38
+msgid "Short name or slug for the project"
+msgstr "Korte naam voor het project"
+
+#: themes/default/templates/projects/new.html:18
+#: themes/default/templates/projects/update.html:38
+msgid "Project slug:"
+msgstr "Korte naam:"
+
+#: themes/default/templates/projects/new.html:19
+msgid ""
+"Explain your project"
+"                                                             \n"
+"                · Why? Why you are creating this project, what you want "
+"to achieve with it"
+"                                                             \n"
+"                · How? Explain how your project works"
+"                                                             \n"
+"                · How you can help: Explain to the volunteers how they "
+"can help and contribute to the goal of your project"
+"                                                             \n"
+"                · Will you help make a difference? Explain to the "
+"volunteers why their contribution is essential and how the result of your"
+" project can help change things!"
+"                                                             \n"
+"            (you can use Markdown to give format to your description!)"
+msgstr ""
+"leg uw project uit"
+"                                                             \n"
+"                · Waarom? Waarom maakt u dit project aan? Wat wilt u "
+"ermee bereiken?"
+"                                                             \n"
+"                · Hoe? Leg uit hoe uw project werkt."
+"                                                             \n"
+"                · Hoe te helpen: Leg aan vrijwilligers uit hoe ze "
+"kunnen bijdragen aan het doel van het project"
+"                                                             \n"
+"                · Wilt u helpen om het verschil te maken? Leg aan vrijwilligers"
+" uit waarom hun bijdrage essentieel is en hoe deze kan helpen om "
+" dingen te veranderen!"
+"                                                             \n"
+"            (u kunt Markdown gebruiken om uw beschrijving te formatteren!)"
+
+#: themes/default/templates/projects/new.html:26
+msgid "Create the project"
+msgstr "Project aanmaken"
+
+#: themes/default/templates/projects/new_blogpost.html:14
+msgid "Write a new blog post for ad"
+msgstr "Schrijf een nieuwe blogpost"
+
+#: themes/default/templates/projects/new_blogpost.html:18
+#: themes/default/templates/projects/update_blogpost.html:20
+msgid "The title of your post"
+msgstr "De titel van uw bericht"
+
+#: themes/default/templates/projects/new_blogpost.html:19
+#: themes/default/templates/projects/update_blogpost.html:21
+msgid "Write your post here. You can use Markdown!"
+msgstr "Schrijf uw bericht hier. U kunt Markdown gebruiken!"
+
+#: themes/default/templates/projects/password.html:14
+msgid "Enter the password to contribute to this project:"
+msgstr "Stel een wachtwoord in om bij te dragen aan dit project:"
+
+#: themes/default/templates/projects/password.html:18
+msgid "Project password"
+msgstr "Projectwachtwoord"
+
+#: themes/default/templates/projects/password.html:21
+msgid "Submit"
+msgstr "Verzenden"
+
+#: themes/default/templates/projects/presenter.html:22
+msgid ""
+"Sorry, you've contributed to all the tasks for this project, but this "
+"project still needs more volunteers, so please spread the word!"
+msgstr ""
+"Helaas, u heeft meegdaan aan alle taken voor dit project, maar "
+"het project heeft nog meer vrijwilligers nodig, dus maak het project bekend!"
+
+#: themes/default/templates/projects/publish.html:12
+msgid "Publish the project"
+msgstr "Publiceer het project"
+
+#: themes/default/templates/projects/publish.html:14
+msgid "Please read carefully!"
+msgstr "Graag aandachtig doorlezen"
+
+#: themes/default/templates/projects/publish.html:15
+msgid ""
+"You are about to publish your project. This CANNOT be undone! Once your "
+"project has been published, people will be able to contribute to it and "
+"answers will begin to be stored."
+msgstr "U staat op het punt een project te publiceren. Dit KAN NIET ongedaan"
+" worden gemaakt! Op het moment dat het project is gepubliceerd, kunnen mensen"
+" eraan bijdragen en zullen alle antwoorden worden opgeslagen."
+
+#: themes/default/templates/projects/publish.html:16
+msgid ""
+"That means that your project should be working properly, so please make "
+"sure it does. Otherwise you can work on it and publish it once it works "
+"fine."
+msgstr ""
+"Dit betekent dat uw project goed moet werken, dus verzekert u zich ervan"
+" dat dit zo is. Anders kunt u eraan werken en het project publiceren op "
+"het moment dat het goed werkt."
+
+#: themes/default/templates/projects/publish.html:21
+msgid "Are you sure you want to publish this project?"
+msgstr "Weet u zeker dat u dit project wilt publiceren?"
+
+#: themes/default/templates/projects/publish.html:23
+msgid "Yes, publish it"
+msgstr "Ja, publiceer het "
+
+#: themes/default/templates/projects/publish.html:24
+msgid "No, do not publish it!"
+msgstr "Nee, niet publiceren!"
+
+#: themes/default/templates/projects/results.html:21
+msgid "No results"
+msgstr "Geen resultaten"
+
+#: themes/default/templates/projects/results.html:22
+msgid "The project owner has not created/published/visualized any results yet."
+msgstr "De eigenaar van het project heeft nog een resultaten gepubliceerd."
+
+#: themes/default/templates/projects/settings.html:16
+msgid "Project Settings"
+msgstr "Projectinstellingen"
+
+#: themes/default/templates/projects/settings.html:19
+#: themes/default/templates/projects/task_settings.html:13
+msgid "Task Settings"
+msgstr "Taakinstellingen"
+
+#: themes/default/templates/projects/settings.html:21
+msgid "Write a blog post"
+msgstr "Een blogpost schrijven"
+
+#: themes/default/templates/projects/stats.html:39
+#: themes/default/templates/projects/task_priority.html:21
+msgid "Belangrijk"
+msgstr ""
+
+#: themes/default/templates/projects/stats.html:39
+msgid "Data have been"
+msgstr "Data is"
+
+#: themes/default/templates/projects/stats.html:39
+msgid "anonymized"
+msgstr "geanonimiseerd"
+
+#: themes/default/templates/projects/stats.html:47
+msgid "Average contribution time per task"
+msgstr "Gemiddelde bijdragetijd per taak"
+
+#: themes/default/templates/projects/stats.html:48
+msgid "seconds"
+msgstr "seconden"
+
+#: themes/default/templates/projects/stats.html:56
+msgid "Distribution of Answers per Hour"
+msgstr "Verdeling van antwoorden per uur"
+
+#: themes/default/templates/projects/stats.html:86
+msgid "Completed Tasks in the last 15 days"
+msgstr "Voltooide taken in de laatste 15 dagen"
+
+#: themes/default/templates/projects/stats.html:86
+#: themes/default/templates/projects/stats.html:157
+msgid "select an area to zoom, click to reset the chart"
+msgstr "selecteer een gebied om te zoomen, klik om de weergave te herstellen"
+
+#: themes/default/templates/projects/stats.html:157
+msgid "Answers per day"
+msgstr "Antwoorden per dag"
+
+#: themes/default/templates/projects/stats.html:169
+msgid "answers were submitted this day"
+msgstr "antwoorden zijn vandaag verstuurd"
+
+#: themes/default/templates/projects/stats.html:228
+msgid "Distribution of Answers"
+msgstr "Verdeling van antwoorden"
+
+#: themes/default/templates/projects/stats.html:234
+msgid "Type"
+msgstr "Type"
+
+#: themes/default/templates/projects/stats.html:236
+msgid "Percentage"
+msgstr "Percentage"
+
+#: themes/default/templates/projects/stats.html:275
+msgid "Details about Anonymous Users"
+msgstr "Details over anonieme gebruikers"
+
+#: themes/default/templates/projects/stats.html:278
+msgid "anonymous users have"
+msgstr "anonieme gebruikers hebben"
+
+#: themes/default/templates/projects/stats.html:278
+#: themes/default/templates/projects/stats.html:369
+msgid "participated"
+msgstr "deelgenomen"
+
+#: themes/default/templates/projects/stats.html:285
+msgid "Country"
+msgstr "Land"
+
+#: themes/default/templates/projects/stats.html:286
+msgid "City"
+msgstr "Stad"
+
+#: themes/default/templates/projects/stats.html:307
+#: themes/default/templates/projects/stats.html:308
+#: themes/default/templates/projects/stats.html:309
+#: themes/default/templates/projects/stats.html:310
+#: themes/default/templates/projects/stats.html:311
+#: themes/default/templates/projects/stats.html:376
+msgid "User"
+msgstr "Gebruiker"
+
+#: themes/default/templates/projects/stats.html:327
+#: themes/default/templates/stats/global.html:169
+msgid "This page includes GeoLite data created by MaxMind, available from"
+msgstr "Deze pagina bevat GeoLite-data gemaakt door MaxMind, beschikbaar via"
+
+#: themes/default/templates/projects/stats.html:366
+msgid "Details about Authenticated Users"
+msgstr "Details over geauthenticeerde gebruikers"
+
+#: themes/default/templates/projects/stats.html:369
+msgid "authenticated users have"
+msgstr "geauthenticeerde gebruikers hebben"
+
+#: themes/default/templates/projects/stats.html:371
+msgid "Top 5 users"
+msgstr "Top 5 gebruikers"
+
+#: themes/default/templates/projects/task_autoimport_options.html:13
+msgid "Setup task autoimporter"
+msgstr "Automatisch taakimporteerfunctie instellen"
+
+#: themes/default/templates/projects/snippets/options.html:4
+#: themes/default/templates/projects/task_autoimport_options.html:16
+#: themes/default/templates/projects/task_import_options.html:16
+msgid "Use one of the following available"
+msgstr "Gebruik één van de volgende beschikbare importeerfuncties"
+
+#: themes/default/templates/projects/task_autoimport_options.html:17
+#: themes/default/templates/projects/task_import_options.html:17
+msgid "importers"
+msgstr "importeerfuncties"
+
+#: themes/default/templates/projects/task_autoimport_options.html:17
+msgid "to setup as the autoimporter"
+msgstr "instellen als de automatische taakimporteerfunctie"
+
+#: themes/default/templates/projects/task_autoimporter.html:14
+msgid "Currently configured autoimport"
+msgstr "Op dit moment ingestelde automatische taakimporteerfunctie"
+
+#: themes/default/templates/projects/task_autoimporter.html:15
+msgid "You currently have the following autoimporter configured"
+msgstr "U heeft op dit moment de volgende automatische taakimporteerfunctie geconfigureerd"
+
+#: themes/default/templates/projects/task_import_options.html:13
+#: themes/default/templates/projects/tasks.html:20
+msgid "Import Tasks"
+msgstr "Taken importeren"
+
+#: themes/default/templates/projects/task_import_options.html:17
+msgid "to import tasks..."
+msgstr "taken importeren..."
+
+#: themes/default/templates/projects/task_import_options.html:31
+msgid "... or import a set of"
+msgstr ... importeren van een set""
+
+#: themes/default/templates/projects/task_import_options.html:31
+msgid "template tasks"
+msgstr "sjabloontaken"
+
+#: themes/default/templates/projects/task_n_answers.html:14
+#: themes/default/templates/projects/task_settings.html:34
+msgid "Task Redundancy"
+msgstr "Taakredundantie"
+
+#: themes/default/templates/projects/task_n_answers.html:18
+msgid "The number of answers per tasks that you want for the project"
+msgstr "Het aantal antwoorden per taak dat u wilt hebben voor dit project"
+
+#: themes/default/templates/projects/task_n_answers.html:20
+#: themes/default/templates/projects/task_scheduler.html:35
+msgid "Set redundancy"
+msgstr "Stel redundantie in"
+
+#: themes/default/templates/projects/snippets/options.html:3
+#: themes/default/templates/projects/task_presenter_editor.html:28
+msgid "Task Presenter Editor"
+msgstr "Editor voor taakpresentator"
+
+#: themes/default/templates/projects/task_presenter_editor.html:28
+msgid "Help"
+msgstr "Help"
+
+#: themes/default/templates/projects/task_presenter_editor.html:34
+msgid "Update the project task presenter"
+msgstr "Werk de taakpresentator bij voor dit project"
+
+#: themes/default/templates/projects/task_presenter_editor.html:35
+msgid "Preview the task presenter"
+msgstr "Voorvertoning van de taakpresentator"
+
+#: themes/default/templates/projects/task_presenter_editor.html:45
+msgid "&times;"
+msgstr "&times;"
+
+#: themes/default/templates/projects/task_presenter_editor.html:46
+msgid "Task Presenter Preview"
+msgstr "Voorvertoning taakpresentator"
+
+#: themes/default/templates/projects/task_presenter_editor.html:54
+msgid "Close"
+msgstr "Sluiten"
+
+#: themes/default/templates/projects/task_priority.html:14
+#: themes/default/templates/projects/task_settings.html:22
+msgid "Task Priority"
+msgstr "Taakprioriteit"
+
+#: themes/default/templates/projects/task_priority.html:15
+msgid "You can change the"
+msgstr "U kunt wijzigingen aanbrengen in de "
+
+#: themes/default/templates/projects/task_priority.html:16
+msgid "priority"
+msgstr "prioriteit"
+
+#: themes/default/templates/projects/task_priority.html:16
+msgid ""
+"of one or more tasks,\n"
+"                providing a list of task IDs separated by commas. The "
+"lowest\n"
+"                priority is"
+msgstr ""
+"van één of meer taken,\n"
+"                door een lijst te geven van taak-ID's, gescheiden door komma's. De "
+"laagste\n"
+"                prioriteit is"
+
+#: themes/default/templates/projects/task_priority.html:19
+msgid "and the highest priority is"
+msgstr "en de hoogste prioriteit is"
+
+#: themes/default/templates/projects/task_priority.html:21
+msgid ""
+"De prioriteitswaarde wordt alleen\n"
+"                gebruikt door de"
+msgstr ""
+
+#: themes/default/templates/projects/task_priority.html:22
+msgid "default scheduler"
+msgstr "standaardplanner"
+
+#: themes/default/templates/projects/task_priority.html:27
+msgid "Comma separated Task.IDs i.e.: 3, 532, 100"
+msgstr "Taak-ID's, door komma's gescheiden, bijv.: 3, 532, 100"
+
+#: themes/default/templates/projects/task_priority.html:28
+msgid "Priority value between 0.0 and 1.0"
+msgstr "Prioriteitswaarde tussen 0.0 en 1.0"
+
+#: themes/default/templates/projects/task_priority.html:30
+msgid "Change Priority"
+msgstr "Wijzig prioriteit"
+
+#: themes/default/templates/projects/task_scheduler.html:14
+#: themes/default/templates/projects/task_settings.html:17
+msgid "Task Scheduler"
+msgstr "Taakplanner"
+
+#: themes/default/templates/projects/task_scheduler.html:15
+msgid "You can choose from the following schedulers"
+msgstr "U kunt kiezen uit de volgende planners"
+
+#: themes/default/templates/projects/task_scheduler.html:17
+msgid "Default"
+msgstr "Standaard"
+
+#: themes/default/templates/projects/task_scheduler.html:17
+msgid "or"
+msgstr "of"
+
+#: themes/default/templates/projects/task_scheduler.html:18
+msgid "Depth First"
+msgstr "Depth first"
+
+#: themes/default/templates/projects/task_scheduler.html:18
+msgid ""
+"returns a task that\n"
+"                    has not been completed (the value of number of "
+"answers has\n"
+"                    not achieved) excluding the current user"
+msgstr ""
+"geef een taak terug die\n"
+"                    nog niet is afgerond (het aantal "
+"antwoorden is\n"
+"                    nog niet bereikt), exclusief de huidige gebruiker"
+
+#: themes/default/templates/projects/task_scheduler.html:21
+msgid "Breadth First"
+msgstr "Breadth first"
+
+#: themes/default/templates/projects/task_scheduler.html:21
+msgid ""
+"returns a\n"
+"                    task which has the least number of task runs "
+"(answers)\n"
+"                    excluding the current user"
+msgstr ""
+"geef een\n"
+"                    taak terug die het kleinste aantal "
+"antwoorden\n"
+"                    heeft, exclusief de huidige gebruiker"
+
+#: themes/default/templates/projects/task_scheduler.html:24
+msgid "Random"
+msgstr ""
+
+#: themes/default/templates/projects/task_scheduler.html:24
+msgid ""
+"returns a task\n"
+"                    randomly --a user could get the same task twice or "
+"more\n"
+"                    times"
+msgstr ""
+"geef een willekeurige\n"
+"                    taak terug --een gebruiker kan een taak twee keer "
+"of\n"
+"                    vaker krijgen"
+
+#: themes/default/templates/projects/task_settings.html:18
+msgid "Change how the tasks are delivered to volunteers"
+msgstr "Wijzig hoe taken aan gebruikers worden aangeleverd"
+
+#: themes/default/templates/projects/task_settings.html:19
+msgid "Scheduler"
+msgstr "Taakplanner"
+
+#: themes/default/templates/projects/task_settings.html:23
+msgid "Change the priority of the tasks"
+msgstr "Wijzig de prioriteit van taken"
+
+#: themes/default/templates/projects/task_settings.html:24
+msgid "Priority"
+msgstr "Prioriteit"
+
+#: themes/default/templates/projects/task_settings.html:29
+msgid "Delete Tasks"
+msgstr "Verwijder taken"
+
+#: themes/default/templates/projects/task_settings.html:30
+msgid "Delete all the tasks and associated answers"
+msgstr "Verwijder alle taken en bijbehorende antwoorden"
+
+#: themes/default/templates/projects/task_settings.html:35
+msgid "Change the redundancy level for the tasks"
+msgstr "Wijzig het redundantieniveau voor de taken"
+
+#: themes/default/templates/projects/task_settings.html:36
+msgid "Redundancy"
+msgstr "Redundantie"
+
+#: themes/default/templates/projects/tasks.html:21
+msgid "Import tasks from templates, GDrive, or CSV"
+msgstr "Importeer taken van sjabloon, GDrive of CSV"
+
+#: themes/default/templates/projects/importers/csv.html:23
+#: themes/default/templates/projects/importers/dropbox.html:30
+#: themes/default/templates/projects/importers/epicollect.html:25
+#: themes/default/templates/projects/importers/flickr.html:34
+#: themes/default/templates/projects/importers/gdocs.html:23
+#: themes/default/templates/projects/importers/s3.html:36
+#: themes/default/templates/projects/importers/twitter.html:43
+#: themes/default/templates/projects/tasks.html:22
+msgid "Import"
+msgstr "Importeer"
+
+#: themes/default/templates/projects/tasks.html:25
+#: themes/default/templates/projects/tasks.html:68
+msgid "Export Tasks"
+msgstr "Exporteer taken"
+
+#: themes/default/templates/projects/tasks.html:26
+#: themes/default/templates/projects/tasks.html:69
+msgid "Export tasks to JSON, CSV or a CKAN server"
+msgstr "Exporteer taken naar JSON, CSV of een CKAN server"
+
+#: themes/default/templates/projects/tasks.html:27
+#: themes/default/templates/projects/tasks.html:70
+msgid "Export"
+msgstr "Exporteer"
+
+#: themes/default/templates/projects/tasks.html:32
+msgid "Task Presenter"
+msgstr "Taakpresentator"
+
+#: themes/default/templates/projects/tasks.html:34
+msgid "Editor"
+msgstr "Editor"
+
+#: themes/default/templates/projects/tasks.html:38
+msgid "Configure the task scheduler, redundancy, etc."
+msgstr "Configureer de taakplanner, redundantie, etc."
+
+#: themes/default/templates/projects/tasks.html:46
+#: themes/default/templates/projects/tasks.html:49
+#: themes/default/templates/projects/tasks.html:62
+#: themes/default/templates/projects/tasks.html:65
+msgid "Browse"
+msgstr "Bladeren"
+
+#: themes/default/templates/projects/tasks.html:47
+#: themes/default/templates/projects/tasks.html:63
+msgid "Check the status of the tasks"
+msgstr "Controleer de status van de taken"
+
+#: themes/default/templates/projects/tasks.html:53
+msgid "Auto-import Tasks"
+msgstr "Taken automatisch importeren"
+
+#: themes/default/templates/projects/tasks.html:54
+msgid "Import tasks regularly and automatically"
+msgstr "Taken regelmatig automatisch importeren"
+
+#: themes/default/templates/projects/tasks.html:55
+msgid "Setup"
+msgstr "Instellen"
+
+#: themes/default/templates/projects/tasks_browse.html:13
+msgid "Browse tasks"
+msgstr "Door taken bladeren"
+
+#: themes/default/templates/projects/tasks_browse.html:15
+msgid "This page shows all the available tasks for this project"
+msgstr "Deze pagina toont alle beschikbare taken voor dit project"
+
+#: themes/default/templates/projects/tasks_browse.html:16
+msgid "For each task, you can find the following information"
+msgstr "Voor elke taak kun je de volgende informatie vinden"
+
+#: themes/default/templates/projects/tasks_browse.html:18
+#: themes/default/templates/projects/tasks_browse.html:29
+#: themes/default/templates/projects/tasks_browse.html:31
+msgid "Task"
+msgstr "Taak"
+
+#: themes/default/templates/projects/tasks_browse.html:18
+msgid "This number identifies the task for the project and it is unique"
+msgstr "Dit nummer identificeert de taak voor het project en is uniek"
+
+#: themes/default/templates/projects/tasks_browse.html:19
+msgid ""
+"The first number shows how many answers have been submitted for the task "
+"and the"
+msgstr "Het eerste nummer toont hoe veel antwoorden zijn verstuurd voor "
+"deze taak en het"
+
+#: themes/default/templates/projects/tasks_browse.html:19
+msgid ""
+"This redundancy method will help to detect errors, typos, data forging, "
+"etc. when the task has been completed"
+msgstr "Deze redundantiemethode helpt om fouten, typfouten, valse data "
+"en dergelijke te detecteren, wanneer de taak nog niet is afgerond"
+
+#: themes/default/templates/projects/tasks_browse.html:19
+msgid "second number"
+msgstr "tweede nummer"
+
+#: themes/default/templates/projects/tasks_browse.html:19
+msgid "how many need to be obtained to mark the task as"
+msgstr "hoeveel moeten worden verkregen om de taak te markeren als"
+
+#: themes/default/templates/projects/tasks_browse.html:20
+msgid "Progress Bar"
+msgstr "Voortgangsbalk"
+
+#: themes/default/templates/projects/tasks_browse.html:20
+msgid "The progress bar will the percentage that has been completed for the task"
+msgstr "De voortgangsbalk toont het percentage dat is voltooid voor deze taak"
+
+#: themes/default/templates/projects/tasks_browse.html:48
+msgid "Download Task Results"
+msgstr "Download taakresultaten"
+
+#: themes/default/templates/projects/tasks_browse.html:52
+msgid "Download Partial results"
+msgstr "Download gedeeltelijke resultaten"
+
+#: themes/default/templates/projects/tasks_browse.html:55
+msgid "Nothing to download yet"
+msgstr "Nog niets te downloaden"
+
+#: themes/default/templates/projects/tutorial.html:14
+msgid "Start contributing"
+msgstr "Begin met bijdragen"
+
+#: themes/default/templates/projects/update.html:14
+msgid "Update the project"
+msgstr "Werk het project bij"
+
+#: themes/default/templates/projects/update.html:39
+msgid "Give some details about the project"
+msgstr "Geef details over het project"
+
+#: themes/default/templates/projects/update.html:40
+msgid "Explain the project (use Markdown!)"
+msgstr "Leg het project uit (gebruik Markdown!)"
+
+#: themes/default/templates/projects/update.html:42
+msgid "Check if you want to allow anonymous users contribute to your project"
+msgstr "Vink aan als u wilt dat anonieme gebruikers kunnen bijdragen aan uw project"
+
+#: themes/default/templates/projects/update_blogpost.html:14
+msgid "Edit the blog post"
+msgstr "Wijzig de blogpost"
+
+#: themes/default/templates/projects/update_blogpost.html:23
+msgid "Update"
+msgstr "Bijwerken"
+
+#: themes/default/templates/projects/webhook.html:20
+msgid "Created"
+msgstr "Aangemaakt"
+
+#: themes/default/templates/projects/webhook.html:21
+msgid "Updated"
+msgstr "Bijgewerkt"
+
+#: themes/default/templates/projects/webhook.html:22
+msgid "Payload"
+msgstr "Lading"
+
+#: themes/default/templates/projects/webhook.html:23
+msgid "Response"
+msgstr "Respons"
+
+#: themes/default/templates/projects/webhook.html:24
+msgid "Response Status Code"
+msgstr "Statuscode respons"
+
+#: themes/default/templates/projects/webhook.html:25
+msgid "Repeat"
+msgstr "Herhaal"
+
+#: themes/default/templates/projects/importers/iiif.html:10
+msgid "From a IIIF manifest"
+msgstr "Van een IIIF-manifest"
+
+#: themes/default/templates/projects/importers/csv.html:16
+msgid "From a CSV file"
+msgstr "Van een CSV-bestand"
+
+#: themes/default/templates/projects/importers/csv.html:20
+msgid ""
+"Please provide a URL (i.e. DropBox, Box, Ubuntu One, etc. public link) to"
+" a CSV file with data for"
+msgstr ""
+"Geef een URL (bijv. Dropbox, Box, Ubuntu One, etc., een publieke link) naar"
+" een CSV-bestand met data voor"
+
+#: themes/default/templates/projects/importers/csv.html:20
+#: themes/default/templates/projects/importers/dropbox.html:26
+#: themes/default/templates/projects/importers/epicollect.html:20
+#: themes/default/templates/projects/importers/flickr.html:31
+#: themes/default/templates/projects/importers/gdocs.html:20
+#: themes/default/templates/projects/importers/iiif.html:16
+#: themes/default/templates/projects/importers/s3.html:23
+#: themes/default/templates/projects/importers/twitter.html:34
+msgid "For more information, please look at"
+msgstr "Voor meer informatie, zie"
+
+#: themes/default/templates/projects/importers/csv.html:20
+#: themes/default/templates/projects/importers/dropbox.html:26
+#: themes/default/templates/projects/importers/epicollect.html:20
+#: themes/default/templates/projects/importers/flickr.html:31
+#: themes/default/templates/projects/importers/gdocs.html:20
+#: themes/default/templates/projects/importers/iiif.html:16
+#: themes/default/templates/projects/importers/s3.html:23
+#: themes/default/templates/projects/importers/twitter.html:35
+msgid "the documentation"
+msgstr "de documentatie"
+
+#: themes/default/templates/projects/importers/csv.html:21
+msgid "The URL of the CSV file"
+msgstr "De URL van het CSV-bestand"
+
+#: themes/default/templates/projects/importers/dropbox.html:18
+msgid "From your Dropbox account"
+msgstr "Van je Dropbox-account"
+
+#: themes/default/templates/projects/importers/dropbox.html:27
+msgid "You are about to import"
+msgstr "U staat op het punt om te importen:"
+
+#: themes/default/templates/projects/importers/dropbox.html:27
+msgid "files"
+msgstr "bestanden"
+
+#: themes/default/templates/projects/importers/epicollect.html:16
+msgid "From an EpiCollect Plus project"
+msgstr "Van een EpiCollect Plus-project"
+
+#: themes/default/templates/projects/importers/epicollect.html:20
+msgid "Please provide an EpiCollect Plus project name to import its data for"
+msgstr "Geef een EpiCollect Plus-projectnaam om data te importeren"
+
+#: themes/default/templates/projects/importers/epicollect.html:22
+msgid "The name of the public EpiCollect Plus project"
+msgstr "De naam van het EpiCollect Plus-project"
+
+#: themes/default/templates/projects/importers/epicollect.html:23
+msgid "The name of the project's form"
+msgstr "De naam van het het projectformulier"
+
+#: themes/default/templates/projects/importers/flickr.html:16
+msgid "From a Flickr Album"
+msgstr "Van een Flickr-album"
+
+#: themes/default/templates/projects/importers/flickr.html:17
+msgid "Revoke access"
+msgstr "Toegang intrekken"
+
+#: themes/default/templates/projects/importers/flickr.html:20
+msgid "Grant access to your Flickr albums to select one..."
+msgstr "Toegang verlenen aan uw Flickr-albums om één te selecteren"
+
+#: themes/default/templates/projects/importers/flickr.html:21
+msgid "Log in Flickr"
+msgstr "Inloggen bij Flickr"
+
+#: themes/default/templates/projects/importers/flickr.html:31
+msgid "Or manually provide the ID of a Flickr set with images for"
+msgstr "Of geef handmatig de ID van een set afbeeldingen op Flickr voor"
+
+#: themes/default/templates/projects/importers/flickr.html:53
+msgid "Select one of your albums:"
+msgstr "Selecteer één van uw albums:"
+
+#: themes/default/templates/projects/importers/flickr.html:55
+msgid "photos"
+msgstr "foto's"
+
+#: themes/default/templates/projects/importers/flickr.html:55
+msgid "Select"
+msgstr "Selecteer"
+
+#: themes/default/templates/projects/importers/gdocs.html:16
+msgid "From a Google Docs Spreadsheet"
+msgstr "Van een Google Docs spreadsheet"
+
+#: themes/default/templates/projects/importers/gdocs.html:20
+msgid "Please provide a URL to a Google Drive Spreadsheet with data for"
+msgstr "Geef een URL naar een Google Drive-spreadsheet met data voor"
+
+#: themes/default/templates/projects/importers/gdocs.html:21
+msgid "The URL of the Google Docs Spreadsheet"
+msgstr "De URL van de Google Docs-spreadsheet"
+
+#: themes/default/templates/projects/importers/s3.html:21
+msgid "From an Amazon S3 bucket"
+msgstr "Van een Amazon S3-bucket"
+
+#: themes/default/templates/projects/importers/s3.html:33
+msgid "Name of the S3 bucket"
+msgstr "Naam van de S3-bucket"
+
+#: themes/default/templates/projects/importers/s3.html:35
+msgid "Search in bucket"
+msgstr "Zoek in bucket"
+
+#: themes/default/templates/projects/importers/s3.html:86
+msgid "Oops... it seems that bucket is private."
+msgstr "Oeps... het lijkt erop dat deze bucket privé is."
+
+#: themes/default/templates/projects/importers/s3.html:87
+msgid "Oops... we could not find that bucket."
+msgstr "Oeps... we konden die bucket niet vinden."
+
+#: themes/default/templates/projects/importers/twitter.html:16
+msgid "From a Twitter hashtag or account"
+msgstr "Van een Twitter hashtag of account"
+
+#: themes/default/templates/projects/importers/twitter.html:20
+msgid ""
+"You can provide your own Twitter credentials and make API requests in "
+"behalf of them, or use the credentials provided by us. (The later only "
+"allows to import the number of tweets returned by a single Twitter API "
+"call, which is 100 for searches and 200 for user timelines.)"
+msgstr ""
+"U kunt uw eigen inloggegevens doorgeven en API-verzoeken doen met uw "
+"eigen account, of onze inloggegevens gebruiken. (Met de tweede optie "
+"kan het aantal tweets van een enkele Twitter API-verzoek worden"
+"binnengehaald: 100 voor zoekopdrachten en 200 voor tijdlijnen van gebruikers.)"
+
+#: themes/default/templates/projects/importers/twitter.html:23
+msgid "I'll use my credentials"
+msgstr "Ik gebruik mijn eigen inloggegevens"
+
+#: themes/default/templates/projects/importers/twitter.html:24
+msgid "I'll use credentials provided by the platform"
+msgstr "Ik gebruik de inloggegevens van het platform"
+
+#: themes/default/templates/projects/importers/twitter.html:32
+msgid ""
+"Please provide the source of your tweets. It can be a \"#hashtag\", a "
+"regular \"word\" for search or a \"@user_account\" from where to import "
+"them"
+msgstr ""
+"Geeft u alstublieft de bron van uw tweets. Dit kan een hashtag \"#hashtag\" zijn,"
+" een normaal \"woord\" om te zoeken of een \"@user_account\" waarvandaan tweets "
+" kunnen worden geïmporteerd."
+
+#: themes/default/templates/projects/importers/twitter.html:37
+msgid "#hashtag or @user or something else"
+msgstr "#hashtag of @user of iets anders"
+
+#: themes/default/templates/projects/presenters/basic.html:2
+msgid "Basic"
+msgstr "Basis"
+
+#: themes/default/templates/projects/presenters/basic.html:3
+msgid "The most basic template"
+msgstr "Het meest standaard sjabloon"
+
+#: themes/default/templates/projects/presenters/basic.html:4
+#: themes/default/templates/projects/presenters/image.html:4
+#: themes/default/templates/projects/presenters/map.html:4
+#: themes/default/templates/projects/presenters/pdf.html:4
+#: themes/default/templates/projects/presenters/sound.html:4
+#: themes/default/templates/projects/presenters/video.html:4
+msgid "Complexity"
+msgstr "Complexiteit"
+
+#: themes/default/templates/projects/presenters/basic.html:5
+#: themes/default/templates/projects/presenters/image.html:5
+#: themes/default/templates/projects/presenters/map.html:5
+#: themes/default/templates/projects/presenters/pdf.html:5
+#: themes/default/templates/projects/presenters/sound.html:5
+#: themes/default/templates/projects/presenters/video.html:5
+msgid "Skills"
+msgstr "Vaardigheden"
+
+#: themes/default/templates/projects/presenters/basic.html:5
+#: themes/default/templates/projects/presenters/image.html:5
+#: themes/default/templates/projects/presenters/sound.html:5
+#: themes/default/templates/projects/presenters/video.html:5
+msgid "HTML and JavaScript"
+msgstr "HTML en Javascript"
+
+#: themes/default/templates/projects/presenters/basic.html:6
+msgid "Use the Basic template"
+msgstr "Gebruik het basissjabloon"
+
+#: themes/default/templates/projects/presenters/image.html:2
+#: themes/default/templates/projects/tasks/gdocs-image.html:2
+msgid "Image Pattern Recognition"
+msgstr "Image Pattern Recognition"
+
+#: themes/default/templates/projects/presenters/image.html:3
+msgid "Re-use the Flickr Person Finder template"
+msgstr "Hergebruik het Flickr Person Finder-sjabloon"
+
+#: themes/default/templates/projects/presenters/image.html:6
+msgid "Use the Image template"
+msgstr "Gebruik het Image-sjabloon"
+
+#: themes/default/templates/projects/presenters/image.html:7
+#: themes/default/templates/projects/presenters/map.html:7
+#: themes/default/templates/projects/presenters/pdf.html:7
+#: themes/default/templates/projects/presenters/sound.html:7
+#: themes/default/templates/projects/presenters/video.html:7
+msgid "Download the template and work locally"
+msgstr "Download het sjabloon en werk lokaal"
+
+#: themes/default/templates/projects/presenters/map.html:2
+#: themes/default/templates/projects/tasks/gdocs-map.html:2
+msgid "Geo-coding"
+msgstr "Geo-coding"
+
+#: themes/default/templates/projects/presenters/map.html:3
+msgid "Re-use the Urban Park template"
+msgstr "Hergebruik het Urban Park template"
+
+#: themes/default/templates/projects/presenters/map.html:5
+msgid "HTML, JavaScript and Geo expertise"
+msgstr "HTML-, Javascript- en Geo-vaardigheden"
+
+#: themes/default/templates/projects/presenters/map.html:6
+msgid "Use the Maps project template"
+msgstr "Gebruik het Maps projectsjabloon"
+
+#: themes/default/templates/projects/presenters/pdf.html:2
+#: themes/default/templates/projects/tasks/gdocs-pdf.html:2
+msgid "Transcribing documents"
+msgstr "Documenten transcriberen"
+
+#: themes/default/templates/projects/presenters/pdf.html:3
+msgid "Re-use the PDF transcription template"
+msgstr "Hergebruik het PDF transcriptiesjabloon"
+
+#: themes/default/templates/projects/presenters/pdf.html:5
+msgid "HTML, JavaScript and Server side"
+msgstr "HTML-, Javscript- en Server side-vaardigheden"
+
+#: themes/default/templates/projects/presenters/pdf.html:6
+msgid "Use the Transcription template"
+msgstr "Gebruik het transcriptiesjabloon"
+
+#: themes/default/templates/projects/presenters/sound.html:2
+#: themes/default/templates/projects/tasks/gdocs-sound.html:2
+msgid "Sound Pattern Recognition"
+msgstr "Sound Pattern Recognition"
+
+#: themes/default/templates/projects/presenters/sound.html:3
+msgid "Re-use the SoundCloud template"
+msgstr "Hergebriuk het SoundCloud-template"
+
+#: themes/default/templates/projects/presenters/sound.html:6
+msgid "Use the Sound template"
+msgstr "Gebruik het Sound-template"
+
+#: themes/default/templates/projects/presenters/video.html:2
+#: themes/default/templates/projects/tasks/gdocs-video.html:2
+msgid "Video Pattern Recognition"
+msgstr "Video Pattern Recognition"
+
+#: themes/default/templates/projects/presenters/video.html:3
+msgid "Re-use the Vimeo template"
+msgstr "Hergebruik het Vimeo-sjabloon"
+
+#: themes/default/templates/projects/presenters/video.html:6
+msgid "Use the Video template"
+msgstr "Gebruik het videosjabloon"
+
+#: themes/default/templates/projects/snippets/options.html:5
+msgid "templates"
+msgstr "Sjablonen"
+
+#: themes/default/templates/projects/snippets/options.html:5
+msgid "for your project"
+msgstr "voor uw project"
+
+#: themes/default/templates/projects/task/wrong.html:8
+msgid "Error!"
+msgstr "Fout!"
+
+#: themes/default/templates/projects/task/wrong.html:8
+msgid "This task does not belong to"
+msgstr "Deze taak hoort niet bij"
+
+#: themes/default/templates/projects/task/wrong.html:9
+msgid "Try with another one"
+msgstr "Probeer met een andere"
+
+#: themes/default/templates/projects/tasks/iiif.html:2
+msgid "Import from a IIIF manifest"
+msgstr "Importeer van een IIIF-manifest"
+
+#: themes/default/templates/projects/tasks/csv.html:3
+msgid "Provide a public link to your own CSV file"
+msgstr "Geef een publieke link naar uw eigen CSV-bestand"
+
+#: themes/default/templates/projects/tasks/csv.html:5
+msgid ""
+"Use the CSV URL\n"
+"      importer"
+msgstr ""
+"Gebruik de CSV URL-\n"
+"      importeerfunctie"
+
+#: themes/default/templates/projects/tasks/delete.html:12
+msgid "Delete all Tasks and Task Runs"
+msgstr "Verwijder alle taken en antwoorden"
+
+#: themes/default/templates/projects/tasks/delete.html:14
+msgid ""
+"If you delete all the\n"
+"            tasks and task runs they will be gone\n"
+"            forever!"
+msgstr ""
+"Als u alle taken\n"
+"            en antwoorden verwijdert, zijn ze definitief\n"
+"            verdwenen!"
+
+#: themes/default/templates/projects/tasks/delete.html:16
+msgid "You cannot undo this action!"
+msgstr "U kunt deze actie niet ongedaan maken!"
+
+#: themes/default/templates/projects/tasks/delete.html:20
+msgid ""
+"Are you sure you want to delete ALL the project tasks and associated task"
+" runs?"
+msgstr "Weet u zeker dat u ALLE taken en bijbehorende antwoorden wilt verwijderen?"
+
+#: themes/default/templates/projects/tasks/delete.html:24
+msgid "Yes"
+msgstr "Ja"
+
+#: themes/default/templates/projects/tasks/delete.html:26
+msgid ""
+"No, do not delete\n"
+"              anything!"
+msgstr ""
+"Nee, verwijder\n"
+"              niets!"
+
+#: themes/default/templates/projects/tasks/dropbox.html:3
+msgid "Use files from your Dropbox account"
+msgstr "Gebruik bestanden uit uw Dropbox-account"
+
+#: themes/default/templates/projects/tasks/dropbox.html:5
+msgid "Use the Dropbox importer"
+msgstr "Gebruik de Dropbox-importeerder"
+
+#: themes/default/templates/projects/tasks/epicollect.html:2
+msgid "EpiCollect Plus Project"
+msgstr "EpiCollect Plus-project"
+
+#: themes/default/templates/projects/tasks/epicollect.html:3
+msgid "Use an EpiCollect Plus project"
+msgstr "Gebruik een EpiCollect Plus-project"
+
+#: themes/default/templates/projects/tasks/epicollect.html:5
+msgid ""
+"Use the EpiCollect\n"
+"      Plus importer"
+msgstr ""
+"Gebruik de EpiCollect\n"
+"      Plus importeerfunctie"
+
+#: themes/default/templates/projects/tasks/flickr.html:3
+msgid "Use images from a Flickr set"
+msgstr "Gebruik afbeeldingen uit een Flickr-set"
+
+#: themes/default/templates/projects/tasks/flickr.html:5
+msgid "Use the Flickr importer"
+msgstr "Gebruik de Flickr-importeerfunctie"
+
+#: themes/default/templates/projects/tasks/gdocs-image.html:3
+msgid "Re-use the Flickr Person Finder tasks"
+msgstr "Hergebruik de Flickr Person Finder-taken"
+
+#: themes/default/templates/projects/tasks/gdocs-image.html:5
+msgid ""
+"Use the\n"
+"      Image tasks"
+msgstr ""
+"Gebruik de\n"
+"      Image-taken"
+
+#: themes/default/templates/projects/tasks/gdocs-map.html:3
+msgid "Re-use the Urban Park tasks"
+msgstr "Hergebruik de Urban Park-taken"
+
+#: themes/default/templates/projects/tasks/gdocs-map.html:5
+msgid ""
+"Use the\n"
+"      Mapping tasks"
+msgstr ""
+"Gebruik de\n"
+"      Mapping-taken"
+
+#: themes/default/templates/projects/tasks/gdocs-pdf.html:3
+msgid "Re-use the PDF transcription tasks"
+msgstr "Hergebruik de PDF transcription-taken"
+
+#: themes/default/templates/projects/tasks/gdocs-pdf.html:5
+msgid ""
+"Use the\n"
+"      Transcription tasks"
+msgstr ""
+"Gebruik de\n"
+"      Transcription-taken"
+
+#: themes/default/templates/projects/tasks/gdocs-sound.html:3
+msgid "Re-use the SoundCloud tasks"
+msgstr "Hergebruik de SoundCloud-taken"
+
+#: themes/default/templates/projects/tasks/gdocs-sound.html:5
+msgid ""
+"Use the\n"
+"      Sound tasks"
+msgstr ""
+"Gebruik de\n"
+"      Sound-taken"
+
+#: themes/default/templates/projects/tasks/gdocs-video.html:3
+msgid "Re-use the Vimeo tasks"
+msgstr "Hergebruik de Vimeo-taken"
+
+#: themes/default/templates/projects/tasks/gdocs-video.html:5
+msgid ""
+"Use the\n"
+"      Video tasks"
+msgstr ""
+"Gebruik de\n"
+"      Video-taken"
+
+#: themes/default/templates/projects/tasks/gdocs.html:2
+msgid "Google Drive Spreadsheet"
+msgstr "Google Drive-spreadsheet"
+
+#: themes/default/templates/projects/tasks/gdocs.html:3
+msgid "Import a Google Drive Spreadsheet"
+msgstr "Importeer een Google Drive-spreadsheet"
+
+#: themes/default/templates/projects/tasks/gdocs.html:5
+msgid ""
+"Use the Google Drive\n"
+"      importer"
+msgstr ""
+"Gebruik de Google Drive-\n"
+"      importeerfunctie"
+
+#: themes/default/templates/projects/tasks/s3.html:2
+msgid "S3"
+msgstr "S3"
+
+#: themes/default/templates/projects/tasks/s3.html:3
+msgid "Use files from an Amazon S3 bucket"
+msgstr "Gebruik bestanden uit een Amazon S3 bucket"
+
+#: themes/default/templates/projects/tasks/s3.html:5
+msgid "Use the Amazon S3 importer"
+msgstr "Gebruik de Amazon S3-importeerfunctie"
+
+#: themes/default/templates/projects/tasks/twitter.html:3
+msgid "Import tweets from a search or a user account"
+msgstr "Importeer tweets vanuit een zoekopdracht of gebruikersaccount"
+
+#: themes/default/templates/projects/tasks/twitter.html:5
+msgid "Use the Twitter importer"
+msgstr "Gebruik de Twitter-importeerfunctie"
+
+#: themes/default/templates/stats/global.html:38
+msgid "General Statistics"
+msgstr "Algemene statistieken"
+
+#: themes/default/templates/stats/global.html:46
+msgid "Anonymous users"
+msgstr "Anonieme gebruikers"
+
+#: themes/default/templates/stats/global.html:47
+msgid "Authenticated users"
+msgstr "Geauthenticeerde gebruikers"
+
+#: themes/default/templates/stats/global.html:48
+#: themes/default/templates/stats/global.html:94
+msgid "Total"
+msgstr "Totaal"
+
+#: themes/default/templates/stats/global.html:52
+msgid "Top 5 Users in the last 24 hours"
+msgstr "Top 5 gebruikers in de laatste 24 uur"
+
+#: themes/default/templates/stats/global.html:55
+msgid "with"
+msgstr "met"
+
+#: themes/default/templates/stats/global.html:55
+msgid "contributed answers"
+msgstr "bijgedragen antwoorden"
+
+#: themes/default/templates/stats/global.html:60
+msgid "No active users in the last 24 hours"
+msgstr "Geen actieve gebruikers in de laatste 24 uur"
+
+#: themes/default/templates/stats/global.html:92
+msgid "Published Projects"
+msgstr "Gepubliceerde projecten"
+
+#: themes/default/templates/stats/global.html:97
+msgid "Top 5 projects in the last 24 hours"
+msgstr "Top 5 projecten in de laatste 24 uur"
+
+#: themes/default/templates/stats/global.html:105
+msgid "No active projects in the last 24 hours"
+msgstr "Geen actieve projecten in de laatste 24 uur"
+
+#: themes/default/templates/stats/global.html:135
+msgid "Tasks and Answers"
+msgstr "Taken en antwoorden"
+
+#: themes/default/templates/stats/global.html:138
+msgid "Number of Tasks"
+msgstr "Aantal taken"
+
+#: themes/default/templates/stats/global.html:139
+msgid "Number of Task Runs"
+msgstr "Aantal antwoorden"
+
+#: themes/default/templates/stats/global.html:167
+msgid "Anonymous Volunteers"
+msgstr "Anonieme vrijwilligers"
+
+#: themes/default/templates/stats/index.html:13
+msgid "Community Leaderboard"
+msgstr "Ranglijst van de gemeenschap"
+
+#: themes/default/templates/stats/index.html:18
+msgid "Name"
+msgstr "Naam"
+
+#: themes/default/templates/stats/index.html:19
+msgid "Score"
+msgstr "Score"
+
