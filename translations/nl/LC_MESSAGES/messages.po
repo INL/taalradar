@@ -1442,7 +1442,7 @@ msgid ""
 "Sorry, you've contributed to all the tasks for this project, but this "
 "project still needs more volunteers, so please spread the word!"
 msgstr ""
-"Helaas, u heeft meegdaan aan alle taken voor dit project, maar "
+"Helaas, u heeft meegedaan aan alle taken voor dit project, maar "
 "het project heeft nog meer vrijwilligers nodig, dus maak het project bekend!"
 
 #: themes/default/templates/projects/publish.html:12
@@ -1917,7 +1917,7 @@ msgstr "Deze pagina toont alle beschikbare taken voor dit project"
 
 #: themes/default/templates/projects/tasks_browse.html:16
 msgid "For each task, you can find the following information"
-msgstr "Voor elke taak kun je de volgende informatie vinden"
+msgstr "Voor elke taak kunt u de volgende informatie vinden"
 
 #: themes/default/templates/projects/tasks_browse.html:18
 #: themes/default/templates/projects/tasks_browse.html:29
@@ -2067,7 +2067,7 @@ msgstr "De URL van het CSV-bestand"
 
 #: themes/default/templates/projects/importers/dropbox.html:18
 msgid "From your Dropbox account"
-msgstr "Van je Dropbox-account"
+msgstr "Van uw Dropbox-account"
 
 #: themes/default/templates/projects/importers/dropbox.html:27
 msgid "You are about to import"
