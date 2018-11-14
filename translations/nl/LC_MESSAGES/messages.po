@@ -415,8 +415,8 @@ msgid ""
 "below you are agreeing to\n"
 "    the"
 msgstr ""
-"hieronder verklaart u dat u akkoor gaat\n"
-" met de"
+"hieronder verklaart u dat u akkoord gaat\n"
+"met de"
 
 #: themes/default/templates/account/signin.html:13
 #: themes/default/templates/account/signin.html:23
