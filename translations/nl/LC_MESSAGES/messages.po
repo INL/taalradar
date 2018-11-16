@@ -414,9 +414,7 @@ msgstr "knop Aanmelden"
 msgid ""
 "below you are agreeing to\n"
 "    the"
-msgstr ""
-"hieronder verklaart u dat u akkoord gaat\n"
-"met de"
+msgstr "hieronder verklaart u dat u akkoord\n gaat met de"
 
 #: themes/default/templates/account/signin.html:13
 #: themes/default/templates/account/signin.html:23
@@ -836,7 +834,7 @@ msgstr ""
 
 #: themes/default/templates/home/_about.html:8
 msgid "PyBossa is different to existing efforts:"
-msgstr "PYBOSSA is anders dan bestaande systemen"
+msgstr "PYBOSSA is anders dan bestaande systemen:"
 
 #: themes/default/templates/home/_about.html:10
 #, python-format
@@ -930,7 +928,7 @@ msgstr "E-maillijst: "
 
 #: themes/default/templates/home/_about.html:31
 msgid "Report any bug, issue or improvement:"
-msgstr "Rapporteer fouten, problemen of verbeteringen: "
+msgstr "Rapporteer fouten, problemen of verbeteringen:"
 
 #: themes/default/templates/home/_about.html:33
 msgid "Github Issues"
@@ -970,7 +968,7 @@ msgstr "Beginnen"
 
 #: themes/default/templates/home/index.html:34
 msgid "It's really simple to start contributing."
-msgstr "Het is makkelijk om bij te dragen"
+msgstr "Het is makkelijk om bij te dragen."
 
 #: themes/default/templates/home/index.html:37
 msgid " Start Contributing"
@@ -1644,7 +1642,7 @@ msgstr "taken importeren..."
 
 #: themes/default/templates/projects/task_import_options.html:31
 msgid "... or import a set of"
-msgstr ... importeren van een set""
+msgstr "... importeren van een set"
 
 #: themes/default/templates/projects/task_import_options.html:31
 msgid "template tasks"
@@ -2103,7 +2101,7 @@ msgstr "Toegang intrekken"
 
 #: themes/default/templates/projects/importers/flickr.html:20
 msgid "Grant access to your Flickr albums to select one..."
-msgstr "Toegang verlenen aan uw Flickr-albums om één te selecteren"
+msgstr "Toegang verlenen aan uw Flickr-albums om één te selecteren..."
 
 #: themes/default/templates/projects/importers/flickr.html:21
 msgid "Log in Flickr"
@@ -2585,4 +2583,3 @@ msgstr "Naam"
 #: themes/default/templates/stats/index.html:19
 msgid "Score"
 msgstr "Score"
-
