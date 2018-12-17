@@ -96,9 +96,17 @@ def categorical_df(data, dataType, x_label, y_label, lang="en"):
         category_dict = Counter(data)
         category_items = list(category_dict.items())
     elif dataType == "Age":
-        category_items = np.histogram(data,bins=np.linspace(0,100,10))
+        hist, bin_edges = np.histogram(data,bins=np.linspace(0,100,11))
+        # Convert NP histogram to items list, suitable for dataframe
+        category_items = []
+        for i,cur_edge in enumerate(bin_edges):
+            if i > 0:
+                # Create interval label: eg. 0-10
+                interval = "{:.0f}".format(bin_edges[i-1])+"-" + "{:.0f}".format(cur_edge)
+                # Save right value to dict
+                category_items.append( (interval,hist[i-1]) )
+    print(category_items)
     category_df = pd.DataFrame.from_records(category_items, columns = [x_label,y_label])
-
     # For gender, we want always same order of bars
     # For location, show descending on frequency
     if dataType=="Gender":
@@ -150,20 +158,21 @@ def analyze_details(info_fields, title):
         prop_nl_c = prop_nl.capitalize()
         data = [d[prop_en] for d in info_fields]
         if prop_en_c == "Age":
-            data_int = convert_to_int(data)
-            # English distplot
-            distplot(x=prop_en_c, y=y_label_en, data=data_int, title=title["en"])
-            # Dutch distplot
-            distplot(x=prop_nl_c, y=y_label_nl, data=data_int, title=title["nl"], lang="nl")
-        else:
-            # English barplot
-            cat_df_en = categorical_df(data, dataType=prop_en_c, x_label=prop_en_c, y_label=y_label_en)
-            barplot(x=prop_en_c, y=y_label_en, data=cat_df_en, title=title["en"], lang="en")
-            # Dutch barplot
-            cat_df_nl = categorical_df(data, dataType=prop_en_c, x_label=prop_nl_c, y_label=y_label_nl, lang="nl")
-            barplot(x=prop_nl_c, y=y_label_nl, data=cat_df_nl, title=title["nl"], lang="nl")
-            # Only English table
-            cat_df_en.to_csv(title["en"]+ "_" + prop_en_c + ".tsv", sep="\t", index=False)
+            data = convert_to_int(data)
+        #     # English distplot
+        #     distplot(x=prop_en_c, y=y_label_en, data=data_int, title=title["en"])
+        #     # Dutch distplot
+        #     distplot(x=prop_nl_c, y=y_label_nl, data=data_int, title=title["nl"], lang="nl")
+        # else:
+        
+        # English barplot
+        cat_df_en = categorical_df(data, dataType=prop_en_c, x_label=prop_en_c, y_label=y_label_en)
+        barplot(x=prop_en_c, y=y_label_en, data=cat_df_en, title=title["en"], lang="en")
+        # Dutch barplot
+        cat_df_nl = categorical_df(data, dataType=prop_en_c, x_label=prop_nl_c, y_label=y_label_nl, lang="nl")
+        barplot(x=prop_nl_c, y=y_label_nl, data=cat_df_nl, title=title["nl"], lang="nl")
+        # Only English table
+        cat_df_en.to_csv(title["en"]+ "_" + prop_en_c + ".tsv", sep="\t", index=False)
 
 def plot_score(score, x, y, title, lang="en"):
     # Convert score dict to df
