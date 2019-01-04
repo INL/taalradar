@@ -135,14 +135,15 @@ var nDetailsFields = 3;
 
 function loadUserProgress() {
 	pybossa.userProgress("nieuwewoorden").done(function(data){
-		var currentTask = data.done;
+        // Keep counter of curent ask ourselves
+        done += 1
 		var totalTasks = data.total -1; // we do not count user details
-		var pct = Math.round((currentTask*100)/totalTasks);
+		var pct = Math.round((done*100)/totalTasks);
 		$("#progress").css("width", pct.toString() +"%");
 		$("#progress").attr("title", pct.toString() + "% completed!");
 		$("#progress").tooltip({"placement": "left"}); 
 		$("#total").text(totalTasks);
-		$("#done").text(currentTask);
+		$("#done").text(done);
 	});
 }
 
@@ -197,7 +198,6 @@ function showTask(task) {
 	console.log("Loading user progress");
 	loadUserProgress();
 	console.log("Loading data into form");
-	console.log(task.info);
 	$("#word").html(task.info.woord);
 	$("#citation").html(boldString(task.info.concordanties, task.info.woord));
 	$("#task-id").html(task.id);
@@ -286,6 +286,7 @@ function presentTask(task) {
 var headers = {}
 var task = {}
 var external_uid = ''
+var done = 0;
 
 function startSession() {
     let url = '/api/project?short_name=nieuwewoorden'
@@ -311,7 +312,7 @@ function requestTask(task) {
     let url = '/project/nieuwewoorden/task/' + task.id
     axios.get(url)
         .then(function(res){
-            console.log(res.data)
+            //console.log(res.data)
         })
 }
 
