@@ -210,6 +210,20 @@ def plot_score(score, x, y, title, lang="en"):
     score_df[x] = labels_new
     barplot(x,y,score_df,title, lang, plot_width=14)
 
+# Remove a prefix for every item in an array
+def remove_affixes(prefixes, suffixes, array):
+    for prefix in prefixes:
+        array = [s[len(prefix):] if s.startswith(prefix) else s for s in array]
+    for suffix in suffixes:
+        array = [s[:-len(suffix)] if s.endswith(suffix) else s for s in array]
+    return array
+
+# Remove items from array, if available
+def remove_items(items, array):
+    for item in items:
+        array = [f for f in array if f != item]
+    return array
+
 def analyze_answers(answer_records, df_tasks, gold_dict, project):
     score = defaultdict(float)
     for task_id, runs_per_task in answer_records.groupby('task_id'):
@@ -224,22 +238,40 @@ def analyze_answers(answer_records, df_tasks, gold_dict, project):
             info = row["info"]
             # Extract question from task run
             task_question = info[project["question_field"]]
-            print(task_question)
-            if isinstance(info, list):
-                user_answer = info
-            elif(isinstance(info, dict)):
-                user_answer = info.values()
-            else: # Unrecognized type, probably empty string
-                user_answer = []
-            if (len(user_answer) == 0) or (all([x=='' for x in user_answer])):
-                user_answer = ["Do not know"]
-            user_answer_set = set([i.lower().strip() for i in user_answer])
+            # If all answers are not saved as dict structure, but on the highest level
+            if project["answer_fields"] is None:
+                if isinstance(info, list):
+                    user_answer = info
+                else: # Unrecognized type, probably empty string
+                    user_answer = []
+                if (len(user_answer) == 0) or (all([x=='' for x in user_answer])):
+                    user_answer = ["Do not know"]
+                user_answer_set = set([i.lower().strip() for i in user_answer])
+            # If answers saved in dictionary structure
+            else:
+                user_answer = {k:v for k,v in info.items() if k in project["answer_fields"]}
+                if project["type"] is "nieuwewoorden":
+                    user_answer_set = str(user_answer["houdbaar"])
+                else:
+                    user_answer_values = user_answer.values()
+                    user_answer_set = set([i.lower().strip() for i in user_answer_values])
+                    user_answer_set.discard('')
             if gold_dict:
                 if contains_all(gold_dict[task_question],user_answer_set):
                     correct += 1
                 total += 1
-            all_answers.append(",".join(user_answer_set))
-        counter = Counter(all_answers).most_common(10)
+            if project["type"] is "herken1" or project["type"] is "analyse":
+                all_answers.append(",".join(user_answer_set))
+            elif project["type"] is "taalvariatie":
+                # Treat multiple options users give as separate answers
+                all_answers += user_answer_set
+            elif project["type"] is "nieuwewoorden":
+                all_answers.append(user_answer_set)
+        print(all_answers)
+        if project["type"] is "taalvariatie":
+            all_answers = remove_affixes(prefixes=['een ', 'de ', 'het '], suffixes=['.', ',', '!', '?', ' ', '-'], array=all_answers)
+            all_answers = remove_items(items=[''], array=all_answers)
+        counter = Counter(all_answers).most_common(20)
         counter_df = pd.DataFrame.from_records(counter, columns = ["user input", "frequency"])
         counter_df.to_csv(project['type']+"-" +  task_question +".tsv", sep="\t", index=False)
         if gold_dict:
