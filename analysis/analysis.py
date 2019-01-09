@@ -16,24 +16,32 @@ if ROUND == 1:
                 'tasks_filename': 'results-sept2018/analyse_task.json',
                 'gold_filename': 'results-sept2018/blends-analyse-10.csv',
                 'type': 'analyse',
-                'question_field': 'lemma'},
+                'question_in_run': False,
+                'question_field': 'lemma',
+                'answer_fields': ['component1', 'component2']},
                 {'name': {'en':'Blends recognition', 'nl':'Herkennen blends'},
                 'runs_filename': 'results-sept2018/herken1_task_run.json',
                 'tasks_filename': 'results-sept2018/herken1_task.json',
                 'gold_filename': 'results-sept2018/blends-herken1-10.csv',
                 'type': 'herken1',
-                'question_field': 'lemma'}]
+                'question_in_run': False,
+                'question_field': 'lemma',
+                'answer_fields': None}]
 if ROUND == 2:
     projects = [{'name':{'en':'New words', 'nl':'Nieuwe woorden'},
                 'runs_filename': 'results-drongo-until20190102/nieuwewoorden_task_run.json',
                 'tasks_filename': 'results-drongo-until20190102/nieuwewoorden_task.json',
                 'type': 'nieuwewoorden',
-                'question_field': 'houdbaar'}, # TODO: add divers
+                'question_in_run': True,
+                'question_field': 'woord',
+                'answer_fields': ['houdbaar', 'divers']},
                 {'name': {'en':'Language variation', 'nl':'Taalvariatie'},
                 'runs_filename': 'results-drongo-until20190102/taalvariatie_task_run.json',
                 'tasks_filename': 'results-drongo-until20190102/taalvariatie_task.json',
                 'type': 'taalvariatie',
-                'question_field': 'word1'}] # TODO: add word2
+                'question_in_run': True,
+                'question_field': 'question',
+                'answer_fields': ['word1', 'word2']}]
 
 details = [("gender","geslacht"),("age","leeftijd"),("location","woonplaats")]
 details_languagevariation = [("province", "provincie"), ("city","woonplaats"), ("motherTongue", "moedertaal"), ("age", "leeftijd"), ("gender", "geslacht"), ("education", "opleiding")]
@@ -147,6 +155,7 @@ def contains_all(gold, answer):
 
 def get_task_question_from_id(id, df_tasks, proj):
     df = df_tasks[df_tasks["id"]==id]
+    print(df.iloc[0]["info"])
     return df.iloc[0]["info"][proj["question_field"]]
 
 
@@ -199,17 +208,23 @@ def plot_score(score, x, y, title, lang="en"):
     labels = score_df[x]
     labels_new =  ["grachtengordel\ndier" if value=='grachtengordeldier' else value for value in labels]
     score_df[x] = labels_new
-    barplot(x,y,score_df,title, lang, plot_width=14)    
+    barplot(x,y,score_df,title, lang, plot_width=14)
 
 def analyze_answers(answer_records, df_tasks, gold_dict, project):
     score = defaultdict(float)
     for task_id, runs_per_task in answer_records.groupby('task_id'):
-        task_question = get_task_question_from_id(task_id, df_tasks, project)
+        if not project["question_in_run"]:
+            # Extract question from task
+            task_question = get_task_question_from_id(task_id, df_tasks, project)
+        # Else: extract question from task run, we do this in next loop
         correct = 0.0
         total = 0.0
         all_answers = []
-        for n,row in runs_per_task.iterrows():
+        for _,row in runs_per_task.iterrows():
             info = row["info"]
+            # Extract question from task run
+            task_question = info[project["question_field"]]
+            print(task_question)
             if isinstance(info, list):
                 user_answer = info
             elif(isinstance(info, dict)):
@@ -219,18 +234,21 @@ def analyze_answers(answer_records, df_tasks, gold_dict, project):
             if (len(user_answer) == 0) or (all([x=='' for x in user_answer])):
                 user_answer = ["Do not know"]
             user_answer_set = set([i.lower().strip() for i in user_answer])
-            if contains_all(gold_dict[task_question],user_answer_set):
-                correct += 1
-            total += 1
+            if gold_dict:
+                if contains_all(gold_dict[task_question],user_answer_set):
+                    correct += 1
+                total += 1
             all_answers.append(",".join(user_answer_set))
         counter = Counter(all_answers).most_common(10)
         counter_df = pd.DataFrame.from_records(counter, columns = ["user input", "frequency"])
         counter_df.to_csv(project['type']+"-" +  task_question +".tsv", sep="\t", index=False)
-        score[task_question] = correct / total
-    # Plot EN
-    plot_score(score, x="word", y="accuracy", title=project["name"]["en"], lang="en")
-    # Plot NL
-    plot_score(score, x="woord", y="nauwkeurigheid", title=project["name"]["nl"], lang="nl")
+        if gold_dict:
+            score[task_question] = correct / total
+    if gold_dict:
+        # Plot EN
+        plot_score(score, x="word", y="accuracy", title=project["name"]["en"], lang="en")
+        # Plot NL
+        plot_score(score, x="woord", y="nauwkeurigheid", title=project["name"]["nl"], lang="nl")
 
 
 def main():
@@ -242,12 +260,13 @@ def main():
         details_records = df_runs[df_runs['info'].map(is_details)]
         analyze_details(details_records['info'], proj["name"], proj["type"])
 
-        # Analyze answers
+        # Analyze answers, round 1
+        answer_records = df_runs[df_runs['info'].map(is_answer)]
         if ROUND==1:
             gold_dict = get_gold_dict(proj["gold_filename"], proj)
-            answer_records = df_runs[df_runs['info'].map(is_answer)]
             analyze_answers(answer_records, df_tasks, gold_dict, proj)
-        
+        elif ROUND ==2:
+            analyze_answers(answer_records, df_tasks, gold_dict=None, project=proj)
 
 if __name__ == "__main__":
     main()
