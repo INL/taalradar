@@ -7,6 +7,7 @@ import errno
 import numpy as np
 from unidecode import unidecode
 from collections import defaultdict, Counter
+import textwrap
 
 ROUND = 2
 
@@ -159,23 +160,29 @@ def get_task_question_from_id(id, df_tasks, proj):
     return df.iloc[0]["info"][proj["question_field"]]
 
 
-def barplot(x,y,data,title, lang="en", plot_width=10):
-    plt.subplots(figsize=(plot_width,6))
-    ax = sns.barplot(x=x, y=y, data=data)
+def barplot(x,y,data,title, lang="en", plot_width=14):
+    # Get x labels, wrap them, and put them back in data fram
+    data_plot = data.copy()
+    labels = data_plot[x]
+    labels = wrap(labels, width=15)
+    data_plot[x] = labels
+
+    plt.subplots(figsize=(plot_width,8.5))
+    ax = sns.barplot(x=x, y=y, data=data_plot)
     ax.set(xlabel=x, ylabel=y)
     plt.title(title)
     title_us = "_".join(title.split())
     plt.savefig(title_us + "-" + x + "-" + lang +".png")
     plt.close()
 
-def distplot(x,y,data,title, lang="en"):
+'''def distplot(x,y,data,title, lang="en"):
     plt.subplots(figsize=(10,5))
     ax = sns.distplot(data, kde=False, bins=20)
     ax.set(xlabel=x, ylabel=y)
     plt.title(title)
     title_us = "_".join(title.split())
     plt.savefig(title_us + "-" + x + "-" + lang + ".png")
-    plt.close()
+    plt.close()'''
 
 def analyze_details(info_fields, title, proj_type):
     title_en = title["en"]
@@ -206,7 +213,8 @@ def plot_score(score, x, y, title, lang="en"):
     score_items = list(score.items())
     score_df = pd.DataFrame.from_records(score_items, columns = [x,y])
     labels = score_df[x]
-    labels_new =  ["grachtengordel\ndier" if value=='grachtengordeldier' else value for value in labels]
+    labels_new = wrap(labels, width=15)
+    print(labels_new)
     score_df[x] = labels_new
     barplot(x,y,score_df,title, lang, plot_width=14)
 
@@ -217,6 +225,12 @@ def remove_affixes(prefixes, suffixes, array):
     for suffix in suffixes:
         array = [s[:-len(suffix)] if s.endswith(suffix) else s for s in array]
     return array
+
+def wrap(string_array, width):
+    # Always wrap on dash, regardless of width
+    string_array = [s.replace("-","-\n") for s in string_array]
+    # Also wrap line if it exceeds width
+    return ["\n".join(textwrap.wrap(s,width=width)) for s in string_array]
 
 # Remove items from array, if available
 def remove_items(items, array):
@@ -250,12 +264,12 @@ def analyze_answers(answer_records, df_tasks, gold_dict, project):
             # If answers saved in dictionary structure
             else:
                 user_answer = {k:v for k,v in info.items() if k in project["answer_fields"]}
-                if project["type"] is "nieuwewoorden":
-                    user_answer_set = str(user_answer["houdbaar"])
-                else:
-                    user_answer_values = user_answer.values()
-                    user_answer_set = set([i.lower().strip() for i in user_answer_values])
-                    user_answer_set.discard('')
+                #if project["type"] is "nieuwewoorden":
+                #    user_answer_set = str(user_answer["houdbaar"])
+                #else:
+                user_answer_values = user_answer.values()
+                user_answer_set = set([i.lower().strip() for i in user_answer_values])
+                user_answer_set.discard('')
             if gold_dict:
                 if contains_all(gold_dict[task_question],user_answer_set):
                     correct += 1
@@ -265,17 +279,18 @@ def analyze_answers(answer_records, df_tasks, gold_dict, project):
             elif project["type"] is "taalvariatie":
                 # Treat multiple options users give as separate answers
                 all_answers += user_answer_set
-            elif project["type"] is "nieuwewoorden":
-                all_answers.append(user_answer_set)
-        print(all_answers)
+            #elif project["type"] is "nieuwewoorden":
+            #    all_answers.append(user_answer_set)
         if project["type"] is "taalvariatie":
             all_answers = remove_affixes(prefixes=['een ', 'de ', 'het '], suffixes=['.', ',', '!', '?', ' ', '-'], array=all_answers)
             all_answers = remove_items(items=[''], array=all_answers)
-        counter = Counter(all_answers).most_common(20)
+        counter = Counter(all_answers).most_common(10)
         counter_df = pd.DataFrame.from_records(counter, columns = ["user input", "frequency"])
         counter_df.to_csv(project['type']+"-" +  task_question +".tsv", sep="\t", index=False)
         if gold_dict:
             score[task_question] = correct / total
+        else:
+            barplot(x=counter_df.columns[0], y=counter_df.columns[1], data=counter_df, title=project['type']+"-" +  task_question, lang="en")
     if gold_dict:
         # Plot EN
         plot_score(score, x="word", y="accuracy", title=project["name"]["en"], lang="en")
@@ -298,7 +313,8 @@ def main():
             gold_dict = get_gold_dict(proj["gold_filename"], proj)
             analyze_answers(answer_records, df_tasks, gold_dict, proj)
         elif ROUND ==2:
-            analyze_answers(answer_records, df_tasks, gold_dict=None, project=proj)
+            if proj["type"] != "nieuwewoorden":
+                analyze_answers(answer_records, df_tasks, gold_dict=None, project=proj)
 
 if __name__ == "__main__":
     main()
