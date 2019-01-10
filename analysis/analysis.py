@@ -31,7 +31,7 @@ if ROUND == 1:
 if ROUND == 2:
     projects = [{'name':{'en':'New words', 'nl':'Nieuwe woorden'},
                 'runs_filename': 'results-drongo-until20190102/nieuwewoorden_task_run.json',
-                'tasks_filename': 'results-drongo-until20190102/nieuwewoorden_task.json',
+                'tasks_filename': 'results-drongo-until20190102/nieuwewoorden_task_local.json',
                 'type': 'nieuwewoorden',
                 'question_in_run': True,
                 'question_field': 'woord',
@@ -238,8 +238,65 @@ def remove_items(items, array):
         array = [f for f in array if f != item]
     return array
 
+def analyze_neologisms(answer_records, df_tasks, project):
+    # Appply pd.Series to unpack dict in column to multiple columns
+    answer_info = answer_records["info"].apply(pd.Series)
+    print(answer_info)
+    tasks_info = df_tasks["info"].apply(pd.Series)
+    tasks_info = tasks_info[tasks_info["type"]=="task"]
+    print(tasks_info)
+    merged = answer_info.merge(tasks_info, how="outer", on=["woord", "id"])
+    # Analyze per word
+    '''word_stats = []
+    for woord, df_word in merged.groupby('woord'):
+        record = create_word_record(df_word, woord)
+        word_stats.append(record)
+    
+    word_stats_df = pd.DataFrame.from_records(word_stats, columns=["woord", "n_sustainable", "n_diverse", "n_total", "perc_sustainable", "perc_diverse", "task_type"])
+
+    print("Most sustainable")
+    most_sustainable = sort_df(word_stats_df, "sustainable")
+    print(most_sustainable)
+    print("Most diverse")
+    most_diverse = sort_df(word_stats_df, "diverse")
+    print(most_diverse)'''
+
+    ### Analyze per task_type (untagged/neo/nonneo), and then per word
+    word_stats_cat = defaultdict(list)
+    word_stats_df = {}
+    for task_type, df_task in merged.groupby('task_type'):
+        for woord, df_word in df_task.groupby('woord'):
+            record = create_word_record(df_word, woord)
+            word_stats_cat[task_type].append(record)
+        print(task_type)
+        word_stats_df[task_type] = pd.DataFrame.from_records(word_stats_cat[task_type], columns=["woord", "n_sustainable", "n_diverse", "n_total", "perc_sustainable", "perc_diverse", "task_type"])
+
+        print("Most sustainable")
+        most_sustainable = sort_df(word_stats_df[task_type], prop="sustainable", title=task_type)
+        print(most_sustainable)
+        print("Most diverse")
+        most_diverse = sort_df(word_stats_df[task_type], prop="diverse", title=task_type)
+        print(most_diverse)
+
+def create_word_record(df_word, woord):
+    n_sustainable = df_word["houdbaar"].value_counts()[True]
+    n_diverse = df_word["divers"].value_counts()[True]
+    n_total = len(df_word)
+    perc_sustainable = n_sustainable / n_total
+    perc_diverse = n_diverse / n_total
+    record = {"woord": woord, "n_sustainable": n_sustainable, "n_diverse": n_diverse, "n_total": n_total, "perc_sustainable": perc_sustainable, "perc_diverse": perc_diverse, "task_type": df_word["task_type"].iloc[0] }
+    return record
+
+def sort_df(df, prop, title):
+    #cols = ["woord", "n_"+prop, "n_total" ,"perc_"+prop]
+    sdf = df.sort_values(by="perc_"+prop, ascending=False)
+    sdf.to_csv(title+"-" +  prop +".tsv", sep="\t", index=False, float_format="%.3f")
+    return sdf
+
 def analyze_answers(answer_records, df_tasks, gold_dict, project):
     score = defaultdict(float)
+    title_en = project["name"]["en"]
+    title_nl = project["name"]["nl"]
     for task_id, runs_per_task in answer_records.groupby('task_id'):
         if not project["question_in_run"]:
             # Extract question from task
@@ -286,14 +343,14 @@ def analyze_answers(answer_records, df_tasks, gold_dict, project):
             all_answers = remove_items(items=[''], array=all_answers)
         counter = Counter(all_answers).most_common(10)
         counter_df = pd.DataFrame.from_records(counter, columns = ["user input", "frequency"])
-        counter_df.to_csv(project['type']+"-" +  task_question +".tsv", sep="\t", index=False)
+        counter_df.to_csv(title_en+"-" +  task_question +".tsv", sep="\t", index=False)
         if gold_dict:
             score[task_question] = correct / total
         else:
-            barplot(x=counter_df.columns[0], y=counter_df.columns[1], data=counter_df, title=project['type']+"-" +  task_question, lang="en")
+            barplot(x=counter_df.columns[0], y=counter_df.columns[1], data=counter_df, title=title_en+"-" +  task_question, lang="en")
     if gold_dict:
         # Plot EN
-        plot_score(score, x="word", y="accuracy", title=project["name"]["en"], lang="en")
+        plot_score(score, x="word", y="accuracy", title=title_en, lang="en")
         # Plot NL
         plot_score(score, x="woord", y="nauwkeurigheid", title=project["name"]["nl"], lang="nl")
 
@@ -313,7 +370,9 @@ def main():
             gold_dict = get_gold_dict(proj["gold_filename"], proj)
             analyze_answers(answer_records, df_tasks, gold_dict, proj)
         elif ROUND ==2:
-            if proj["type"] != "nieuwewoorden":
+            if proj["type"] == "nieuwewoorden":
+                analyze_neologisms(answer_records, df_tasks, project=proj)
+            else:
                 analyze_answers(answer_records, df_tasks, gold_dict=None, project=proj)
 
 if __name__ == "__main__":
