@@ -254,17 +254,15 @@ def analyze_neologisms(answer_records, df_tasks, project):
     
     word_stats_df = pd.DataFrame.from_records(word_stats, columns=["woord", "n_sustainable", "n_diverse", "n_total", "perc_sustainable", "perc_diverse", "task_type"])
 
-    print("Most sustainable")
-    most_sustainable = sort_df(word_stats_df, "sustainable")
+    most_sustainable = sort_df(word_stats_df, prop="sustainable", title="general")
     print(most_sustainable)
-    print("Most diverse")
-    most_diverse = sort_df(word_stats_df, "diverse")
-    print(most_diverse)'''
+    most_diverse = sort_df(word_stats_df, prop="diverse", title="general")'''
+
 
     ### Analyze per task_type (untagged/neo/nonneo), and then per word
     word_stats_cat = defaultdict(list)
     word_stats_df = {}
-    for task_type, df_task in merged.groupby('task_type'):
+    for task_type, df_task in list(merged.groupby('task_type'))+ [("general", merged)]:
         for woord, df_word in df_task.groupby('woord'):
             record = create_word_record(df_word, woord)
             word_stats_cat[task_type].append(record)
@@ -290,7 +288,7 @@ def create_word_record(df_word, woord):
 def sort_df(df, prop, title):
     #cols = ["woord", "n_"+prop, "n_total" ,"perc_"+prop]
     sdf = df.sort_values(by="perc_"+prop, ascending=False)
-    sdf.to_csv(title+"-" +  prop +".tsv", sep="\t", index=False, float_format="%.3f")
+    sdf.to_csv("taalradar-" + title+"-" +  prop +".tsv", sep="\t", index=False, float_format="%.3f")
     return sdf
 
 def analyze_answers(answer_records, df_tasks, gold_dict, project):
