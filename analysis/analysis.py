@@ -9,6 +9,8 @@ from unidecode import unidecode
 from collections import defaultdict, Counter
 import textwrap
 
+pd.set_option('display.max_columns', 500)
+
 ROUND = 2
 
 if ROUND == 1:
@@ -246,19 +248,6 @@ def analyze_neologisms(answer_records, df_tasks, project):
     tasks_info = tasks_info[tasks_info["type"]=="task"]
     print(tasks_info)
     merged = answer_info.merge(tasks_info, how="outer", on=["woord", "id"])
-    # Analyze per word
-    '''word_stats = []
-    for woord, df_word in merged.groupby('woord'):
-        record = create_word_record(df_word, woord)
-        word_stats.append(record)
-    
-    word_stats_df = pd.DataFrame.from_records(word_stats, columns=["woord", "n_sustainable", "n_diverse", "n_total", "perc_sustainable", "perc_diverse", "task_type"])
-
-    most_sustainable = sort_df(word_stats_df, prop="sustainable", title="general")
-    print(most_sustainable)
-    most_diverse = sort_df(word_stats_df, prop="diverse", title="general")'''
-
-
     ### Analyze per task_type (untagged/neo/nonneo), and then per word
     word_stats_cat = defaultdict(list)
     word_stats_df = {}
@@ -275,6 +264,25 @@ def analyze_neologisms(answer_records, df_tasks, project):
         print("Most diverse")
         most_diverse = sort_df(word_stats_df[task_type], prop="diverse", title=task_type)
         print(most_diverse)
+
+def analyze_langvar(answer_records, details_records, project):
+    # Appply pd.Series to unpack dict in column to multiple columns
+    answer_records_expand = pd.concat([answer_records.drop(['info'], axis=1), answer_records['info'].apply(pd.Series)], axis=1)
+    
+    details_records_expand = pd.concat([details_records[["user_ip", "user_id"]], details_records['info'].apply(pd.Series)], axis=1)
+
+    # Add user details to answers
+    merged = answer_records_expand.merge(details_records_expand, how="outer", on=["user_ip", "user_id"])
+    
+    ### Analyze per question
+    word_stats_cat = defaultdict(list)
+    word_stats_df = {}
+    for question, df_question in merged.groupby('question'):
+        for province, df_province in list(df_question.groupby('province')) + [("Overall", df_question)]:
+            all_answers = set(df_province["word1"]) + set(df_province["word2"])
+            all_answers = remove_affixes(prefixes=['een ', 'de ', 'het '], suffixes=['.', ',', '!', '?', ' ', '-'], array=all_answers)
+            all_answers = remove_items(items=[''], array=all_answers)
+        
 
 def create_word_record(df_word, woord):
     n_sustainable = df_word["houdbaar"].value_counts()[True]
@@ -369,8 +377,11 @@ def main():
             analyze_answers(answer_records, df_tasks, gold_dict, proj)
         elif ROUND ==2:
             if proj["type"] == "nieuwewoorden":
+                continue
                 analyze_neologisms(answer_records, df_tasks, project=proj)
-            else:
+            elif proj["type"] == "taalvariatie":
+                analyze_langvar(answer_records, details_records, project=proj)
+            else: # this should not happen in principle
                 analyze_answers(answer_records, df_tasks, gold_dict=None, project=proj)
 
 if __name__ == "__main__":
