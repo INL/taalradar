@@ -265,6 +265,13 @@ def analyze_neologisms(answer_records, df_tasks, project):
         most_diverse = sort_df(word_stats_df[task_type], prop="diverse", title=task_type)
         print(most_diverse)
 
+def clean(all_answers):
+    all_answers = [s.strip('.,!?- ') for s in all_answers]
+    all_answers = remove_affixes(prefixes=['een ', 'de ', 'het '], suffixes=[], array=all_answers)
+    all_answers = remove_items(items=[''], array=all_answers)
+    all_answers = [w.lower() for w in all_answers]
+    return all_answers
+
 def analyze_langvar(answer_records, details_records, project):
     # Appply pd.Series to unpack dict in column to multiple columns
     answer_records_expand = pd.concat([answer_records.drop(['info'], axis=1), answer_records['info'].apply(pd.Series)], axis=1)
@@ -275,13 +282,42 @@ def analyze_langvar(answer_records, details_records, project):
     merged = answer_records_expand.merge(details_records_expand, how="outer", on=["user_ip", "user_id"])
     
     ### Analyze per question
-    word_stats_cat = defaultdict(list)
-    word_stats_df = {}
     for question, df_question in merged.groupby('question'):
+        #answers_question = {}
+        df_question_answers = pd.DataFrame()
+        provinces = []
         for province, df_province in list(df_question.groupby('province')) + [("Overall", df_question)]:
-            all_answers = set(df_province["word1"]) + set(df_province["word2"])
-            all_answers = remove_affixes(prefixes=['een ', 'de ', 'het '], suffixes=['.', ',', '!', '?', ' ', '-'], array=all_answers)
-            all_answers = remove_items(items=[''], array=all_answers)
+            provinces.append(province)
+            all_answers = list(df_province["word1"]) + list(df_province["word2"])
+            all_answers = clean(all_answers)
+            counter = list(Counter(all_answers).items())
+            df_counter_province = pd.DataFrame.from_records(counter, columns = ["user input", province])
+            df_counter_province = df_counter_province.set_index("user input")
+            df_question_answers = pd.concat([df_question_answers, df_counter_province], axis=1, sort=False)
+        df_question_answers = df_question_answers.sort_values(by="Overall", ascending=False)
+        df_sum = df_question_answers.sum()
+        df_question_answers_rel = df_question_answers / df_sum.replace({0:np.nan})
+        # Compute per country
+        provinces_vlg = ["Antwerpen", "Limburg (BE)", "Vlaams-Brabant", "West-Vlaanderen"]
+        provinces_nl = ["Drenthe", "Flevoland", "Friesland", "Gelderland", "Limburg (NL)", "Noord-Brabant", "Noord-Holland", "Overijssel", "Utrecht", "Zuid-Holland"]
+        df_country = pd.DataFrame()
+        df_country["Flanders"] = df_question_answers[provinces_vlg].sum(axis=1)
+        df_country["The Netherlands"] = df_question_answers[provinces_nl].sum(axis=1)
+        df_country_sum = df_country.sum()
+        df_country_rel = df_country / df_country_sum.replace({0:np.nan})
+        # Write
+        write_csv(df_question_answers, path = os.path.join("Language variation/","absolute"), filename=question+".tsv", float_format="%.0f")
+        write_csv(df_question_answers_rel, path = os.path.join("Language variation/","relative"), filename=question+".tsv")
+        write_csv(df_sum, path = os.path.join("Language variation/","total"), filename=question+".tsv", float_format="%.0f")
+        write_csv(df_country, path = os.path.join("Language variation/","country"), filename=question+".tsv", float_format="%.0f")
+        write_csv(df_country_rel, path = os.path.join("Language variation/","country-relative"), filename=question+".tsv")
+
+
+def write_csv(df, path, filename, float_format="%.2f"):
+    if not os.path.exists(path):
+        os.makedirs(path)
+    path_file = os.path.join(path, filename)
+    df.to_csv(path_file, sep="\t", index=True, float_format=float_format)
         
 
 def create_word_record(df_word, woord):
