@@ -303,15 +303,19 @@ def analyze_langvar(answer_records, details_records, project):
         df_country = pd.DataFrame()
         df_country["Flanders"] = df_question_answers[provinces_vlg].sum(axis=1)
         df_country["The Netherlands"] = df_question_answers[provinces_nl].sum(axis=1)
+        #df_country = df_country.sort_values(by="The Netherlands", ascending=False)
         df_country_sum = df_country.sum()
         df_country_rel = df_country / df_country_sum.replace({0:np.nan})
+
+        #print(df_country_rel["Flanders"].argmax(), df_country_rel["The Netherlands"].argmax())
+
         # Write
         write_csv(df_question_answers, path = os.path.join("Language variation/","absolute"), filename=question+".tsv", float_format="%.0f")
         write_csv(df_question_answers_rel, path = os.path.join("Language variation/","relative"), filename=question+".tsv")
         write_csv(df_sum, path = os.path.join("Language variation/","total"), filename=question+".tsv", float_format="%.0f")
         write_csv(df_country, path = os.path.join("Language variation/","country"), filename=question+".tsv", float_format="%.0f")
         write_csv(df_country_rel, path = os.path.join("Language variation/","country-relative"), filename=question+".tsv")
-
+        write_csv(df_country_sum, path = os.path.join("Language variation/","country-sum"), filename=question+".tsv", float_format="%.0f")
 
 def write_csv(df, path, filename, float_format="%.2f"):
     if not os.path.exists(path):
