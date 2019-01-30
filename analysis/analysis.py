@@ -11,7 +11,7 @@ import textwrap
 
 pd.set_option('display.max_columns', 500)
 
-ROUND = 2
+ROUND = 1
 
 if ROUND == 1:
     projects = [{'name':{'en':'Blends analysis', 'nl':'Analyse blends'},
@@ -158,7 +158,6 @@ def contains_all(gold, answer):
 
 def get_task_question_from_id(id, df_tasks, proj):
     df = df_tasks[df_tasks["id"]==id]
-    print(df.iloc[0]["info"])
     return df.iloc[0]["info"][proj["question_field"]]
 
 
@@ -216,8 +215,8 @@ def plot_score(score, x, y, title, lang="en"):
     score_df = pd.DataFrame.from_records(score_items, columns = [x,y])
     labels = score_df[x]
     labels_new = wrap(labels, width=15)
-    print(labels_new)
     score_df[x] = labels_new
+    score_df.to_csv(title+"-"+x+"-"+lang+"-score.tsv", index=False, sep="\t")
     barplot(x,y,score_df,title, lang, plot_width=14)
 
 # Remove a prefix for every item in an array
@@ -243,10 +242,8 @@ def remove_items(items, array):
 def analyze_neologisms(answer_records, df_tasks, project):
     # Appply pd.Series to unpack dict in column to multiple columns
     answer_info = answer_records["info"].apply(pd.Series)
-    print(answer_info)
     tasks_info = df_tasks["info"].apply(pd.Series)
     tasks_info = tasks_info[tasks_info["type"]=="task"]
-    print(tasks_info)
     merged = answer_info.merge(tasks_info, how="outer", on=["woord", "id"])
     ### Analyze per task_type (untagged/neo/nonneo), and then per word
     word_stats_cat = defaultdict(list)
@@ -255,7 +252,6 @@ def analyze_neologisms(answer_records, df_tasks, project):
         for woord, df_word in df_task.groupby('woord'):
             record = create_word_record(df_word, woord)
             word_stats_cat[task_type].append(record)
-        print(task_type)
         word_stats_df[task_type] = pd.DataFrame.from_records(word_stats_cat[task_type], columns=["woord", "n_sustainable", "n_diverse", "n_total", "perc_sustainable", "perc_diverse", "task_type"])
 
         print("Most sustainable")
@@ -353,8 +349,11 @@ def analyze_answers(answer_records, df_tasks, gold_dict, project):
         all_answers = []
         for _,row in runs_per_task.iterrows():
             info = row["info"]
+            if info=="":
+                continue
             # Extract question from task run
-            task_question = info[project["question_field"]]
+            if project["question_in_run"]:
+                task_question = info[project["question_field"]]
             # If all answers are not saved as dict structure, but on the highest level
             if project["answer_fields"] is None:
                 if isinstance(info, list):
