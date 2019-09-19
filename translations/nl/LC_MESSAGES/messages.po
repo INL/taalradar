@@ -2583,3 +2583,15 @@ msgstr "Naam"
 #: themes/default/templates/stats/index.html:19
 msgid "Score"
 msgstr "Score"
+
+msgid "Sobre el mosquito tigre y de la fiebre amarilla"
+msgstr "Over de tijgermug en de gele koorts"
+
+msgid "Sobre las enfermedades"
+msgstr "Over de ziekten"
+
+msgid "Empieza a clasificar"
+msgstr "Begin met classificeren"
+
+msgid "About the tiger mosquito and yellow fever"
+msgstr "Over de tijgermug en de gele koorts"

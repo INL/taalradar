@@ -6,12 +6,12 @@ import os
 import errno
 import numpy as np
 from unidecode import unidecode
-from collections import defaultdict, Counter
+from collections import defaultdict, Counter, OrderedDict
 import textwrap
 
 pd.set_option('display.max_columns', 500)
 
-ROUND = 1
+ROUND = 2
 
 if ROUND == 1:
     projects = [{'name':{'en':'Blends analysis', 'nl':'Analyse blends'},
@@ -269,6 +269,7 @@ def clean(all_answers):
     return all_answers
 
 def analyze_langvar(answer_records, details_records, project):
+
     # Appply pd.Series to unpack dict in column to multiple columns
     answer_records_expand = pd.concat([answer_records.drop(['info'], axis=1), answer_records['info'].apply(pd.Series)], axis=1)
     
@@ -276,7 +277,29 @@ def analyze_langvar(answer_records, details_records, project):
 
     # Add user details to answers
     merged = answer_records_expand.merge(details_records_expand, how="outer", on=["user_ip", "user_id"])
-    
+    merged = merged.fillna("unknown") # Groupby appears not to work with None or NaN, so fill them
+
+    # Special processing to create big results table for Taalverhalen authors
+    # merge word1 and word2
+    merged_taalverhalen = merged.copy()
+    merged_taalverhalen["words"] = merged_taalverhalen[['word1','word2']].apply(lambda x: x[0]+", "+x[1] if len(x[1])>0 else x[0], axis=1)
+    records = []
+    # Rows of questions become columns. Eventually one row per user
+    for user, df_user in merged_taalverhalen.groupby(["user_id","user_ip"]):
+        record = OrderedDict()
+        for n,entry in df_user.iterrows():
+            question = entry["question"]
+            answer = entry["words"]
+            record[question] = answer
+        # From the first row, get user details and add them
+        row0 = df_user.iloc[0]
+        for source_en,target_nl in [("province","provincie"), ("city","woonplaats"), ("motherTongue","moedertaal"), ("age","leeftijd"), ("gender", "geslacht"), ("education", "opleidingsniveau")]:
+            record[target_nl] = row0[source_en]
+        records.append(record)
+    df_taalverhalen = pd.DataFrame(records).fillna("")
+    df_taalverhalen.to_csv("taalverhalen.csv",index=False)
+
+
     ### Analyze per question
     for question, df_question in merged.groupby('question'):
         #answers_question = {}
