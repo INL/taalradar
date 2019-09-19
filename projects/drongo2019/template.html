@@ -134,7 +134,7 @@ var nDetailsFields = 3;
 
 
 function loadUserProgress() {
-	pybossa.userProgress("nieuwewoorden").done(function(data){
+	pybossa.userProgress("drongo2019").done(function(data){
         // Keep counter of curent ask ourselves
         done += 1
 		var totalTasks = data.total -1; // we do not count user details
@@ -281,7 +281,7 @@ function presentTask(task) {
 	}
 }
 
-// pybossa.run("nieuwewoorden");
+// pybossa.run("drongo2019");
 
 var headers = {}
 var task = {}
@@ -289,13 +289,13 @@ var external_uid = ''
 var done = 0;
 
 function startSession() {
-    let url = '/api/project?short_name=nieuwewoorden'
+    let url = '/api/project?short_name=drongo2019'
     external_uid = $('#id').val() + '-' + new Date().getTime()
     axios.get(url)
         .then(function(response) {
             project = response.data[0]
             let secret_key = project.secret_key
-            url = '/api/auth/project/nieuwewoorden/token'
+            url = '/api/auth/project/drongo2019/token'
             axios.get(url, {headers: { 'Authorization': project.secret_key}})
                 .then(function(response){
                     headers = {
@@ -309,7 +309,7 @@ function startSession() {
 }
 
 function requestTask(task) {
-    let url = '/project/nieuwewoorden/task/' + task.id
+    let url = '/project/drongo2019/task/' + task.id
     axios.get(url)
         .then(function(res){
             //console.log(res.data)
