@@ -283,9 +283,11 @@ function presentTask(task) {
 
 // pybossa.run("drongo2019");
 
-var headers = {}
-var task = {}
-var external_uid = ''
+// Global variables
+var headers = {};
+var task = {};
+var external_uid = '';
+var project_id = '';
 var done = 0;
 
 function startSession() {
@@ -294,6 +296,9 @@ function startSession() {
     axios.get(url)
         .then(function(response) {
             project = response.data[0]
+            // Save project id, we need this for future requests
+            project_id = project.id
+            // Get secret key from response, and use it to retrieve token
             let secret_key = project.secret_key
             url = '/api/auth/project/drongo2019/token'
             axios.get(url, {headers: { 'Authorization': project.secret_key}})
@@ -317,7 +322,7 @@ function requestTask(task) {
 }
 
 function getTask() {
-    let url = '/api/project/5/newtask?external_uid=' + external_uid
+    let url = '/api/project/' + project_id + '/newtask?external_uid=' + external_uid
     axios.get(url, {headers: headers})
         .then(function(res){
             task = res.data
