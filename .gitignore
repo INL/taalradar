@@ -16,3 +16,5 @@ projects/opentaal/OpenTaal-210G-basis-gekeurd.txt
 projects/blends/analyse/template.html.orig
 projects/blends/herken1/template.html.orig
 node_modules
+analysis
+env

@@ -1,0 +1,14 @@
+formula: >
+    (50 * all(
+    is_whole_sentence(), 
+    length < 40,
+    length > 7,
+    blacklist(words, illegal_chars), 
+    min([word_frequency(w) for w in words]) > 20,
+    )
+    * greylist(words, rare_chars, 0.25)
+    ) / 100
+    
+variables:
+    rare_chars: ([A-Z'.,!?)(;:-])
+    illegal_chars: ([<|\]\[>/\\^@])
