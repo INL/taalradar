@@ -40,14 +40,15 @@ var user_details = {};
 
 
 var aAllPairs = new Array();
+var aAllWords = new Array();
 
 
 // click event on words in citations
-document.getElementById('citation').onmouseup =function(){
+document.getElementById('citation').onmouseup = function(){
 
 	var n = document.getElementById('citation');
 	var oSelectedText = getSelectedText(n);
-	var aWords = new Array();
+	aAllWords = new Array();
 
 	// if selection is empty, that means that we've clicked on a word
 	// without selecting it manually.
@@ -120,8 +121,8 @@ document.getElementById('citation').onmouseup =function(){
 				{
 				aNewPairsArray.push( [iStartIndex, iEndIndex] );
 				var sWord = (n.textContent.substring(iStartIndex, iEndIndex)).toLowerCase();
-				if ( aWords.indexOf(sWord)<0 )
-					aWords.push(sWord);					
+				if ( aAllWords.indexOf(sWord)<0 )
+					aAllWords.push(sWord);					
 				}
 			}
 		
@@ -130,10 +131,10 @@ document.getElementById('citation').onmouseup =function(){
 			sQuote = getHighlight(sQuote, aNewPairsArray, "yellow");	
 			
 		// show a sorted list of chosen words
-		aWords.sort();
+		aAllWords.sort();
 		
 		var chosenWords = document.getElementById('chosen_words');
-		chosenWords.textContent = aWords.join(', ');
+		chosenWords.textContent = aAllWords.join(', ');
 
 	}
 

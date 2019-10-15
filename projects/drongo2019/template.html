@@ -131,14 +131,15 @@ var PROJECT_NAME = "drongo2019";
 
 
 var aAllPairs = new Array();
+var aAllWords = new Array();
 
 
 // click event on words in citations
-document.getElementById('citation').onmouseup=function(){
+document.getElementById('citation').onmouseup = function(){
 
 	var n = document.getElementById('citation');
 	var oSelectedText = getSelectedText(n);
-	var aWords = new Array();
+	aAllWords = new Array();
 
 	// if selection is empty, that means that we've clicked on a word
 	// without selecting it manually.
@@ -149,7 +150,7 @@ document.getElementById('citation').onmouseup=function(){
 	}
 	
 	// if we have a selection now, process it
-	if (oSelectedText.text != '')
+	if (oSelectedText.text != '' && oSelectedText.text != task.info.lemma)
 	{
 		// get the current screen selection
 		var iStart =	parseInt(oSelectedText.start);
@@ -211,8 +212,8 @@ document.getElementById('citation').onmouseup=function(){
 				{
 				aNewPairsArray.push( [iStartIndex, iEndIndex] );
 				var sWord = (n.textContent.substring(iStartIndex, iEndIndex)).toLowerCase();
-				if ( aWords.indexOf(sWord)<0 )
-					aWords.push(sWord);					
+				if ( aAllWords.indexOf(sWord)<0 )
+					aAllWords.push(sWord);					
 				}
 			}
 		
@@ -221,15 +222,16 @@ document.getElementById('citation').onmouseup=function(){
 			sQuote = getHighlight(sQuote, aNewPairsArray, "yellow");	
 			
 		// show a sorted list of chosen words
-		aWords.sort();
+		aAllWords.sort();
 		
 		var chosenWords = document.getElementById('chosen_words');
-		chosenWords.textContent = aWords.join(', ');
+		chosenWords.textContent = aAllWords.join(', ');
 
 	}
 
 	// put the quote back into the DOM tree, with highlight words
-	n.innerHTML = sQuote;
+	// and bold lemma
+	n.innerHTML = boldString(sQuote, task.info.lemma)
 }
 
 
@@ -385,7 +387,7 @@ function getWordClickedUpon(n){
 		text.trim(), start, 
 		true); // extra parameter: push word boundaries (see explanation at getTrueIndexes)
 
-	// return an object with 4 parts: selection start/end indexes, selection text, and reliability
+	// return an object with 3 parts: selection start/end indexes, selection text
 	return {
 		start: oTrueIndexes.start,
 		end: oTrueIndexes.end,
@@ -689,7 +691,7 @@ function showDetailsForm(task) {
 
 function boldString(str, find){
 	var re = new RegExp(find, "g");
-	return str.replace(re, "<b>"+find+"</b>");
+	return str.replace(re, "<b><u>"+find+"</u></b>");
 }
 
 function showTask(task) {
@@ -722,11 +724,10 @@ function showTask(task) {
 	$(".btn-submit-task").off("click").on("click", function(){
 	
 		// Save array with all non-empty blend fields
-		var sSentence = $("#citation").text();
-		var aChosenWords = ($("#chosen_words").text()).split(", ");
+		var sSentence = $("#citation").text();		
 		
 		var answer = {	"sentence": task.info.sentence, "id": task.info.id, "lemma": task.info.lemma, 
-						"chosen_words": aChosenWords,
+						"chosen_words": aAllWords,
 						"user_age": user_details["age"], "user_gender": user_details["gender"], "user_location": user_details["location"]};
 						
 		saveTask(task.id, answer).then(function(_){
@@ -736,6 +737,7 @@ function showTask(task) {
 			
 			// empty list of words for next task
 			aAllPairs = new Array();
+			aAllWords = new Array();
 			var chosenWords = document.getElementById('chosen_words');
 			chosenWords.textContent = "";
 			
