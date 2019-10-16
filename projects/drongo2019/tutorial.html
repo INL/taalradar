@@ -3,18 +3,21 @@
         </div>
     <div class="col-md-8">
         <br><br><br><br>
-        <h1>Uitleg</h1>
-        In deze taak krijgt u een zin te zien met een medisch lemma. Het lemma in kwestie staat vetgedrukt. De vraag aan u is of deze zin nog meer interessante medische woorden bevat. Als deze er zijn, klik ze zo veel mogelijk aan. 
-        <br><br>
-        Er is geen goed of fout antwoord, we zijn benieuwd naar uw inschatting. Alvast bedankt voor uw deelname en veel succes! Hieronder een voorbeeld. 
-        <h1>Voorbeeldopgave</h1>
-		<h2>Welke medische termen horen volgens u in een woordenboek van algemeen Nederlands?</h2>
-		<p>Een woord kiezen kan door erop te klikken (één klik voldoet). Een term bestaande uit meerdere woorden (zoals 'hart- en vaatziekten') kunt u kiezen door de muisknop ingedrukt te houden, terwijl u met de muis over de woorden beweegt.</p>
-		<p>Probeer op woorden te klikken. Deze zullen direct verschijnen in het vakje 'Gekozen woorden'.</p>
+        <h2><b>Uitleg</b></h2>
+		<h2>Welke medische woorden horen volgens u in een woordenboek van het algemeen Nederlands?</h2>
+        <p>
+		In deze taak krijgt u een zin te zien waarin het vetgedrukte woord uit de medische sfeer afkomstig is. Wij vragen u om aan te geven of de zin meer medische woorden bevat, waarvan u het belangrijk vindt dat ze in een woordenboek van het algemeen Nederlands worden opgenomen en verklaard.<br><br>
+		Per zin kunt u meerdere woorden selecteren. U selecteert een woord door erop te klikken (één klik voldoet). Een woord dat uit meerdere elementen bestaat (zoals ‘hart- en vaatziekten’ of ‘acute reuma’), kunt u selecteren door de muisknop ingedrukt te houden, terwijl u ermee over de woorden beweegt. De geselecteerde woorden verschijnen direct in het vakje 'Gekozen woorden'. Als u een woord ten onrechte heeft geselecteerd en deze keuze ongedaan wilt maken, kunt u er nogmaals op klikken. Het verdwijnt dan uit de lijst.<br><br>
+		Er zijn geen goede of foute antwoorden, we zijn benieuwd naar uw inschatting. Alvast bedankt voor uw deelname en veel succes!
+		</p>
+		<h2><b>Voorbeeldopgave</b></h2>		
         <div class="row skeleton-task"> <!-- Start Skeleton Row-->
             <div class="col-md-10 "><!-- Start of Question and Submission DIV (column) -->
-                <h3><i><b>(...)</b> <span id="citation"> Rotterdamse kunstenaars presenteert hun werk tijdens ' Root Expositions '. De tweede editie van dit <b>pop-upconcept</b> begint vanavond op de Blaak. In deze tijdelijke galerie laat kunstenaarsorganisatie Root opkomend talent </span>
-                    <b>(...)</b></i></h3>
+                <h4>
+				<b>(...)</b> 
+				<span id="citation"> Vier op de tien volwassen Nederlanders is te dik. Bij een op de tien is zelfs sprake van ernstig <b>overgewicht</b>, obesitas. Van de kinderen is een op de zeven te zwaar </span>
+				<b>(...)</b>
+				</h4>
                 <br>
                 Gekozen woorden:
 				<form class="form-inline" id="taskform">				
@@ -34,7 +37,7 @@
 
 var user_details = {};
 
-
+var TASK_INFO_LEMMA = 'overgewicht';  // #### take over the lemma of the example here!!!!!!!!!
 
 // ===== click on words extension =============================================
 
@@ -59,7 +62,7 @@ document.getElementById('citation').onmouseup = function(){
 	}
 	
 	// if we have a selection now, process it
-	if (oSelectedText.text != '')
+	if (oSelectedText.text != '' && oSelectedText.text != TASK_INFO_LEMMA)
 	{
 		// get the current screen selection
 		var iStart =	parseInt(oSelectedText.start);
@@ -135,12 +138,18 @@ document.getElementById('citation').onmouseup = function(){
 		
 		var chosenWords = document.getElementById('chosen_words');
 		chosenWords.textContent = aAllWords.join(', ');
-
-	}
-
-	// put the quote back into the DOM tree, with highlight words
-	n.innerHTML = sQuote;
+		
+		// put the quote back into the DOM tree, with highlight words
+		n.innerHTML = boldString(sQuote, TASK_INFO_LEMMA)
+	}	
 }
+
+function boldString(str, find){
+	var re = new RegExp(find, "g");
+	return str.replace(re, "<b>"+find+"</b>");
+}
+
+
 
 
 

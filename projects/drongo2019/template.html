@@ -98,13 +98,19 @@
     -->
     <div class="row skeleton-task"> <!-- Start Skeleton Row-->
         <div class="col-md-10 "><!-- Start of Question and Submission DIV (column) -->
-			<h2>Welke medische termen horen volgens u in een woordenboek van algemeen Nederlands?</h2>
-			<p>Een woord kiezen kan door erop te klikken. Een term bestaande uit meerdere woorden (zoals 'hart- en vaatziekten') kunt u kiezen door de muisknop ingedrukt te houden, terwijl u met de muis over de woorden beweegt.</p>
+			<h2>Welke medische woorden horen volgens u in een woordenboek van het algemeen Nederlands?</h2>
+			<p>
+			Per zin kunt u meerdere woorden selecteren. U selecteert een woord door erop te klikken (één klik voldoet). Een woord dat uit meerdere elementen bestaat (zoals ‘hart- en vaatziekten’ of ‘acute reuma’), kunt u selecteren door de muisknop ingedrukt te houden, terwijl u ermee over de woorden beweegt. De geselecteerde woorden verschijnen direct in het vakje 'Gekozen woorden'. Als u een woord ten onrechte heeft geselecteerd en deze keuze ongedaan wilt maken, kunt u er nogmaals op klikken. Het verdwijnt dan uit de lijst.
+			</p>
             <p>Tekst <span id="done" class="label label-info"></span> van <span id="total" class="label label-info"></span></p>
             <div class="progress">
                 <div id="progress" rel="tooltip" title="#" class="progress-bar" style="width: 0%;"  role="progressbar"></div>
             </div>
-            <h3><i><b>(...)</b> <span id="citation">(voorbeeld)</span> <b>(...)</b></i></h3>
+            <h4>
+			<b>(...)</b>
+			<span id="citation">(voorbeeld)</span>
+			<b>(...)</b>
+			</h4>
             <br>
 			Gekozen woorden:
             <form class="form-inline" id="taskform">				
@@ -238,12 +244,15 @@ document.getElementById('citation').onmouseup = function(){
 		
 		var chosenWords = document.getElementById('chosen_words');
 		chosenWords.textContent = aAllWords.join(', ');
+		
+		
+		// put the quote back into the DOM tree, with highlight words
+		// and bold lemma
+		n.innerHTML = boldString(sQuote, task.info.lemma);
 
 	}
 
-	// put the quote back into the DOM tree, with highlight words
-	// and bold lemma
-	n.innerHTML = boldString(sQuote, task.info.lemma)
+	
 }
 
 
@@ -713,7 +722,7 @@ function showDetailsForm(task) {
 
 function boldString(str, find){
 	var re = new RegExp(find, "g");
-	return str.replace(re, "<b><u>"+find+"</u></b>");
+	return str.replace(re, "<b>"+find+"</b>");
 }
 
 function showTask(task) {
