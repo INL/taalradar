@@ -20,15 +20,23 @@
                 <a class="close">×</a>
                 Volgende taak aan het laden...
             </div>
-            <div id="taskcompleted" class="alert alert-info" style="display:none;">
-                <strong>De taak is afgerond!</strong> Bedankt!
+            <div id="taskcompleted" class="alert alert-success" style="display:none;">
+				<strong>Bedankt!</strong> U heeft een hele reeks taken uitgevoerd!
+                <br/>
+                Als u wilt, kunt u nog een reeks taken uitvoeren.
+				<br/>
+				<br/>
+				<div class="alert-actions">
+                    <a class="btn btn-primary" onclick="getTask()">Nog een reeks</a>
+                    <a class="btn btn-primary" onclick="startSession()">Stoppen</a>
+                </div>
             </div>
             <div id="finish" class="alert alert-success" style="display:none;">
                 <strong>Gefeliciteerd!</strong> U heeft alle beschikbare teksten doorlopen.
                 <br/>
                 <div class="alert-actions">
-                    <a class="btn small" href="/">Ga terug</a>
-                    <a class="btn small" href="/app">of bekijk alle projecten</a>
+                    <a class="btn btn-primary" href="/">Ga terug</a>
+                    <a class="btn btn-primary" href="/app">Bekijk alle projecten</a>
                 </div>
             </div>
             <div id="error" class="alert alert-danger" style="display:none;">
@@ -126,6 +134,10 @@ var nDetailsFields = 3;
 var user_details = {};
 
 var PROJECT_NAME = "drongo2019";
+
+var NUMBER_OF_TASKS_PER_SESSION = 10;
+
+
 
 // ===== click on words extension =============================================
 
@@ -651,8 +663,18 @@ function showDetailsForm(task) {
 	console.log("Starting to show details form...");
 	$(".skeleton-task").hide();
 	$(".skeleton-finish").hide();
+	$("#taskcompleted").hide();
 	$(".skeleton-userdetails").show();
 	$("#details1").focus();
+	
+	// (re)initialize values (needed from 2nd session on, to remove details of the previous contributor)
+	$("#details1").val(""); 
+	$("#details2").val("");
+	$("#details3").val("");
+	// number of tasks performed back to 0 of course
+	done = 0;
+	
+	
 	// Submit button
 	$(".btn-submit-userdetails").off("click").on("click", function(){
 	
@@ -700,6 +722,7 @@ function showTask(task) {
 	$(".skeleton-userdetails").hide();
 	$(".skeleton-finish").hide();
 	$(".skeleton-task").show();
+	$("#taskcompleted").hide();
 	console.log("Loading user progress");
 	loadUserProgress();
 	console.log("Loading data into form");
@@ -732,8 +755,14 @@ function showTask(task) {
 						
 		saveTask(task.id, answer).then(function(_){
 		
-			$("#success").fadeIn();
-			setTimeout(function() { $("#success").fadeOut(); }, 2000);
+			// if we haven't reached the final task of the session
+			// show a message between each tasks to show that everything goed well
+			
+			if (done % NUMBER_OF_TASKS_PER_SESSION !== 0)
+				{
+				$("#success").fadeIn();
+				setTimeout(function() { $("#success").fadeOut(); }, 2000);
+				}
 			
 			// empty list of words for next task
 			aAllPairs = new Array();
@@ -741,11 +770,28 @@ function showTask(task) {
 			var chosenWords = document.getElementById('chosen_words');
 			chosenWords.textContent = "";
 			
-            getTask();
+			// if we have reached the number of tasks to be performed within one single session
+			// tell the user, and ask if he/she wants to go on
+			
+			if (done % NUMBER_OF_TASKS_PER_SESSION == 0)
+				taskcompleted();
+				
+			// normal case: show next tasks
+			else
+				getTask();
 		});
 	});
 
 	$("#loading").hide();
+}
+
+
+function taskcompleted(){
+	$(".skeleton-task").hide();
+	$(".skeleton-userdetails").hide();
+	$("#loading").hide();
+	$(".skeleton-finish").hide();
+	$("#taskcompleted").show();
 }
 
 function finish() {
@@ -753,7 +799,7 @@ function finish() {
 	$(".skeleton-userdetails").hide();
 	$("#loading").hide();
 	$(".skeleton-finish").show();
-    
+    $("#taskcompleted").hide();
 }
 
 // Polyfills
