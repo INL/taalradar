@@ -1,0 +1,910 @@
+<div class="row" id="authenticate">
+	<!--
+    <p><input id="id" placeholder="your name"></input></p>
+	-->
+    <button class="btn" onclick="startSession()">Start een nieuwe sessie</button>
+</div>
+<div id="contribute">
+    <div class="row">
+        <!-- Success and Error Messages for the user --> 
+        <div class="col-md-8 col-md-offset-2" style="height:50px">
+            <div id="success" class="alert alert-success" style="display:none;">
+                <a class="close">×</a>
+                <strong>Bedankt!</strong> Uw antwoord is opgeslagen.
+            </div>
+            <div id="success-details" class="alert alert-success" style="display:none;">
+                <a class="close">×</a>
+                <strong>Bedankt!</strong> Uw gegevens zijn opgeslagen.
+            </div>
+            <div id="loading" class="alert alert-info" style="display:none;">
+                <a class="close">×</a>
+                Volgende taak aan het laden...
+            </div>
+            <div id="taskcompleted" class="alert alert-success" style="display:none;">
+				<strong>Bedankt!</strong> U heeft een hele reeks taken uitgevoerd!
+                <br/>
+                Als u wilt, kunt u nog een reeks taken uitvoeren.
+				<br/>
+				<br/>
+				<div class="alert-actions">
+                    <a class="btn btn-primary" onclick="getTask()">Nog een reeks</a>
+                    <a class="btn btn-primary" onclick="startSession()">Stoppen</a>
+                </div>
+            </div>
+            <div id="finish" class="alert alert-success" style="display:none;">
+                <strong>Gefeliciteerd!</strong> U heeft alle beschikbare teksten doorlopen.
+                <br/>
+                <div class="alert-actions">
+                    <a class="btn btn-primary" href="/">Ga terug</a>
+                    <a class="btn btn-primary" href="/app">Bekijk alle projecten</a>
+                </div>
+            </div>
+            <div id="error" class="alert alert-danger" style="display:none;">
+                <a class="close">×</a>
+                <strong>Fout!</strong> Er ging iets mis, neem contact op met beheerders van deze website.
+            </div>
+        </div> <!-- End Success and Error Messages for the user -->
+    </div> <!-- End of Row -->
+    
+    <div class="row skeleton-userdetails"> <!-- Start Skeleton Row-->
+        Hieronder kunt u enkele persoonlijke gegevens invullen, die ons extra inzichten geven in ons onderzoek. De velden die u niet wilt invullen, kunt u leeg laten.<br><br>Uw leeftijd, geslacht en woonplaats zijn, gekoppeld aan uw antwoorden, zichtbaar voor andere bezoekers van het platform. Andere bezoekers kunnen echter niet uw eventuele accountgegevens (naam en e-mailadres) zien die hieraan gekoppeld zijn.
+        <div class="col-md-8 "><!-- Start of Question and Submission DIV (column) -->
+            <form class="form-inline" id="detailsform">
+                    <div class="form-group">
+                        <h3 id="headerAge">Leeftijd:</h3>
+                        <input type="number" min="0" max="150" class="form-control" name="age" id="details1" style="width:100%;"/>
+                    </div>
+                    <br><br>
+                    <div class="form-group">
+                        <h3 id="headerGender">Geslacht:</h3>
+                        <select class="form-control" name="gender" id="details2" style="width:100%;">
+                            <option>Zeg ik niet</option>
+                            <option>Man</option>
+                            <option>Vrouw</option>
+                            <option>Anders</option>
+                        </select>
+                    </div>
+                    <br><br>
+                    <div class="form-group">
+                        <h3 id="headerLocation">Woonplaats:</h3>
+                        <input type="text" class="form-control" name="location" id="details3" style="width:100%;"/>
+                    </div>
+                    <br><br>
+                </form>
+            <div> <!-- Start DIV for the submission buttons -->
+                <button class="btn btn-submit btn-primary btn-submit-userdetails"><i class="fa"></i>Verzend!</button>
+            </div><!-- End of DIV for the submission buttons -->
+        </div><!-- End of Question and Submission DIV (column) -->
+    </div><!-- End of Skeleton Row -->
+    
+    <div class="row skeleton-finish"> <!-- Start Skeleton Row-->
+        <div class="col-md-8 "><!-- Start of Question and Submission DIV (column) -->
+            <h1>Dank u wel, u heeft alle woorden doorlopen!</h1>
+            Het Instituut voor de Nederlandse taal gebruikt uw bijdrage om de kennis over de Nederlandse taal uit te breiden.
+            <h3>Nog een experiment?</h3>
+            Smaakt dit experiment naar meer? <b>Doe ook mee met ons experiment over <a href="http://taalradar.ivdnt.org/project/taalvariatie/newtask">taalvariatie</a></b>!
+            <h3>Op de hoogte blijven?</h3>
+            Wilt u op de hoogte blijven van ons onderzoek, en
+            eventueel vaker meedoen aan dergelijke experimenten? Mail dan naar
+            <a href="mailto:servicedesk@ivdnt.org">servicedesk@ivdnt.org</a>, onder
+            vermelding van Taalradar.
+        </div><!-- End of Question and Submission DIV (column) -->
+    </div><!-- End of Skeleton Row -->
+    
+    <!--
+        Task DOM for showing the data to the user
+        It uses the class="skeleton" to identify the elements that belong to the
+        task.
+    -->
+    <div class="row skeleton-task"> <!-- Start Skeleton Row-->
+        <div class="col-md-10 "><!-- Start of Question and Submission DIV (column) -->
+			<h2>Welke medische woorden horen volgens u in een woordenboek van het algemeen Nederlands?</h2>
+			<p>
+			Per zin kunt u meerdere woorden selecteren. U selecteert een woord door erop te klikken (één klik voldoet). Een woord dat uit meerdere elementen bestaat (zoals ‘hart- en vaatziekten’ of ‘acute reuma’), kunt u selecteren door de muisknop ingedrukt te houden, terwijl u ermee over de woorden beweegt. De geselecteerde woorden verschijnen direct in het vakje 'Gekozen woorden'. Als u een woord ten onrechte heeft geselecteerd en deze keuze ongedaan wilt maken, kunt u er nogmaals op klikken. Het verdwijnt dan uit de lijst.
+			</p>
+            <p>Tekst <span id="done" class="label label-info"></span> van <span id="total" class="label label-info"></span></p>
+            <div class="progress">
+                <div id="progress" rel="tooltip" title="#" class="progress-bar" style="width: 0%;"  role="progressbar"></div>
+            </div>
+            <h4>
+			<b>(...)</b>
+			<span id="citation">(voorbeeld)</span>
+			<b>(...)</b>
+			</h4>
+            <br>
+			Gekozen woorden:
+            <form class="form-inline" id="taskform">				
+				<h3><i><span id="chosen_words">
+				</span></i></h3>
+            </form>
+            <br><br>
+            <div> <!-- Start DIV for the submission buttons -->
+    			<button class="btn btn-primary btn-submit btn-submit-task"><i class="fa"></i>Volgende</button>
+            </div><!-- End of DIV for the submission buttons -->
+            <div class="col-md-10 small">
+            </div>
+        </div><!-- End of Question and Submission DIV (column) -->
+    </div><!-- End of Skeleton Row -->
+</div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+
+/* global pybossa */
+
+var nDetailsFields = 3;
+
+
+
+// ===== information details ==================================================
+
+var user_details = {};
+
+var PROJECT_NAME = "drongo2019n2";
+
+var NUMBER_OF_TASKS_PER_SESSION = 10;
+
+
+
+// ===== click on words extension =============================================
+
+
+var aAllPairs = new Array();
+var aAllWords = new Array();
+
+
+// click event on words in citations
+document.getElementById('citation').onmouseup = function(){
+
+	var n = document.getElementById('citation');
+	var oSelectedText = getSelectedText(n);
+	aAllWords = new Array();
+
+	// if selection is empty, that means that we've clicked on a word
+	// without selecting it manually.
+	// In this case, try to select the word that was clicked upon
+	if (oSelectedText.text == '')
+	{
+		oSelectedText = getWordClickedUpon(n);
+	}
+	
+	// if we have a selection now, process it
+	if (oSelectedText.text != '' && oSelectedText.text != task.info.lemma)
+	{
+		// get the current screen selection
+		var iStart =	parseInt(oSelectedText.start);
+		var iEnd = 	parseInt(oSelectedText.end);
+
+		// if indexes clicked on are already part of the clicked words array, remove it from the array
+		// and otherwise add those indexes!
+		var sPair = iStart + "," + iEnd;
+		var iIndex = aAllPairs.indexOf(sPair);
+		if (iIndex >= 0)
+			{
+			aAllPairs.splice(iIndex, 1);
+			}
+		else
+			{
+			// remove the tokens that are within the selection (=overlap)
+			// and add the selection as a whole after that			
+			var bAddSelection = true;
+			for (var i=aAllPairs.length-1; i>=0; i--)
+				{								
+				var sOnePair = aAllPairs[i];
+				var iOneStart = parseInt(sOnePair.split(",")[0]);
+				var iOneEnd = parseInt(sOnePair.split(",")[1]);
+				
+				// if token is within the selection, remove it
+				if (iStart<=iOneStart && iOneEnd<=iEnd)
+					{
+					aAllPairs.splice(i, 1);
+					}
+				// if selection is within/overlapping an existing token, do nothing
+				else if ( ( iOneStart<=iStart && iStart<=iOneEnd ) ||
+						  ( iOneStart<=iEnd   && iEnd<=iOneEnd   ) )
+					{
+					bAddSelection = false;
+					}
+					
+				}
+			// add the selection
+			if (bAddSelection)
+				aAllPairs.push(sPair);
+			}
+
+		// reprocess highlight for the quote
+		// and rebuild complete list of UNIQUE words 
+		
+		var sQuote = 	removeHighlight(n.textContent);
+
+		
+		var aNewPairsArray = new Array();
+		for (var i=0; i<aAllPairs.length; i++)
+			{			
+			var onePair = aAllPairs[i].split(",");
+			
+			var iStartIndex = parseInt(onePair[0]);
+			var iEndIndex   = parseInt(onePair[1]);
+			
+			
+			if (iStartIndex<iEndIndex)
+				{
+				aNewPairsArray.push( [iStartIndex, iEndIndex] );
+				var sWord = (n.textContent.substring(iStartIndex, iEndIndex)).toLowerCase();
+				if ( aAllWords.indexOf(sWord)<0 )
+					aAllWords.push(sWord);					
+				}
+			}
+		
+		// call the highlight function with the whole array of position pairs
+		if (aNewPairsArray.length>0)
+			sQuote = getHighlight(sQuote, aNewPairsArray, "yellow");	
+			
+		// show a sorted list of chosen words
+		aAllWords.sort();
+		
+		var chosenWords = document.getElementById('chosen_words');
+		chosenWords.textContent = aAllWords.join(', ');
+		
+		
+		// put the quote back into the DOM tree, with highlight words
+		// and bold lemma
+		n.innerHTML = boldString(sQuote, task.info.lemma);
+
+	}
+
+	
+}
+
+
+
+String.prototype.regexIndexOf = function(regex, startpos) {
+	var indexOf = this.substring(startpos || 0).search(regex);
+	return (indexOf >= 0) ? (indexOf + (startpos || 0)) : indexOf;
+};
+
+String.prototype.regexLastIndexOf = function(regex, startpos) {
+	regex = (regex.global) ? regex : new RegExp(regex.source, "g" + (regex.ignoreCase ? "i" : "") + (regex.multiLine ? "m" : ""));
+	if(typeof (startpos) == "undefined") {
+	startpos = this.length;
+	} else if(startpos < 0) {
+	startpos = 0;
+	}
+	var stringToWorkWith = this.substring(0, startpos + 1);
+	var lastIndexOf = -1;
+	var nextStop = 0;
+	while((result = regex.exec(stringToWorkWith)) != null) {
+	lastIndexOf = result.index;
+	regex.lastIndex = ++nextStop;
+	}
+	return lastIndexOf;
+};
+
+
+function removeHighlight(sString){
+
+	var sNewString = sString.replace(/(\<span style='background: .+?\>)(.+?)(\<\/span\>)/gi, "$2");
+	return sNewString;
+};
+
+
+
+
+function Comparator(a,b){
+	if (a[0] < b[0]) return -1;
+	if (a[0] > b[0]) return 1;
+	return 0;
+};
+function sortArrayOfArray(myArray){
+
+	myArray = myArray.sort(Comparator);
+	return myArray;
+};
+
+function getHighlight(sString, aaIndexes, sColor){
+	
+	// make sure to remove highlight from input string, otherwise we might corrupt it
+	// (by overlapping spans that bite each other)
+	sString = removeHighlight(sString);
+	
+	
+	// make sure the indexes are sorted correctly
+	aaIndexes = sortArrayOfArray(aaIndexes);
+	
+	var sPreTag = "<span style='background: "+sColor+"'>";
+	var sPostTag = "</span>";
+	var iTotalIndexCorrection = 0;
+	var iIndexCorrectionForEachStep = (sPreTag+sPostTag).length;
+	
+	for (var i=0; i<aaIndexes.length; i++)
+		{
+		var aIndexes = aaIndexes[i];
+		
+		// prevent wrong highlighting 
+		// (e.g. when indexes are nog defined)
+		if (isNaN(aIndexes[0]) || isNaN(aIndexes[1])) continue;
+		
+		// make sure we have index positions as numbers, and add index correption to those at each cycle
+		// this is necessary since adding tags into the string causes following indexes to 
+		// reference wrong string positions
+		var iStartIndex = (typeof aIndexes[0]=='number') ? aIndexes[0] : parseInt(aIndexes[0]);
+		iStartIndex += iTotalIndexCorrection;		
+		var iEndIndex =   (typeof aIndexes[1]=='number') ? aIndexes[1] : parseInt(aIndexes[1]);
+		iEndIndex += iTotalIndexCorrection;	
+		
+		// insert tags
+		sString = sString.substring(0, iStartIndex) +
+		sPreTag +
+		sString.substring(iStartIndex, iEndIndex) +
+		sPostTag +
+		sString.substring(iEndIndex);
+		
+		// apply index correction
+		iTotalIndexCorrection += iIndexCorrectionForEachStep;		
+		}
+	
+	
+	return sString;
+};
+
+
+function getSelectedText(n){
+
+	var start = 0, end = 0;
+    var sel, range, priorRange, fulltext;
+	
+	range = window.getSelection().getRangeAt(0);        
+	priorRange = range.cloneRange();
+	priorRange.selectNodeContents(n);
+	fulltext = priorRange.toString();
+	priorRange.setEnd(range.startContainer, range.startOffset);
+	start = priorRange.toString().length;
+	text = range.toString();
+
+	
+	// Compute the true indexes of the text selection
+    // This is needed because detection of positions doesn't take into account the tags and 
+    //  html entitie names within the original string. We will need to remove highlighting
+    //  in advance, because highlighting tags are no part of the original string
+    var oTrueIndexes = getTrueIndexes(
+		fulltext,
+		removeHighlight( n.textContent ), 
+		text.trim(), start, 
+		true); // extra parameter: push word boundaries (see explanation at getTrueIndexes)
+	
+	// return an object with 3 parts: selection start/end indexes, selection text
+	return {
+		start: oTrueIndexes.start,
+		end: oTrueIndexes.end,
+		text: text.trim()
+	};
+
+}
+
+function getWordClickedUpon(n){
+
+	var start = 0, end = 0;
+	var sel, range, priorRange, wholeRange, fulltext;
+
+	range = window.getSelection().getRangeAt(0);   
+	wholeRange = range.cloneRange();
+	wholeRange.selectNodeContents(n);
+	priorRange = range.cloneRange();
+	priorRange.selectNodeContents(n);
+	priorRange.setEnd(range.startContainer, range.startOffset);
+	start = priorRange.toString().regexLastIndexOf(/(\s|\.|,|;|:|\(|\[|'|"|„|”)/)+1;
+	end   = wholeRange.toString().regexIndexOf(/(\s|\?|!|\.|,|;|:|\)|\]|'|"|„|”)/, start+1);
+	if (end<0) end = wholeRange.toString().length;      
+	fulltext = wholeRange.toString();
+	text  = fulltext.substring(start, end);
+
+
+	// Compute the true indexes of the text selection
+	// This is needed because detection of positions doesn't take into account the tags and 
+	//  html entities names within the original string. We will need to remove highlighting
+	//  in advance, because highlighting tags are no part of the original string
+	var oTrueIndexes = getTrueIndexes(
+		fulltext,
+		removeHighlight( n.textContent ), 
+		text.trim(), start, 
+		true); // extra parameter: push word boundaries (see explanation at getTrueIndexes)
+
+	// return an object with 3 parts: selection start/end indexes, selection text
+	return {
+		start: oTrueIndexes.start,
+		end: oTrueIndexes.end,
+		text: text.trim()
+	};
+
+}
+
+
+function reEncodeEntities(sEncodedEntities, sDecodedEntities){
+	
+	var indexesToEntities = {};
+	var indexesToTags = {};
+	var iLength = sDecodedEntities.length;
+	var iCorrectionToApply = 0;
+	
+	for (var i=0; i<iLength; i++)
+		{
+	
+		// we found a tag
+		if ( sEncodedEntities.charAt(i) == "<" && 
+			 sDecodedEntities.charAt(i) != sEncodedEntities.charAt(i) )
+			{			
+			// get tag and its end position
+			var iPositionAfterTag =	i + (sEncodedEntities.substring(i)).regexIndexOf("\>([^\<]|$)")+1
+			var sTag = 				sEncodedEntities.substring(i, iPositionAfterTag);
+			// register the tag so we'll be able to put it back at its original position in the output
+			indexesToTags[i] = sTag; 
+			// remove the tag 
+			sEncodedEntities = sDecodedEntities.substring(0, i) + sEncodedEntities.substring(iPositionAfterTag);
+			}
+		
+		// we found a decoded entity
+		if ( sEncodedEntities.charAt(i) == "&" && 
+			 sDecodedEntities.charAt(i) != sEncodedEntities.charAt(i) )
+			{
+			// Translate the ENcoded entity back into a DEcoded entity in the sEncodedEntities string
+			// That way, we can keep comparing chars at the same position in both strings 
+			// instead of keeping different cursor positions in each string... easier to work with!
+			
+			// get ENcoded entity and its end position
+			// (detect ';' from the cursor position i, otherwise we would possibly catch previous entities)
+			var iPositionAfterEntity =	i + (sEncodedEntities.substring(i)).indexOf(";")+1
+			var sEntity = 				sEncodedEntities.substring(i, iPositionAfterEntity);
+			// register the ENcoded entity so we'll be able to put it back at its original position in the output
+			indexesToEntities[i] = sEntity; 
+			// do the translation, as explained here above
+			// (end-pos + 1, so we catch prefix plus the entity)
+			sEncodedEntities = sDecodedEntities.substring(0, i+1) + sEncodedEntities.substring(iPositionAfterEntity);
+			}
+		}
+	
+	// Now we are ready to insert the DEcoded entities at their right positions
+	// (begin at the end, of course, since inserting substrings changes indexes at the right side of the cursor)
+	
+	for (var i=iLength; i>=0; i--)
+		{	
+		var sEntity =	indexesToEntities[i];
+		var sTag = 		indexesToTags[i];
+		
+		if (sEntity != null)
+			{
+			// (end-pos + 1 to skip the DEcoded entity, which is replaced by sEntity
+			sDecodedEntities = sDecodedEntities.substring(0, i) + sEntity + sDecodedEntities.substring(i+1);
+			// (length-1, because we replace a DEcoded entity [1 char] by its ENcoded entity [n chars] -> n-1
+			iCorrectionToApply += (sEntity.length-1); 
+			}
+		if (sTag != null)
+			{
+			// (end-pos without +1, because there's nothing to skip here, instead we just insert sTag)
+			sDecodedEntities = sDecodedEntities.substring(0, i) + sTag + sDecodedEntities.substring(i);
+			iCorrectionToApply += sTag.length;
+			}
+		}
+	
+	// return the substring in which we restored the DEcoded entities of the original table data
+	return {"restored_entities": sDecodedEntities, "index_correction": iCorrectionToApply};
+}
+
+
+
+// Given a main string in which a substring was found at a given index
+// compute the true start and end indexes in the same string containing html entities
+//
+function getTrueIndexes(sRangeStringDecodedEntities, sNodeStringEncodedEntities, sSelectionDecodedEntities, selectionStartIndex, bPushWordBoundaries){
+	
+	// [1] We need to restore the ENcoded entities, since calling range.toString() cause those to be DEcoded,
+	//     in such a way that indexes might not fit the table data. 
+	
+	// get quote with ENcoded entities 
+	var mainStringAndCorrection = 				reEncodeEntities( sNodeStringEncodedEntities, sRangeStringDecodedEntities );
+	var mainString = 							mainStringAndCorrection["restored_entities"];
+	
+	// compute new start position given the corrected quote string
+	var sPrefixDecodedEntities =				sRangeStringDecodedEntities.substring( 0, selectionStartIndex );	
+	var sPrefixEncodedEntitiesAndCorrection = 	reEncodeEntities( sNodeStringEncodedEntities, sPrefixDecodedEntities );
+	var sPrefixEncodedEntities = 				sPrefixEncodedEntitiesAndCorrection["restored_entities"];
+	
+	var iCorrection = 							sPrefixEncodedEntitiesAndCorrection["index_correction"]; //(sPrefixEncodedEntities.length - sPrefixDecodedEntities.length);
+	// from now on, selectionStartIndex must be applied to strings with ENcoded entities, instead of range.toString()
+	selectionStartIndex = 						selectionStartIndex + iCorrection;
+	
+	// do the same with the selection
+	
+	var sSelectionPartEncodedEntities = sNodeStringEncodedEntities.substring( selectionStartIndex );
+	var selection = (reEncodeEntities( sSelectionPartEncodedEntities, sSelectionDecodedEntities ))["restored_entities"];	
+	
+	// [2] change all html-entitie names into tags, so we will only have to deal with taglike things
+	//
+	// This changes  Hij heet Napol&eacute;on
+	//         into  hij heet napolD<~~~~~>on
+	// so each character keeps its original position in the string
+	//
+	// This will allow us to find the true word bounderies, where characters as '&' or ';' can be found. 
+	// If we wouldn't convert DEcoded html entities into tags, we would probably interpret the ';' part of an entity as a word border, which it isn't.
+	
+	mainString = mainString.toLowerCase().replace( /(&)([^;]+)(;)/gi, 
+			function ($0, $1, $2, $3) {
+	    return "D<" + (new Array($2.length).join("~")) + ">" ;
+	}); // D for dummy char, replacing the entity char
+	
+	
+	// [3] Now do the job
+	
+	var newSelectionStartIndex = selectionStartIndex;
+	var newSelectionEndIndex   = selectionStartIndex + (selection.length); 
+	
+	// if required (it is when a word has been clicked upon, so we search for its boundaries automatically)
+	// check if the word is truely surrounded by spaces or such. If not, look for the true boundaries of the word.
+	// (this is needed, because the selection was obtained by checking the node what was clicked upon; but sometimes
+	//  a word can be spread among several nodes, because of in-between tags for style etc).
+	if (bPushWordBoundaries)
+		{
+		newSelectionStartIndex = getIndexOfPreviousSpace(mainString, newSelectionStartIndex) + 1;
+		newSelectionEndIndex   = getIndexOfFollowingSpace(mainString, newSelectionEndIndex);
+		}
+		
+	// finally make sure the start index is not a closing tag
+	while ( (mainString.substring(newSelectionStartIndex)).substring(0, 2) == "<\/" )
+		{
+		newSelectionStartIndex = mainString.indexOf(">", newSelectionStartIndex) + 1;
+		}
+	
+	return {
+		"start": newSelectionStartIndex,
+		"end": newSelectionEndIndex
+	};
+}
+
+// Find the first preceding space before a given index.
+// We need this function to solve a particular flow of the fn.getSelectedTextInNode function:
+// Getting the selected text works given a node that has been clicked upon. In most cases,
+// this is good enough. Sadly, in some cases, this method doesn't give the right text boundaries,
+// because a word happens to be broken up in several nodes due to tags assigning style etc.
+// So, to be able to get the true word boundaries, we try to find the surrounding true spaces,
+// meaning that we exclude space within a tag, of course.
+function getIndexOfPreviousSpace(mainString, startIndex){
+	
+	var withinTag = false;
+	
+	for (var i=startIndex; i>=0; i--)
+		{
+		var currentChar = mainString.charAt(i);
+		if (currentChar==">") 
+			withinTag = true;
+		
+		if (currentChar.match(/[\^\$\(\)\[\]\{\}\\\|\.\*\+\?\s'"!:;,&@#%=]/) && !withinTag)
+			return i;
+		
+		if (currentChar=="<") withinTag = false;
+		}
+	
+	// We reach this point when the string part in range [0, startIndex]  
+	// contains no space at all (outside the tags).
+	// In that particular case, strictly speaking, the space preceeding
+	// the first letter of the string is at index -1.
+	return -1;
+}
+
+
+// Find the first following space after a given index.
+// See explanation at previous function getIndexOfPreviousSpace()
+function getIndexOfFollowingSpace(mainString, endIndex){
+	
+	var withinTag = false;
+	
+	for (var i=endIndex; i<mainString.length; i++)
+		{
+		var currentChar = mainString.charAt(i);
+		if (currentChar=="<") 
+			withinTag = true;
+		
+		if (currentChar.match(/[\^\$\(\)\[\]\{\}\\\|\.\*\+\?\s'"!:;,&@#%=]/) && !withinTag)
+			return i;
+		
+		if (currentChar==">") withinTag = false;
+		}
+	
+	// We reach this point when the string part in range [endIndex, string-length]
+	// contains no space at all (outside the tags).
+	// In that particular case, the string length value is the index at which
+	// the following space would occur
+	return mainString.length;
+}
+
+
+// subfunction of getTrueIndexes(...)
+function computeTrueIndex(mainString, incorrectIndex){
+	
+	var indexCorrection = 0;
+	var indexWithoutTags = -1;
+	var withinTag = false;
+	
+	for (var i=0; i<mainString.length; i++)
+		{		
+		var currentChar = mainString.charAt(i);
+		if (currentChar=="<") 
+			withinTag = true;
+		
+		if (withinTag) indexCorrection++;
+		else indexWithoutTags++;
+		
+		// if we have reached the expected index, we are finished
+		if (indexWithoutTags >= incorrectIndex &&
+				// withinTag=true can happen when incorrectIndex=0,
+				// that is: when the mainString begins with a tag 
+				// and the selection starts right after this tag.
+				!withinTag && 
+				// we can't break when we encounter a Dummy
+				// since the following characters are its code (in the original string)
+				currentChar!='D')
+			break;		
+			
+		if (currentChar==">") withinTag = false;	
+		}
+	
+	return incorrectIndex + indexCorrection;
+}
+
+
+
+// ======================================================================
+
+
+function loadUserProgress() {
+	pybossa.userProgress(PROJECT_NAME).done(function(data){
+        // Keep counter of curent ask ourselves
+        done += 1
+		var totalTasks = data.total -1; // we do not count user details
+		var pct = Math.round((done*100)/totalTasks);
+		$("#progress").css("width", pct.toString() +"%");
+		$("#progress").attr("title", pct.toString() + "% completed!");
+		$("#progress").tooltip({"placement": "left"}); 
+		$("#total").text(totalTasks);
+		$("#done").text(done);
+	});
+}
+
+
+function showDetailsForm(task) {
+	console.log("Starting to show details form...");
+	$(".skeleton-task").hide();
+	$(".skeleton-finish").hide();
+	$("#taskcompleted").hide();
+	$(".skeleton-userdetails").show();
+	$("#details1").focus();
+	
+	// (re)initialize values (needed from 2nd session on, to remove details of the previous contributor)
+	$("#details1").val(""); 
+	$("#details2").val("");
+	$("#details3").val("");
+	// number of tasks performed back to 0 of course
+	done = 0;
+	
+	
+	// Submit button
+	$(".btn-submit-userdetails").off("click").on("click", function(){
+	
+		// save details in global variable, whose content will be save in each task
+		user_details = {"age": $("#details1").val(), "gender": $("#details2").val(), "location": $("#details3").val()};
+		
+		// call first task now
+		
+		getTask();
+		//localStorage.user_details = JSON.stringify(user_details);
+		//saveTask(task.id, user_details).then(function(_){
+		//	$("#success-details").fadeIn();
+		//	setTimeout(function() { $("#success-details").fadeOut(); }, 2000);
+        //    getTask()
+		//});
+	});
+
+	console.log("Set ENTER reactions for all details inputs in form.");
+	$("#detailsform").off("keyup").on("keyup", function(event) {
+		// Number 13 is the "Enter" key on the keyboard
+		if (event.keyCode === 13) {
+			console.log("ENTER pressed in field " + event.target.id);
+			var fieldId = event.target.id;
+			// If last field, trigger Submit button
+			if (fieldId.endsWith(nDetailsFields.toString())) {
+				$(".btn-submit-userdetails").click();
+			}
+			else {
+				// For all other fields, focus next field
+				var currentNum = parseInt(fieldId[fieldId.length-1]);
+				$("#detailsform #details"+(currentNum+1).toString()).focus();
+			}
+		}
+	});
+}
+
+function boldString(str, find){
+	var re = new RegExp(find, "g");
+	return str.replace(re, "<b>"+find+"</b>");
+}
+
+function showTask(task) {
+	console.log("Starting to show task: " + task);
+	console.log("Hiding and showing right pages");
+	$(".skeleton-userdetails").hide();
+	$(".skeleton-finish").hide();
+	$(".skeleton-task").show();
+	$("#taskcompleted").hide();
+	console.log("Loading user progress");
+	loadUserProgress();
+	console.log("Loading data into form");
+	$("#word").html(task.info.lemma);
+	$("#citation").html(boldString(task.info.sentence, task.info.lemma));
+	$("#task-id").html(task.id);
+
+	// Empty checkboxes
+	$("#radioHoudbaarYes").removeAttr("checked");
+	$("#radioHoudbaarNo").removeAttr("checked");
+
+
+	$("#taskform").off("keyup").on("keyup", function(event) {
+		// Number 13 is the "Enter" key on the keyboard
+		if (event.keyCode === 13) {
+			var fieldId = event.target.id;
+			$(".btn-submit-task").click();
+		}
+	});
+
+	// Submit button
+	$(".btn-submit-task").off("click").on("click", function(){
+	
+		// Save array with all non-empty blend fields
+		var sSentence = $("#citation").text();		
+		
+		var answer = {	"sentence": task.info.sentence, "id": task.info.id, "lemma": task.info.lemma, 
+						"chosen_words": aAllWords,
+						"user_age": user_details["age"], "user_gender": user_details["gender"], "user_location": user_details["location"]};
+						
+		saveTask(task.id, answer).then(function(_){
+		
+			// if we haven't reached the final task of the session
+			// show a message between each tasks to show that everything goed well
+			
+			if (done % NUMBER_OF_TASKS_PER_SESSION !== 0)
+				{
+				$("#success").fadeIn();
+				setTimeout(function() { $("#success").fadeOut(); }, 2000);
+				}
+			
+			// empty list of words for next task
+			aAllPairs = new Array();
+			aAllWords = new Array();
+			var chosenWords = document.getElementById('chosen_words');
+			chosenWords.textContent = "";
+			
+			// if we have reached the number of tasks to be performed within one single session
+			// tell the user, and ask if he/she wants to go on
+			
+			if (done % NUMBER_OF_TASKS_PER_SESSION == 0)
+				taskcompleted();
+				
+			// normal case: show next tasks
+			else
+				getTask();
+		});
+	});
+
+	$("#loading").hide();
+}
+
+
+function taskcompleted(){
+	$(".skeleton-task").hide();
+	$(".skeleton-userdetails").hide();
+	$("#loading").hide();
+	$(".skeleton-finish").hide();
+	$("#taskcompleted").show();
+}
+
+function finish() {
+	$(".skeleton-task").hide();
+	$(".skeleton-userdetails").hide();
+	$("#loading").hide();
+	$(".skeleton-finish").show();
+    $("#taskcompleted").hide();
+}
+
+// Polyfills
+if (!String.prototype.endsWith) {
+	String.prototype.endsWith = function(search, this_len) {
+		if (this_len === undefined || this_len > this.length) {
+			this_len = this.length;
+		}
+		return this.substring(this_len - search.length, this_len) === search;
+	};
+}
+
+function presentTask(task) {
+	if ( !$.isEmptyObject(task) ) {		
+	
+		// Show task
+		requestTask(task);
+		showTask(task);		
+	}
+	else {
+		finish();
+	}
+}
+
+// pybossa.run(PROJECT_NAME);
+
+// Global variables
+var headers = {};
+var task = {};
+var external_uid = '';
+var project_id = '';
+var done = 0;
+
+function startSession() {
+    let url = '/api/project?short_name='+PROJECT_NAME
+    //external_uid = $('#id').val() + '-' + new Date().getTime()
+	external_uid = PROJECT_NAME + '-' + new Date().getTime()
+    axios.get(url)
+        .then(function(response) {
+            project = response.data[0]
+            // Save project id, we need this for future requests
+            project_id = project.id
+            // Get secret key from response, and use it to retrieve token
+            let secret_key = project.secret_key
+            url = '/api/auth/project/'+PROJECT_NAME+'/token'
+            axios.get(url, {headers: { 'Authorization': project.secret_key}})
+                .then(function(response){
+                    headers = {
+                        'Authorization': 'Bearer ' + response.data
+                    }
+                    $('#authenticate').hide()
+                    $('#contribute').show()
+					
+					// first show the user's details form
+					// (as soon as the user has completed it, a first task will be shown)
+					showDetailsForm(task);
+                })
+        })
+}
+
+function requestTask(task) {
+    let url = '/project/'+PROJECT_NAME+'/task/' + task.id
+    axios.get(url)
+        .then(function(res){
+            //console.log(res.data)
+        })
+}
+
+function getTask() {
+    let url = '/api/project/' + project_id + '/newtask?external_uid=' + external_uid
+    axios.get(url, {headers: headers})
+        .then(function(res){
+            task = res.data
+            presentTask(task)
+        })
+}
+
+function saveTask(taskId, info) {
+    let url = '/api/taskrun'
+    return axios(url, {
+        method: 'post',
+        data: {
+            project_id: task.project_id,
+            task_id: taskId,
+            info: info,
+            external_uid: external_uid
+        },
+        headers: headers
+    })
+}
+
+$("#contribute").hide();
+</script>
+<style>
+    .form-check-label {
+        font-weight: normal;
+        font-size: 18px;
+    }
+</style>

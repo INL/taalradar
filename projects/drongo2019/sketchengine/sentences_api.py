@@ -54,6 +54,7 @@ if not os.path.exists(BACKUP_DIR):
 def parse_concordances(concordances, lemma, results_per_lemma):
     print("   Parsing")
     lines = concordances["Lines"]
+    open("output.txt", "w", encoding="utf-8").write(str(concordances))
     total_tokens = []
     total_tags = []
     total_lemmas = []
