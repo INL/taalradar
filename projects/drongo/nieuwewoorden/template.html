@@ -1,132 +1,136 @@
-<div class="row">
-    <!-- Success and Error Messages for the user --> 
-    <div class="col-md-8 col-md-offset-2" style="height:50px">
-        <div id="success" class="alert alert-success" style="display:none;">
-            <a class="close">×</a>
-            <strong>Bedankt!</strong> Uw antwoord is opgeslagen.
-        </div>
-        <div id="success-details" class="alert alert-success" style="display:none;">
-            <a class="close">×</a>
-            <strong>Bedankt!</strong> Uw gegevens zijn opgeslagen.
-        </div>
-        <div id="loading" class="alert alert-info" style="display:none;">
-            <a class="close">×</a>
-            Volgende taak aan het laden...
-        </div>
-        <div id="taskcompleted" class="alert alert-info" style="display:none;">
-            <strong>De taak is afgerond!</strong> Bedankt!
-        </div>
-        <div id="finish" class="alert alert-success" style="display:none;">
-            <strong>Gefeliciteerd!</strong> U heeft alle beschikbare teksten doorlopen.
-            <br/>
-            <div class="alert-actions">
-                <a class="btn small" href="/">Ga terug</a>
-                <a class="btn small" href="/app">of bekijk alle projecten</a>
+<div class="row" id="authenticate">
+    <p><input id="id" placeholder="your name"></input></p>
+    <button class="btn" onclick="startSession()">Start a new session</button>
+</div>
+<div id="contribute">
+    <div class="row">
+        <!-- Success and Error Messages for the user --> 
+        <div class="col-md-8 col-md-offset-2" style="height:50px">
+            <div id="success" class="alert alert-success" style="display:none;">
+                <a class="close">×</a>
+                <strong>Bedankt!</strong> Uw antwoord is opgeslagen.
             </div>
-        </div>
-        <div id="error" class="alert alert-danger" style="display:none;">
-            <a class="close">×</a>
-            <strong>Fout!</strong> Er ging iets mis, neem contact op met beheerders van deze website.
-        </div>
-    </div> <!-- End Success and Error Messages for the user -->
-</div> <!-- End of Row -->
-
-<div class="row skeleton-userdetails"> <!-- Start Skeleton Row-->
-    Hieronder kunt u enkele persoonlijke gegevens invullen, die ons extra inzichten geven in ons onderzoek. De velden die u niet wilt invullen, kunt u leeg laten.<br><br>Uw leeftijd, geslacht en woonplaats zijn, gekoppeld aan uw antwoorden, zichtbaar voor andere bezoekers van het platform. Andere bezoekers kunnen echter niet uw eventuele accountgegevens (naam en e-mailadres) zien die hieraan gekoppeld zijn.
-    <div class="col-md-8 "><!-- Start of Question and Submission DIV (column) -->
-        <form class="form-inline" id="detailsform">
-                <div class="form-group">
-                    <h3 id="headerAge">Leeftijd:</h3>
-                    <input type="number" min="0" max="150" class="form-control" name="age" id="details1" style="width:100%;"/>
+            <div id="success-details" class="alert alert-success" style="display:none;">
+                <a class="close">×</a>
+                <strong>Bedankt!</strong> Uw gegevens zijn opgeslagen.
+            </div>
+            <div id="loading" class="alert alert-info" style="display:none;">
+                <a class="close">×</a>
+                Volgende taak aan het laden...
+            </div>
+            <div id="taskcompleted" class="alert alert-info" style="display:none;">
+                <strong>De taak is afgerond!</strong> Bedankt!
+            </div>
+            <div id="finish" class="alert alert-success" style="display:none;">
+                <strong>Gefeliciteerd!</strong> U heeft alle beschikbare teksten doorlopen.
+                <br/>
+                <div class="alert-actions">
+                    <a class="btn small" href="/">Ga terug</a>
+                    <a class="btn small" href="/app">of bekijk alle projecten</a>
                 </div>
-                <br><br>
-                <div class="form-group">
-                    <h3 id="headerGender">Geslacht:</h3>
-                    <select class="form-control" name="gender" id="details2" style="width:100%;">
-                        <option>Zeg ik niet</option>
-                        <option>Man</option>
-                        <option>Vrouw</option>
-                        <option>Anders</option>
-                    </select>
+            </div>
+            <div id="error" class="alert alert-danger" style="display:none;">
+                <a class="close">×</a>
+                <strong>Fout!</strong> Er ging iets mis, neem contact op met beheerders van deze website.
+            </div>
+        </div> <!-- End Success and Error Messages for the user -->
+    </div> <!-- End of Row -->
+    
+    <div class="row skeleton-userdetails"> <!-- Start Skeleton Row-->
+        Hieronder kunt u enkele persoonlijke gegevens invullen, die ons extra inzichten geven in ons onderzoek. De velden die u niet wilt invullen, kunt u leeg laten.<br><br>Uw leeftijd, geslacht en woonplaats zijn, gekoppeld aan uw antwoorden, zichtbaar voor andere bezoekers van het platform. Andere bezoekers kunnen echter niet uw eventuele accountgegevens (naam en e-mailadres) zien die hieraan gekoppeld zijn.
+        <div class="col-md-8 "><!-- Start of Question and Submission DIV (column) -->
+            <form class="form-inline" id="detailsform">
+                    <div class="form-group">
+                        <h3 id="headerAge">Leeftijd:</h3>
+                        <input type="number" min="0" max="150" class="form-control" name="age" id="details1" style="width:100%;"/>
+                    </div>
+                    <br><br>
+                    <div class="form-group">
+                        <h3 id="headerGender">Geslacht:</h3>
+                        <select class="form-control" name="gender" id="details2" style="width:100%;">
+                            <option>Zeg ik niet</option>
+                            <option>Man</option>
+                            <option>Vrouw</option>
+                            <option>Anders</option>
+                        </select>
+                    </div>
+                    <br><br>
+                    <div class="form-group">
+                        <h3 id="headerLocation">Woonplaats:</h3>
+                        <input type="text" class="form-control" name="location" id="details3" style="width:100%;"/>
+                    </div>
+                    <br><br>
+                </form>
+            <div> <!-- Start DIV for the submission buttons -->
+                <button class="btn btn-submit btn-primary btn-submit-userdetails"><i class="fa"></i>Verzend!</button>
+            </div><!-- End of DIV for the submission buttons -->
+        </div><!-- End of Question and Submission DIV (column) -->
+    </div><!-- End of Skeleton Row -->
+    
+    <div class="row skeleton-finish"> <!-- Start Skeleton Row-->
+        <div class="col-md-8 "><!-- Start of Question and Submission DIV (column) -->
+            <h1>Dank u wel, u heeft alle woorden doorlopen!</h1>
+            Het Instituut voor de Nederlandse taal gebruikt uw bijdrage om de kennis over de Nederlandse taal uit te breiden.
+            <h3>Nog een experiment?</h3>
+            Smaakt dit experiment naar meer? <b>Doe ook mee met ons experiment over <a href="http://taalradar.ivdnt.org/project/taalvariatie/newtask">taalvariatie</a></b>!
+            <h3>Op de hoogte blijven?</h3>
+            Wilt u op de hoogte blijven van ons onderzoek, en
+            eventueel vaker meedoen aan dergelijke experimenten? Mail dan naar
+            <a href="mailto:servicedesk@ivdnt.org">servicedesk@ivdnt.org</a>, onder
+            vermelding van Taalradar.
+        </div><!-- End of Question and Submission DIV (column) -->
+    </div><!-- End of Skeleton Row -->
+    
+    <!--
+        Task DOM for showing the data to the user
+        It uses the class="skeleton" to identify the elements that belong to the
+        task.
+    -->
+    <div class="row skeleton-task"> <!-- Start Skeleton Row-->
+        <div class="col-md-10 "><!-- Start of Question and Submission DIV (column) -->
+            <p>Tekst <span id="done" class="label label-info"></span> van <span id="total" class="label label-info"></span></p>
+            <div class="progress">
+                <div id="progress" rel="tooltip" title="#" class="progress-bar" style="width: 0%;"  role="progressbar"></div>
+            </div>
+            <h3><i><b>(...)</b> <span id="citation">(voorbeeldtekst)</span> <b>(...)</b></i></h3>
+            <br>
+            <form class="form-inline" id="taskform">
+                <div class="form-check">
+                    Dit woord zal lang gebruikt blijven worden.
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="radio" value="" name="radioHoudbaar" id="radioHoudbaarYes">
+                        Ja
+    				</label>
+    				<label class="form-check-label">
+                        <input class="form-check-input" type="radio" value="" name="radioHoudbaar" id="radioHoudbaarNo">
+                        Nee
+                    </label>
                 </div>
-                <br><br>
-                <div class="form-group">
-                    <h3 id="headerLocation">Woonplaats:</h3>
-                    <input type="text" class="form-control" name="location" id="details3" style="width:100%;"/>
+                <div class="form-check">
+    				Dit woord zal door veel verschillende mensen (bijv. jong, oud) in veel verschillende situaties (bijv. gesprek, krant) gebruikt worden.
+                    <label class="form-check-label">
+    					<input class="form-check-input" type="radio" value="" name="radioDivers" id="radioDiversYes">
+    					Ja
+    				</label>
+    				<label class="form-check-label">
+    					<input class="form-check-input" type="radio" value="" name="radioDivers" id="radioDiversNo">
+    					Nee
+    				</label>
                 </div>
-                <br><br>
             </form>
-        <div> <!-- Start DIV for the submission buttons -->
-            <button class="btn btn-submit btn-primary btn-submit-userdetails"><i class="fa"></i>Verzend!</button>
-        </div><!-- End of DIV for the submission buttons -->
-    </div><!-- End of Question and Submission DIV (column) -->
-</div><!-- End of Skeleton Row -->
-
-<div class="row skeleton-finish"> <!-- Start Skeleton Row-->
-    <div class="col-md-8 "><!-- Start of Question and Submission DIV (column) -->
-        <h1>Dank u wel, u heeft alle woorden doorlopen!</h1>
-        Het Instituut voor de Nederlandse taal gebruikt uw bijdrage om de kennis over de Nederlandse taal uit te breiden.
-        <h3>Nog een experiment?</h3>
-        Smaakt dit experiment naar meer? <b>Doe ook mee met ons experiment over <a href="http://taalradar.ivdnt.org/project/taalvariatie/newtask">taalvariatie</a></b>!
-        <h3>Op de hoogte blijven?</h3>
-        Wilt u op de hoogte blijven van ons onderzoek, en
-        eventueel vaker meedoen aan dergelijke experimenten? Mail dan naar
-        <a href="mailto:servicedesk@ivdnt.org">servicedesk@ivdnt.org</a>, onder
-        vermelding van Taalradar.
-    </div><!-- End of Question and Submission DIV (column) -->
-</div><!-- End of Skeleton Row -->
-
-<!--
-    Task DOM for showing the data to the user
-    It uses the class="skeleton" to identify the elements that belong to the
-    task.
--->
-<div class="row skeleton-task"> <!-- Start Skeleton Row-->
-    <div class="col-md-10 "><!-- Start of Question and Submission DIV (column) -->
-        <p>Tekst <span id="done" class="label label-info"></span> van <span id="total" class="label label-info"></span></p>
-        <div class="progress">
-            <div id="progress" rel="tooltip" title="#" class="progress-bar" style="width: 0%;"  role="progressbar"></div>
-        </div>
-        <h3><i><b>(...)</b> <span id="citation">(voorbeeldtekst)</span> <b>(...)</b></i></h3>
-        <br>
-        <form class="form-inline" id="taskform">
-            <div class="form-check">
-                Dit woord zal lang gebruikt blijven worden.
-                <label class="form-check-label">
-                    <input class="form-check-input" type="radio" value="" name="radioHoudbaar" id="radioHoudbaarYes">
-                    Ja
-				</label>
-				<label class="form-check-label">
-                    <input class="form-check-input" type="radio" value="" name="radioHoudbaar" id="radioHoudbaarNo">
-                    Nee
-                </label>
+            <br><br>
+            <div> <!-- Start DIV for the submission buttons -->
+    			<button class="btn btn-primary btn-submit btn-submit-task"><i class="fa"></i>Volgende</button>
+            </div><!-- End of DIV for the submission buttons -->
+            <div class="col-md-10 small">
             </div>
-            <div class="form-check">
-				Dit woord zal door veel verschillende mensen (bijv. jong, oud) in veel verschillende situaties (bijv. gesprek, krant) gebruikt worden.
-                <label class="form-check-label">
-					<input class="form-check-input" type="radio" value="" name="radioDivers" id="radioDiversYes">
-					Ja
-				</label>
-				<label class="form-check-label">
-					<input class="form-check-input" type="radio" value="" name="radioDivers" id="radioDiversNo">
-					Nee
-				</label>
-            </div>
-        </form>
-        <br><br>
-        <div> <!-- Start DIV for the submission buttons -->
-			<button class="btn btn-primary btn-submit btn-submit-task"><i class="fa"></i>Volgende</button>
-        </div><!-- End of DIV for the submission buttons -->
-        <div class="col-md-10 small">
-        </div>
-    </div><!-- End of Question and Submission DIV (column) -->
-</div><!-- End of Skeleton Row -->
-
+        </div><!-- End of Question and Submission DIV (column) -->
+    </div><!-- End of Skeleton Row -->
+</div>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script type="text/javascript">
 /* global pybossa */
 var nDetailsFields = 3;
-
-
 
 
 function loadUserProgress() {
@@ -143,7 +147,7 @@ function loadUserProgress() {
 }
 
 
-function showDetailsForm(task, deferred) {
+function showDetailsForm(task) {
 	console.log("Starting to show details form...");
 	$(".skeleton-task").hide();
 	$(".skeleton-finish").hide();
@@ -153,10 +157,10 @@ function showDetailsForm(task, deferred) {
 	$(".btn-submit-userdetails").off("click").on("click", function(){
 		var user_details = {"age": $("#details1").val(), "gender": $("#details2").val(), "location": $("#details3").val()};
 		localStorage.user_details = JSON.stringify(user_details);
-		pybossa.saveTask(task.id, user_details).done(function(_){
-			deferred.resolve();
+		saveTask(task.id, user_details).then(function(_){
 			$("#success-details").fadeIn();
 			setTimeout(function() { $("#success-details").fadeOut(); }, 2000);
+            getTask()
 		});
 	});
 
@@ -184,7 +188,7 @@ function boldString(str, find){
 	return str.replace(re, "<b>"+find+"</b>");
 }
 
-function showTask(task, deferred) {
+function showTask(task) {
 	console.log("Starting to show task: " + task);
 	console.log("Hiding and showing right pages");
 	$(".skeleton-userdetails").hide();
@@ -231,10 +235,10 @@ function showTask(task, deferred) {
 			divers = null;
 		}
 		var answer = {"houdbaar": houdbaar, "divers": divers, "id": task.info.id, "woord": task.info.woord};
-		pybossa.saveTask(task.id, answer).done(function(_){
-			deferred.resolve();
+		saveTask(task.id, answer).then(function(_){
 			$("#success").fadeIn();
 			setTimeout(function() { $("#success").fadeOut(); }, 2000);
+            getTask()
 		});
 	});
 
@@ -259,23 +263,82 @@ if (!String.prototype.endsWith) {
 	};
 }
 
-pybossa.presentTask(function(task, deferred) {
+function presentTask(task) {
 	if ( !$.isEmptyObject(task) ) {
 		if (task.info.type == "userdetails") {
 			// Show page to give personal details
-			showDetailsForm(task, deferred);
+            requestTask(task);
+			showDetailsForm(task);
 		}
 		else {
 			// Show task
-			showTask(task, deferred);
+            requestTask(task);
+			showTask(task);
 		}
 	}
 	else {
 		finish();
 	}
-});
+}
 
-pybossa.run("nieuwewoorden");
+// pybossa.run("nieuwewoorden");
+
+var headers = {}
+var task = {}
+var external_uid = ''
+
+function startSession() {
+    let url = '/api/project?short_name=nieuwewoorden'
+    external_uid = $('#id').val() + '-' + new Date().getTime()
+    axios.get(url)
+        .then(function(response) {
+            project = response.data[0]
+            let secret_key = project.secret_key
+            url = '/api/auth/project/nieuwewoorden/token'
+            axios.get(url, {headers: { 'Authorization': project.secret_key}})
+                .then(function(response){
+                    headers = {
+                        'Authorization': 'Bearer ' + response.data
+                    }
+                    $('#authenticate').hide()
+                    $('#contribute').show()
+                    getTask()
+                })
+        })
+}
+
+function requestTask(task) {
+    let url = '/project/nieuwewoorden/task/' + task.id
+    axios.get(url)
+        .then(function(res){
+            console.log(res.data)
+        })
+}
+
+function getTask() {
+    let url = '/api/project/5/newtask?external_uid=' + external_uid
+    axios.get(url, {headers: headers})
+        .then(function(res){
+            task = res.data
+            presentTask(task)
+        })
+}
+
+function saveTask(taskId, info) {
+    let url = '/api/taskrun'
+    return axios(url, {
+        method: 'post',
+        data: {
+            project_id: task.project_id,
+            task_id: taskId,
+            info: info,
+            external_uid: external_uid
+        },
+        headers: headers
+    })
+}
+
+$("#contribute").hide();
 </script>
 <style>
     .form-check-label {
